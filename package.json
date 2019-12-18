@@ -1,0 +1,38 @@
+{
+  "name": "quizzle",
+  "version": "1.0.0",
+  "description": "A quiz to show your skills ## Project title \"Quizzle\" is just a working title. Creative suggestions for a title are very welcome.",
+  "main": "index.js",
+  "scripts": {
+    "build-client": "cd client && npm run build",
+    "build-storybook": "cd client && npm run build-storybook",
+    "build": "npm run build-storybook && npm run build-client",
+    "client": "cd client && npm start",
+    "server": "node server.js",
+    "storybook": "cd client && npm run storybook",
+    "test": "cd client && npm test",
+    "postinstall": "cd client && npm install"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aruppert/quizzle.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/aruppert/quizzle/issues"
+  },
+  "homepage": "https://github.com/aruppert/quizzle#readme",
+  "devDependencies": {
+    "eslint": "^6.7.2",
+    "eslint-plugin-react": "^7.17.0",
+    "nodemon": "^2.0.2",
+    "prettier": "1.19.1"
+  },
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "mongodb": "^3.4.0"
+  }
+}
