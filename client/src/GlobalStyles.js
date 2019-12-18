@@ -13,7 +13,9 @@ function GlobalStyles() {
         body {
           font-size: 16px;
           margin: 0;
-          background: black;
+          background: grey;
+          height: 100vh;
+          width: 100vw;
         }
       `}
     />
