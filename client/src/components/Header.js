@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import logo from '../assets/logo.png';
-import paint_palette from '../assets/paint_palette.svg';
+import ColorPalette from '../icons/ColorPalette';
+import Logo from '../icons/Logo';
 
 const HeaderBar = styled.div`
   display: flex;
@@ -18,11 +18,6 @@ const HeaderBar = styled.div`
   border-bottom: 3px solid #fff;
   border-right: 3px solid #fff;
   box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
-`;
-
-const HeadLogo = styled.img`
-  width: 48px;
-  height: 53px;
 `;
 
 const HeadText = styled.h1`
@@ -44,10 +39,10 @@ const HeadButton = styled.button`
 export default function Header() {
   return (
     <HeaderBar>
-      <HeadLogo src={logo} />
+      <Logo />
       <HeadText>QuiZZ.me</HeadText>
       <HeadButton>
-        <img src={paint_palette} />
+        <ColorPalette />
       </HeadButton>
     </HeaderBar>
   );
