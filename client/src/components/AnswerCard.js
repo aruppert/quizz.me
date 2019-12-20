@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from '@emotion/styled';
 
-const AnswerCard = styled.div`
+const AnswerContainer = styled.div`
   display: flex;
   width: 160px;
   height: 90px;
@@ -20,10 +20,10 @@ const TextWrapper = styled.div`
   color: ${props => props.theme.colors.text1};
 `;
 
-export default function Answer() {
+export default function AnswerCard() {
   return (
-    <AnswerCard>
+    <AnswerContainer>
       <TextWrapper>Lorem ipsum dolor sit amet!</TextWrapper>
-    </AnswerCard>
+    </AnswerContainer>
   );
 }

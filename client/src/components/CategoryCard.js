@@ -1,10 +1,13 @@
 import React from 'react';
 import styled from '@emotion/styled';
 
-const QuestionContainer = styled.div`
+const CategoryContainer = styled.div`
   display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
   width: 340px;
   height: 180px;
+
   background: linear-gradient(
     to right,
     ${props => props.theme.colors.card2},
@@ -15,20 +18,26 @@ const QuestionContainer = styled.div`
 `;
 
 const TextWrapper = styled.div`
+  font-size: 1.5rem;
   text-align: center;
   align-self: center;
   color: ${props => props.theme.colors.text1};
   margin: 20px;
 `;
 
-export default function QuestionCard() {
+const DropdownMenu = styled.div`
+  border: 2px solid white;
+  font-size: 1rem;
+  text-align: center;
+  align-self: center;
+  color: ${props => props.theme.colors.text1};
+`;
+
+export default function CategoryCard() {
   return (
-    <QuestionContainer>
-      <TextWrapper>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum, neque modi! Architecto
-        voluptates facere, nam, quos, quam provident laboriosam quo voluptatem similique excepturi
-        quas nulla nobis aliquid dolor reprehenderit itaque.
-      </TextWrapper>
-    </QuestionContainer>
+    <CategoryContainer>
+      <TextWrapper>Please select category:</TextWrapper>
+      <DropdownMenu>DROPDOWN MENU tbd.</DropdownMenu>
+    </CategoryContainer>
   );
 }

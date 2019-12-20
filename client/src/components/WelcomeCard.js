@@ -1,10 +1,12 @@
 import React from 'react';
 import styled from '@emotion/styled';
 
-const QuestionContainer = styled.div`
+const WelcomeContainer = styled.div`
   display: flex;
+  justify-content: center;
   width: 340px;
-  height: 180px;
+  height: 70px;
+
   background: linear-gradient(
     to right,
     ${props => props.theme.colors.card2},
@@ -15,20 +17,17 @@ const QuestionContainer = styled.div`
 `;
 
 const TextWrapper = styled.div`
+  font-size: 1.5rem;
   text-align: center;
   align-self: center;
   color: ${props => props.theme.colors.text1};
   margin: 20px;
 `;
 
-export default function QuestionCard() {
+export default function WelcomeCard() {
   return (
-    <QuestionContainer>
-      <TextWrapper>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum, neque modi! Architecto
-        voluptates facere, nam, quos, quam provident laboriosam quo voluptatem similique excepturi
-        quas nulla nobis aliquid dolor reprehenderit itaque.
-      </TextWrapper>
-    </QuestionContainer>
+    <WelcomeContainer>
+      <TextWrapper>Welcome player ...</TextWrapper>
+    </WelcomeContainer>
   );
 }
