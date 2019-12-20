@@ -2,6 +2,7 @@ import React from 'react';
 import styled from '@emotion/styled';
 import Dice from '../icons/Dice';
 import AddQuestion from '../icons/AddQuestion';
+import Button from './Button';
 
 const FooterBar = styled.div`
   display: flex;
@@ -20,16 +21,13 @@ const FooterBar = styled.div`
   box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
 `;
 
-const FooterButton = styled.button`
-  border: none;
-  outline: none;
-  background: none;
+const FooterButton = styled(Button)`
   width: 1fr;
   height: 100%;
   flex-grow: 1;
 `;
 
-export default function Header() {
+export default function Footer() {
   return (
     <FooterBar>
       <FooterButton>

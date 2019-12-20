@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from '@emotion/styled';
 
-const QuestionCard = styled.div`
+const QuestionContainer = styled.div`
   display: flex;
   width: 340px;
   height: 180px;
@@ -21,14 +21,14 @@ const TextWrapper = styled.div`
   margin: 20px;
 `;
 
-export default function Question() {
+export default function QuestionCard() {
   return (
-    <QuestionCard>
+    <QuestionContainer>
       <TextWrapper>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum, neque modi! Architecto
         voluptates facere, nam, quos, quam provident laboriosam quo voluptatem similique excepturi
         quas nulla nobis aliquid dolor reprehenderit itaque.
       </TextWrapper>
-    </QuestionCard>
+    </QuestionContainer>
   );
 }
