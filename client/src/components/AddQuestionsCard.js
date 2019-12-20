@@ -2,7 +2,7 @@ import React from 'react';
 import styled from '@emotion/styled';
 import AddQuestion from '../icons/AddQuestion';
 
-const PlayCard = styled.div`
+const AddQuestionsContainer = styled.div`
   display: flex;
   flex-flow: column;
   justify-content: space-evenly;
@@ -25,11 +25,11 @@ const TextWrapper = styled.div`
   color: ${props => props.theme.colors.text1};
 `;
 
-export default function Play() {
+export default function AddQuestionsCard() {
   return (
-    <PlayCard>
+    <AddQuestionsContainer>
       <TextWrapper>Add questions</TextWrapper>
       <AddQuestion />
-    </PlayCard>
+    </AddQuestionsContainer>
   );
 }

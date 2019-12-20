@@ -2,7 +2,7 @@ import React from 'react';
 import styled from '@emotion/styled';
 import Dice from '../icons/Dice';
 
-const PlayCard = styled.div`
+const PlayContainer = styled.div`
   display: flex;
   flex-flow: column;
   justify-content: space-evenly;
@@ -25,11 +25,11 @@ const TextWrapper = styled.div`
   color: ${props => props.theme.colors.text1};
 `;
 
-export default function Play() {
+export default function PlayCard() {
   return (
-    <PlayCard>
+    <PlayContainer>
       <TextWrapper>Play single player mode</TextWrapper>
       <Dice />
-    </PlayCard>
+    </PlayContainer>
   );
 }
