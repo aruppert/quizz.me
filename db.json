@@ -1,5 +1,13 @@
 {
-  "posts": [{ "id": 1, "title": "json-server", "author": "typicode" }],
-  "comments": [{ "id": 1, "body": "some comment", "postId": 1 }],
-  "profile": { "name": "typicode" }
+  "questions": [
+    {
+      "category": "Cars",
+      "question": "Which car brand isn't german?",
+      "correct_answer": "VOLVO",
+      "incorrect_answer1": "BMW",
+      "incorrect_answer2": "Mercedes",
+      "incorrect_answer3": "Audi",
+      "id": 1
+    }
+  ]
 }
