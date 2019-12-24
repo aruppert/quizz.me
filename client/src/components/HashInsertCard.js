@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import InputField from './InputField';
+import Input from './Input';
 import Dice from '../icons/Dice';
 import Button from './Button';
 
@@ -29,14 +29,6 @@ const TextWrapper = styled.div`
 const InputWrapper = styled.div`
   display: flex;
   justify-content: center;
-`;
-
-const Input = styled(InputField)`
-  border: 2px solid white;
-  font-size: 1.2rem;
-  text-align: center;
-  align-self: center;
-  color: ${props => props.theme.colors.text1};
 `;
 
 export default function HashInsertCard() {
