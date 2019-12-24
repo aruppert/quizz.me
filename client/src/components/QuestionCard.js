@@ -3,6 +3,7 @@ import styled from '@emotion/styled';
 
 const QuestionContainer = styled.div`
   display: flex;
+  justify-content: center;
   width: 340px;
   height: 180px;
   background: linear-gradient(
@@ -21,14 +22,10 @@ const TextWrapper = styled.div`
   margin: 20px;
 `;
 
-export default function QuestionCard() {
+export default function QuestionCard(props) {
   return (
     <QuestionContainer>
-      <TextWrapper>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum, neque modi! Architecto
-        voluptates facere, nam, quos, quam provident laboriosam quo voluptatem similique excepturi
-        quas nulla nobis aliquid dolor reprehenderit itaque.
-      </TextWrapper>
+      <TextWrapper>{props.question}</TextWrapper>
     </QuestionContainer>
   );
 }
