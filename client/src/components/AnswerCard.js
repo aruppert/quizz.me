@@ -3,6 +3,7 @@ import styled from '@emotion/styled';
 
 const AnswerContainer = styled.div`
   display: flex;
+  margin: 10px;
   width: 160px;
   height: 90px;
   background: linear-gradient(
