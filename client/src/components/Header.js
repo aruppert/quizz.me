@@ -9,6 +9,8 @@ const HeaderBar = styled.div`
   display: flex;
   justify-content: space-around;
   align-items: center;
+  position: absolute;
+  top: 0px;
   width: 100vw;
   height: 70px;
   background: linear-gradient(

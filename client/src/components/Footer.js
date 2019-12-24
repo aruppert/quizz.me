@@ -10,6 +10,8 @@ const FooterBar = styled.div`
   display: flex;
   justify-content: space-around;
   align-items: center;
+  position: absolute;
+  bottom: 0px;
   width: 100vw;
   height: 70px;
   background: linear-gradient(
