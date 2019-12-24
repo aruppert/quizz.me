@@ -5,6 +5,8 @@ import AddQuestion from '../icons/AddQuestion';
 import Button from './Button';
 
 const FooterBar = styled.div`
+  position: absolute;
+  bottom: 0px;
   display: flex;
   justify-content: space-around;
   align-items: center;

@@ -4,6 +4,8 @@ import ColorPalette from '../icons/ColorPalette';
 import Logo from '../icons/Logo';
 
 const HeaderBar = styled.div`
+  position: absolute;
+  top: 0px;
   display: flex;
   justify-content: space-around;
   align-items: center;
