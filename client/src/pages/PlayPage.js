@@ -22,9 +22,7 @@ const AnswerContainer = styled.div`
 `;
 
 export default function PlayPage() {
-  const [id, setId] = React.useState('');
-  // sessionStorage.setItem('questionAnswered');
-
+  const [ids, setIds] = React.useState([]);
   const [category, setCategory] = React.useState('');
   const [question, setQuestion] = React.useState('');
   const [correct_answer, setCorrect_answer] = React.useState('');
@@ -32,10 +30,12 @@ export default function PlayPage() {
   const [incorrect_answer2, setIncorrect_answer2] = React.useState('');
   const [incorrect_answer3, setIncorrect_answer3] = React.useState('');
 
-  async function fetchTestQuestion() {
-    const response = await fetch('http://localhost:8080/questions/1');
+  let randomNumber = Math.floor(Math.random() * 5) + 1;
+
+  async function fetchTestQuestion(randomNumber) {
+    const response = await fetch('http://localhost:8080/questions/' + randomNumber);
     const data = await response.json();
-    setId(data.id);
+    setIds(ids => [...ids, data.id]);
     setCategory(data.category);
     setQuestion(data.question);
     setCorrect_answer(data.correct_answer);
@@ -43,9 +43,42 @@ export default function PlayPage() {
     setIncorrect_answer2(data.incorrect_answer2);
     setIncorrect_answer3(data.incorrect_answer3);
   }
-  console.log(id);
-  // React.useEffect(() => {}, []),
-  fetchTestQuestion();
+  console.log(ids);
+  // let playedQuestionsById = [];
+
+  function checkNextQuestion(number) {
+    if (ids.includes(number)) {
+      let randomNumber = Math.floor(Math.random() * 5) + 1;
+      checkNextQuestion(randomNumber);
+    } else {
+      fetchTestQuestion(number);
+    }
+  }
+
+  // let count = id + 1;
+  //   fetchTestQuestion(count);
+  //   console.log(id);
+  //   if (playedQuestionsById.includes(id)) {
+  //     count++;
+  //     setId(2);
+  //     console.warn(count);
+  //     console.error(id);
+  //     fetchTestQuestion(count);
+  //   } else {
+  //     console.log('ok, play');
+  //   }
+
+  // function getNewQuestion() {}
+
+  // getNewQuestion();
+
+  // while (playedQuestions.includes(id)) {
+  //   console.log('Allready played');
+  //   count++;
+  //   fetchTestQuestion(count);
+  // }
+
+  // playedQuestionsById.push(ids);
 
   const allAnswers = [correct_answer, incorrect_answer1, incorrect_answer2, incorrect_answer3];
 
@@ -75,8 +108,9 @@ export default function PlayPage() {
   return (
     <Main>
       <Header />
-      <h3>{category}</h3>
       <QuestionCard question={question} />
+      <button onClick={() => fetchTestQuestion(randomNumber)}>Start</button>
+      <button onClick={() => checkNextQuestion(randomNumber)}>Next Question</button>
       <AnswerContainer>
         <AnswerCard answer={allAnswers[0]} onClick={() => verifyAnswer(allAnswers[0])} />
         <AnswerCard answer={allAnswers[1]} onClick={() => verifyAnswer(allAnswers[1])} />
