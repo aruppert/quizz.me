@@ -21,6 +21,11 @@ const AnswerContainer = styled.div`
   margin: 20px;
 `;
 
+const PassButton = styled(AnswerCard)`
+  height: 30px;
+  margin: 0px;
+`;
+
 export default function PlayPage() {
   const [ids, setIds] = React.useState([]);
   const [category, setCategory] = React.useState('');
@@ -29,10 +34,12 @@ export default function PlayPage() {
   const [incorrect_answer1, setIncorrect_answer1] = React.useState('');
   const [incorrect_answer2, setIncorrect_answer2] = React.useState('');
   const [incorrect_answer3, setIncorrect_answer3] = React.useState('');
+  const [points, setPoints] = React.useState(0);
+  const [questionsPlayed, setQuestionsPlayed] = React.useState(0);
 
-  let randomNumber = Math.floor(Math.random() * 5) + 1;
+  const randomNumber = Math.floor(Math.random() * 5) + 1;
 
-  async function fetchTestQuestion(randomNumber) {
+  async function fetchQuestion(randomNumber) {
     const response = await fetch('http://localhost:8080/questions/' + randomNumber);
     const data = await response.json();
     setIds(ids => [...ids, data.id]);
@@ -43,42 +50,15 @@ export default function PlayPage() {
     setIncorrect_answer2(data.incorrect_answer2);
     setIncorrect_answer3(data.incorrect_answer3);
   }
-  console.log(ids);
-  // let playedQuestionsById = [];
 
-  function checkNextQuestion(number) {
+  function getNextQuestion(number) {
     if (ids.includes(number)) {
-      let randomNumber = Math.floor(Math.random() * 5) + 1;
-      checkNextQuestion(randomNumber);
+      const randomNumber = Math.floor(Math.random() * 5) + 1;
+      getNextQuestion(randomNumber);
     } else {
-      fetchTestQuestion(number);
+      fetchQuestion(number);
     }
   }
-
-  // let count = id + 1;
-  //   fetchTestQuestion(count);
-  //   console.log(id);
-  //   if (playedQuestionsById.includes(id)) {
-  //     count++;
-  //     setId(2);
-  //     console.warn(count);
-  //     console.error(id);
-  //     fetchTestQuestion(count);
-  //   } else {
-  //     console.log('ok, play');
-  //   }
-
-  // function getNewQuestion() {}
-
-  // getNewQuestion();
-
-  // while (playedQuestions.includes(id)) {
-  //   console.log('Allready played');
-  //   count++;
-  //   fetchTestQuestion(count);
-  // }
-
-  // playedQuestionsById.push(ids);
 
   const allAnswers = [correct_answer, incorrect_answer1, incorrect_answer2, incorrect_answer3];
 
@@ -90,33 +70,68 @@ export default function PlayPage() {
   shuffle(allAnswers);
 
   sessionStorage.setItem('firstAnswer', true);
+  // let answerGiven = '';
 
   function verifyAnswer(value) {
-    console.log(sessionStorage.getItem('firstAnswer'));
     if (sessionStorage.getItem('firstAnswer') === 'true') {
       if (value === correct_answer) {
-        console.log('Correct');
+        // alert('Correct');
+        setPoints(points + 1);
+        setQuestionsPlayed(questionsPlayed + 1);
+        getNextQuestion(randomNumber);
+        // let answerGiven = 'correct';
+        // Notification(answerGiven);
       } else {
-        console.warn('Wrong');
+        // alert('Wrong');
+        setPoints(points - 1);
+        setQuestionsPlayed(questionsPlayed + 1);
+        getNextQuestion(randomNumber);
+        // let answerGiven = 'incorrect';
+        // Notification(answerGiven);
       }
     } else {
-      console.log('Nanana, only one answer');
+      console.log('Na na na, only one answer allowed!');
     }
     sessionStorage.setItem('firstAnswer', false);
   }
 
+  function passQuestion() {
+    getNextQuestion(randomNumber);
+    setPoints(points - 0.25);
+  }
+
+  React.useEffect(() => {
+    fetchQuestion(randomNumber);
+  }, []);
+
+  // function Notification(state) {
+  //   switch (state) {
+  //     case 'correct':
+  //       return console.log('right');
+  //     case 'incorrect':
+  //       console.log('falsch');
+  //       return <IncorrectAnswerAlert />;
+  //     default:
+  //       return null;
+  //   }
+  // }
+
   return (
     <Main>
       <Header />
-      <QuestionCard question={question} />
-      <button onClick={() => fetchTestQuestion(randomNumber)}>Start</button>
-      <button onClick={() => checkNextQuestion(randomNumber)}>Next Question</button>
+      <QuestionCard
+        total={questionsPlayed}
+        score={points}
+        category={category}
+        question={question}
+      />
       <AnswerContainer>
-        <AnswerCard answer={allAnswers[0]} onClick={() => verifyAnswer(allAnswers[0])} />
-        <AnswerCard answer={allAnswers[1]} onClick={() => verifyAnswer(allAnswers[1])} />
-        <AnswerCard answer={allAnswers[2]} onClick={() => verifyAnswer(allAnswers[2])} />
-        <AnswerCard answer={allAnswers[3]} onClick={() => verifyAnswer(allAnswers[3])} />
+        <AnswerCard value={allAnswers[0]} onClick={() => verifyAnswer(allAnswers[0])} />
+        <AnswerCard value={allAnswers[1]} onClick={() => verifyAnswer(allAnswers[1])} />
+        <AnswerCard value={allAnswers[2]} onClick={() => verifyAnswer(allAnswers[2])} />
+        <AnswerCard value={allAnswers[3]} onClick={() => verifyAnswer(allAnswers[3])} />
       </AnswerContainer>
+      <PassButton value="Pass (-0.25 points)" onClick={() => passQuestion()} />
       <Footer />
     </Main>
   );

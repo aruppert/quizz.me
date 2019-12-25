@@ -4,6 +4,7 @@ import styled from '@emotion/styled';
 const QuestionContainer = styled.div`
   display: flex;
   justify-content: center;
+  flex-flow: column;
   width: 340px;
   height: 180px;
   background: linear-gradient(
@@ -25,6 +26,10 @@ const TextWrapper = styled.div`
 export default function QuestionCard(props) {
   return (
     <QuestionContainer>
+      <TextWrapper>
+        Score: {props.score} of possible {props.total}
+      </TextWrapper>
+      <TextWrapper>Category: {props.category}</TextWrapper>
       <TextWrapper>{props.question}</TextWrapper>
     </QuestionContainer>
   );

@@ -22,8 +22,8 @@ const TextWrapper = styled.div`
 
 export default function AnswerCard(props) {
   return (
-    <AnswerContainer onClick={props.onClick}>
-      <TextWrapper>{props.answer}</TextWrapper>
+    <AnswerContainer onClick={props.onClick} {...props}>
+      <TextWrapper>{props.value}</TextWrapper>
     </AnswerContainer>
   );
 }
