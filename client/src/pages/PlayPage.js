@@ -22,6 +22,9 @@ const AnswerContainer = styled.div`
 `;
 
 export default function PlayPage() {
+  const [id, setId] = React.useState('');
+  // sessionStorage.setItem('questionAnswered');
+
   const [category, setCategory] = React.useState('');
   const [question, setQuestion] = React.useState('');
   const [correct_answer, setCorrect_answer] = React.useState('');
@@ -32,6 +35,7 @@ export default function PlayPage() {
   async function fetchTestQuestion() {
     const response = await fetch('http://localhost:8080/questions/1');
     const data = await response.json();
+    setId(data.id);
     setCategory(data.category);
     setQuestion(data.question);
     setCorrect_answer(data.correct_answer);
@@ -39,7 +43,8 @@ export default function PlayPage() {
     setIncorrect_answer2(data.incorrect_answer2);
     setIncorrect_answer3(data.incorrect_answer3);
   }
-
+  console.log(id);
+  // React.useEffect(() => {}, []),
   fetchTestQuestion();
 
   const allAnswers = [correct_answer, incorrect_answer1, incorrect_answer2, incorrect_answer3];
@@ -51,12 +56,20 @@ export default function PlayPage() {
 
   shuffle(allAnswers);
 
+  sessionStorage.setItem('firstAnswer', true);
+
   function verifyAnswer(value) {
-    if (value === correct_answer) {
-      alert('Correct');
+    console.log(sessionStorage.getItem('firstAnswer'));
+    if (sessionStorage.getItem('firstAnswer') === 'true') {
+      if (value === correct_answer) {
+        console.log('Correct');
+      } else {
+        console.warn('Wrong');
+      }
     } else {
-      alert('Wrong');
+      console.log('Nanana, only one answer');
     }
+    sessionStorage.setItem('firstAnswer', false);
   }
 
   return (
