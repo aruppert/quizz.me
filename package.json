@@ -11,7 +11,8 @@
     "server": "node server.js",
     "storybook": "cd client && npm run storybook",
     "test": "cd client && npm test",
-    "postinstall": "cd client && npm install"
+    "postinstall": "cd client && npm install",
+    "json": "json-server --watch --port 8080 db.json"
   },
   "repository": {
     "type": "git",
