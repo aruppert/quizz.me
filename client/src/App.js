@@ -8,6 +8,7 @@ import FormPage from './pages/FormPage';
 import ChooseGameModePage from './pages/ChooseGameModePage';
 import PlayOrAddSetPage from './pages/PlayOrAddSetPage';
 import PlayPage from './pages/PlayPage';
+import PublicOrPrivateSetPage from './pages/PublicOrPrivateSetPage';
 
 function App() {
   return (
@@ -22,13 +23,16 @@ function App() {
             <Route path="/choose">
               <ChooseGameModePage />
             </Route>
-            <Route path="/select">
+            <Route path="/puborprivate">
+              <PublicOrPrivateSetPage />
+            </Route>
+            <Route path="/play">
+              <PlayPage />
+            </Route>
+            <Route path="/playoradd">
               <PlayOrAddSetPage />
             </Route>
             <Route path="/">
-              <PlayPage />
-            </Route>
-            <Route path="/landing">
               <LandingPage />
             </Route>
           </Switch>
