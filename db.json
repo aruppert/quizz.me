@@ -17,6 +17,42 @@
       "incorrect_answer2": "en ",
       "incorrect_answer3": "España›",
       "id": 2
+    },
+    {
+      "category": "Random",
+      "question": "How many children has my sister?",
+      "correct_answer": "3",
+      "incorrect_answer1": "2",
+      "incorrect_answer2": "1",
+      "incorrect_answer3": "4",
+      "id": 3
+    },
+    {
+      "category": "Random",
+      "question": "What time is it in Australia?",
+      "correct_answer": "Depends",
+      "incorrect_answer1": "Later",
+      "incorrect_answer2": "Earlier",
+      "incorrect_answer3": "Now",
+      "id": 4
+    },
+    {
+      "category": "Random",
+      "question": "What's the answer?",
+      "correct_answer": "42",
+      "incorrect_answer1": "Later",
+      "incorrect_answer2": "Earlier",
+      "incorrect_answer3": "Now",
+      "id": 5
+    },
+    {
+      "category": "Random",
+      "question": "Why?",
+      "correct_answer": "because",
+      "incorrect_answer1": "Later",
+      "incorrect_answer2": "Earlier",
+      "incorrect_answer3": "Now",
+      "id": 6
     }
   ]
 }

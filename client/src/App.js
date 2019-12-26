@@ -25,10 +25,10 @@ function App() {
             <Route path="/select">
               <PlayOrAddSetPage />
             </Route>
-            <Route path="/play">
+            <Route path="/">
               <PlayPage />
             </Route>
-            <Route path="/">
+            <Route path="/landing">
               <LandingPage />
             </Route>
           </Switch>

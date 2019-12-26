@@ -1,8 +1,10 @@
 import React from 'react';
 import styled from '@emotion/styled';
 
-const AnswerContainer = styled.div`
+const AnswerContainer = styled.button`
   display: flex;
+  outline: none;
+  justify-content: center;
   margin: 10px;
   width: 160px;
   height: 90px;
@@ -16,15 +18,13 @@ const AnswerContainer = styled.div`
 `;
 
 const TextWrapper = styled.div`
-  text-align: center;
-  align-self: center;
   color: ${props => props.theme.colors.text1};
 `;
 
-export default function AnswerCard() {
+export default function AnswerCard(props) {
   return (
-    <AnswerContainer>
-      <TextWrapper>Lorem ipsum dolor sit amet!</TextWrapper>
+    <AnswerContainer onClick={props.onClick} {...props}>
+      <TextWrapper>{props.value}</TextWrapper>
     </AnswerContainer>
   );
 }
