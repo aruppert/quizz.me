@@ -3,6 +3,7 @@ import styled from '@emotion/styled';
 
 const AnswerContainer = styled.button`
   display: flex;
+  outline: none;
   justify-content: center;
   margin: 10px;
   width: 160px;
