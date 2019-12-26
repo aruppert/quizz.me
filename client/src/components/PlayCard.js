@@ -1,8 +1,9 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import Dice from '../icons/Dice';
+import { Link } from 'react-router-dom';
 
-const PlayContainer = styled.div`
+const PlayContainer = styled(Link)`
   display: flex;
   flex-flow: column;
   justify-content: space-evenly;
@@ -16,6 +17,7 @@ const PlayContainer = styled.div`
   );
   border-radius: 25px 0px 25px 0px;
   box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
+  text-decoration: none;
 `;
 
 const TextWrapper = styled.div`
@@ -27,7 +29,7 @@ const TextWrapper = styled.div`
 
 export default function PlayCard() {
   return (
-    <PlayContainer>
+    <PlayContainer to="/play">
       <TextWrapper>Play single player mode</TextWrapper>
       <Dice />
     </PlayContainer>

@@ -2,7 +2,7 @@ import React from 'react';
 import styled from '@emotion/styled';
 import Input from './Input';
 import Dice from '../icons/Dice';
-import Button from './Button';
+import ButtonLink from './ButtonLink';
 
 const HashInsertContainer = styled.div`
   display: flex;
@@ -38,9 +38,9 @@ export default function HashInsertCard() {
       <InputWrapper>
         <Input placeholder="Input here please..."></Input>
       </InputWrapper>
-      <Button>
+      <ButtonLink>
         <Dice />
-      </Button>
+      </ButtonLink>
     </HashInsertContainer>
   );
 }
