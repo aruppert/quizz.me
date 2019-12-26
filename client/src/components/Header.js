@@ -4,7 +4,7 @@ import ColorPalette from '../icons/ColorPalette';
 import Logo from '../icons/Logo';
 import { Link } from 'react-router-dom';
 
-const HeaderBar = styled(({ ...path }) => <Link {...path} />)`
+const HeaderBar = styled(Link)`
   position: absolute;
   top: 0px;
   display: flex;

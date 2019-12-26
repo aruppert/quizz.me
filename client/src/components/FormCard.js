@@ -2,7 +2,8 @@ import React from 'react';
 import styled from '@emotion/styled';
 import Input from './Input';
 import Planet from '../icons/Planet';
-import Button from './Button';
+import QuestionMark from '../icons/QuestionMark';
+import Lock from '../icons/Lock';
 
 const BigContainer = styled.div`
   width: 340px;
@@ -29,7 +30,10 @@ const Nav = styled.div`
   display: flex;
 `;
 
-const NavButton = styled(Button)`
+const NavButton = styled.button`
+  border: none;
+  outline: none;
+  background: none;
   border: 2px solid white;
   border-radius: 10px;
   font-size: 1em;
@@ -38,6 +42,21 @@ const NavButton = styled(Button)`
   color: ${props => props.theme.colors.text1};
   width: 50%;
   flex-grow: 1;
+`;
+const Status = styled.div`
+  display: flex;
+  width: 100%;
+  align-self: center;
+  justify-content: space-around;
+`;
+
+const QuestionsCounter = styled.div`
+  display: flex;
+  align-self: center;
+`;
+const Text = styled.div`
+  align-self: center;
+  font-size: 1.5rem;
 `;
 
 export default function FormCard() {
@@ -49,6 +68,8 @@ export default function FormCard() {
     incorrect_answer2: '',
     incorrect_answer3: ''
   });
+
+  const [questionsCounter, setQuestionsCounter] = React.useState(0);
 
   function onChange(event) {
     const value = event.target.value;
@@ -74,55 +95,102 @@ export default function FormCard() {
         incorrect_answer3: question.incorrect_answer3
       })
     });
-    setQuestion({
-      category: '',
-      question: '',
-      correct_answer: '',
-      incorrect_answer1: '',
-      incorrect_answer2: '',
-      incorrect_answer3: ''
-    });
+    if (presetCategory != '') {
+      setQuestion({
+        category: presetCategory,
+        question: '',
+        correct_answer: '',
+        incorrect_answer1: '',
+        incorrect_answer2: '',
+        incorrect_answer3: ''
+      });
+    }
+    setQuestionsCounter(questionsCounter + 1);
   }
 
+  const presetCategory = sessionStorage.getItem('category');
+
+  const isPrivateSet = sessionStorage.getItem('isPrivateSet');
+
+  React.useEffect(() => {
+    if (presetCategory != '') {
+      setQuestion({
+        category: presetCategory,
+        question: '',
+        correct_answer: '',
+        incorrect_answer1: '',
+        incorrect_answer2: '',
+        incorrect_answer3: ''
+      });
+    } else {
+      setQuestion({
+        category: '',
+        question: '',
+        correct_answer: '',
+        incorrect_answer1: '',
+        incorrect_answer2: '',
+        incorrect_answer3: ''
+      });
+    }
+  }, []);
   return (
     <BigContainer>
       <Form onSubmit={handleSubmit}>
-        <Planet />
+        <Status>
+          {!isPrivateSet && <Planet />}
+          {isPrivateSet && <Lock />}
+          <QuestionsCounter>
+            <QuestionMark />
+            <Text>{questionsCounter}</Text>
+          </QuestionsCounter>
+        </Status>
         <Input
+          type="text"
           value={question.category}
           name="category"
           onChange={onChange}
           placeholder="Category"
+          required
         />
         <Input
+          type="text"
           value={question.question}
           name="question"
           onChange={onChange}
           placeholder="Question"
+          autofocus
+          required
         />
         <Input
           value={question.correct_answer}
           name="correct_answer"
           onChange={onChange}
           placeholder="Correct Answer"
+          required
         />
         <Input
+          type="text"
           value={question.incorrect_answer1}
           name="incorrect_answer1"
           onChange={onChange}
           placeholder="Wrong Answer 1"
+          required
         />
         <Input
+          type="text"
           value={question.incorrect_answer2}
           name="incorrect_answer2"
           onChange={onChange}
           placeholder="Wrong Answer 2"
+          required
         />
         <Input
+          type="text"
           value={question.incorrect_answer3}
           name="incorrect_answer3"
           onChange={onChange}
           placeholder="Wrong Answer 3"
+          required
         />
         <Nav>
           <NavButton>Submit </NavButton>

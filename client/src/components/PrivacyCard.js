@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import Button from './Button';
+import ButtonLink from './ButtonLink';
 import Planet from '../icons/Planet';
 import Lock from '../icons/Lock';
 
@@ -31,7 +31,7 @@ const Wrapper = styled.div`
   justify-content: center;
 `;
 
-const PrivacyButton = styled(Button)`
+const PrivacyButton = styled(ButtonLink)`
   width: 1fr;
   height: 100%;
   flex-grow: 1;

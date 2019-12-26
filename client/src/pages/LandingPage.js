@@ -1,8 +1,9 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import Logo from '../icons/Logo';
+import { Link } from 'react-router-dom';
 
-const Container = styled.div`
+const Container = styled(Link)`
   height: 100vh;
   width: 100vw;
   display: flex;
@@ -21,7 +22,7 @@ const LandingLogo = styled(Logo)`
 
 export default function LandingPage() {
   return (
-    <Container>
+    <Container to="/playoradd">
       <LandingLogo />
     </Container>
   );
