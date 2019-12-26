@@ -70,27 +70,20 @@ export default function PlayPage() {
   shuffle(allAnswers);
 
   sessionStorage.setItem('firstAnswer', true);
-  // let answerGiven = '';
 
   function verifyAnswer(value) {
     if (sessionStorage.getItem('firstAnswer') === 'true') {
       if (value === correct_answer) {
-        // alert('Correct');
         setPoints(points + 1);
         setQuestionsPlayed(questionsPlayed + 1);
         getNextQuestion(randomNumber);
-        // let answerGiven = 'correct';
-        // Notification(answerGiven);
       } else {
-        // alert('Wrong');
         setPoints(points - 1);
         setQuestionsPlayed(questionsPlayed + 1);
         getNextQuestion(randomNumber);
-        // let answerGiven = 'incorrect';
-        // Notification(answerGiven);
       }
     } else {
-      console.log('Na na na, only one answer allowed!');
+      return null;
     }
     sessionStorage.setItem('firstAnswer', false);
   }
@@ -103,18 +96,6 @@ export default function PlayPage() {
   React.useEffect(() => {
     fetchQuestion(randomNumber);
   }, []);
-
-  // function Notification(state) {
-  //   switch (state) {
-  //     case 'correct':
-  //       return console.log('right');
-  //     case 'incorrect':
-  //       console.log('falsch');
-  //       return <IncorrectAnswerAlert />;
-  //     default:
-  //       return null;
-  //   }
-  // }
 
   return (
     <Main>
