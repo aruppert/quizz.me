@@ -2,7 +2,7 @@ import React from 'react';
 import styled from '@emotion/styled';
 import Dice from '../icons/Dice';
 import AddQuestion from '../icons/AddQuestion';
-import Button from './Button';
+import { Link } from 'react-router-dom';
 
 const FooterBar = styled.div`
   position: absolute;
@@ -25,19 +25,20 @@ const FooterBar = styled.div`
   box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
 `;
 
-const FooterButton = styled(Button)`
-  width: 1fr;
-  height: 100%;
+const FooterButton = styled(({ ...path }) => <Link {...path} />)`
   flex-grow: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 export default function Footer() {
   return (
     <FooterBar>
-      <FooterButton>
+      <FooterButton to="/choose">
         <Dice />
       </FooterButton>
-      <FooterButton>
+      <FooterButton to="/add">
         <AddQuestion />
       </FooterButton>
     </FooterBar>

@@ -2,8 +2,9 @@ import React from 'react';
 import styled from '@emotion/styled';
 import ColorPalette from '../icons/ColorPalette';
 import Logo from '../icons/Logo';
+import { Link } from 'react-router-dom';
 
-const HeaderBar = styled.div`
+const HeaderBar = styled(({ ...path }) => <Link {...path} />)`
   position: absolute;
   top: 0px;
   display: flex;
@@ -22,6 +23,7 @@ const HeaderBar = styled.div`
   border-bottom: 3px solid #fff;
   border-right: 3px solid #fff;
   box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
+  text-decoration: none;
 `;
 
 const HeadText = styled.h1`
@@ -42,7 +44,7 @@ const HeadButton = styled.button`
 
 export default function Header() {
   return (
-    <HeaderBar>
+    <HeaderBar to="/">
       <Logo />
       <HeadText>QuiZZ.me</HeadText>
       <HeadButton>
