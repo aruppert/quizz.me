@@ -95,7 +95,7 @@ export default function FormCard() {
         incorrect_answer3: question.incorrect_answer3
       })
     });
-    if (presetCategory != '') {
+    if (presetCategory !== '') {
       setQuestion({
         category: presetCategory,
         question: '',
@@ -113,7 +113,7 @@ export default function FormCard() {
   const isPrivateSet = sessionStorage.getItem('isPrivateSet');
 
   React.useEffect(() => {
-    if (presetCategory != '') {
+    if (presetCategory !== '') {
       setQuestion({
         category: presetCategory,
         question: '',

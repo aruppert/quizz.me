@@ -38,7 +38,7 @@ export default function HashInsertCard() {
       <InputWrapper>
         <Input placeholder="Input here please..."></Input>
       </InputWrapper>
-      <ButtonLink>
+      <ButtonLink to="/play">
         <Dice />
       </ButtonLink>
     </HashInsertContainer>
