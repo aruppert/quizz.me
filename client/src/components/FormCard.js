@@ -4,6 +4,8 @@ import Input from './Input';
 import Planet from '../icons/Planet';
 import QuestionMark from '../icons/QuestionMark';
 import Lock from '../icons/Lock';
+import PrivateConfirmationCard from '../components/PrivateConfirmationCard';
+import PublicConfirmationCard from '../components/PublicConfirmationCard';
 
 const BigContainer = styled.div`
   width: 340px;
@@ -43,6 +45,7 @@ const NavButton = styled.button`
   width: 50%;
   flex-grow: 1;
 `;
+
 const Status = styled.div`
   display: flex;
   width: 100%;
@@ -54,6 +57,7 @@ const QuestionsCounter = styled.div`
   display: flex;
   align-self: center;
 `;
+
 const Text = styled.div`
   align-self: center;
   font-size: 1.5rem;
@@ -68,8 +72,9 @@ export default function FormCard() {
     incorrect_answer2: '',
     incorrect_answer3: ''
   });
-
+  const [questionStatus, setQuestionStatus] = React.useState('inactive');
   const [questionsCounter, setQuestionsCounter] = React.useState(0);
+  const [finished, setFinished] = React.useState(false);
 
   function onChange(event) {
     const value = event.target.value;
@@ -92,12 +97,23 @@ export default function FormCard() {
         correct_answer: question.correct_answer,
         incorrect_answer1: question.incorrect_answer1,
         incorrect_answer2: question.incorrect_answer2,
-        incorrect_answer3: question.incorrect_answer3
+        incorrect_answer3: question.incorrect_answer3,
+        status: questionStatus
       })
     });
-    if (presetCategory !== '') {
+    if (privateCategory !== '') {
       setQuestion({
-        category: presetCategory,
+        category: privateCategory,
+        question: '',
+        correct_answer: '',
+        incorrect_answer1: '',
+        incorrect_answer2: '',
+        incorrect_answer3: ''
+      });
+      setQuestionStatus('active');
+    } else {
+      setQuestion({
+        category: question.category,
         question: '',
         correct_answer: '',
         incorrect_answer1: '',
@@ -108,94 +124,100 @@ export default function FormCard() {
     setQuestionsCounter(questionsCounter + 1);
   }
 
-  const presetCategory = sessionStorage.getItem('category');
-
+  const privateCategory = sessionStorage.getItem('category');
   const isPrivateSet = sessionStorage.getItem('isPrivateSet');
 
   React.useEffect(() => {
-    if (presetCategory !== '') {
-      setQuestion({
-        category: presetCategory,
-        question: '',
-        correct_answer: '',
-        incorrect_answer1: '',
-        incorrect_answer2: '',
-        incorrect_answer3: ''
-      });
-    } else {
-      setQuestion({
-        category: '',
-        question: '',
-        correct_answer: '',
-        incorrect_answer1: '',
-        incorrect_answer2: '',
-        incorrect_answer3: ''
-      });
+    if (privateCategory !== '') {
+      setQuestion({ category: privateCategory });
+      setQuestionStatus('active');
     }
   }, []);
+
+  function onClickFinished() {
+    setFinished(true);
+  }
+
+  const addMore = () => {
+    setFinished(false);
+  };
+
   return (
-    <BigContainer>
-      <Form onSubmit={handleSubmit}>
-        <Status>
-          {!isPrivateSet && <Planet />}
-          {isPrivateSet && <Lock />}
-          <QuestionsCounter>
-            <QuestionMark />
-            <Text>{questionsCounter}</Text>
-          </QuestionsCounter>
-        </Status>
-        <Input
-          type="text"
-          value={question.category}
-          name="category"
-          onChange={onChange}
-          placeholder="Category"
-          required
-        />
-        <Input
-          type="text"
-          value={question.question}
-          name="question"
-          onChange={onChange}
-          placeholder="Question"
-          autofocus
-          required
-        />
-        <Input
-          value={question.correct_answer}
-          name="correct_answer"
-          onChange={onChange}
-          placeholder="Correct Answer"
-          required
-        />
-        <Input
-          type="text"
-          value={question.incorrect_answer1}
-          name="incorrect_answer1"
-          onChange={onChange}
-          placeholder="Wrong Answer 1"
-          required
-        />
-        <Input
-          type="text"
-          value={question.incorrect_answer2}
-          name="incorrect_answer2"
-          onChange={onChange}
-          placeholder="Wrong Answer 2"
-          required
-        />
-        <Input
-          type="text"
-          value={question.incorrect_answer3}
-          name="incorrect_answer3"
-          onChange={onChange}
-          placeholder="Wrong Answer 3"
-          required
-        />
-        <Nav>
-          <NavButton>Submit </NavButton>
-        </Nav>
-      </Form>
-    </BigContainer>
+    <>
+      {!finished && (
+        <BigContainer>
+          <Form onSubmit={handleSubmit}>
+            <Status>
+              {isPrivateSet === 'true' && <Lock />}
+              {isPrivateSet === 'false' && <Planet />}
+              <QuestionsCounter>
+                <QuestionMark />
+                <Text>{questionsCounter}</Text>
+              </QuestionsCounter>
+            </Status>
+            <Input
+              type="text"
+              value={question.category}
+              name="category"
+              onChange={onChange}
+              placeholder="Category"
+              required
+            />
+            <Input
+              type="text"
+              value={question.question}
+              name="question"
+              onChange={onChange}
+              placeholder="Question"
+              autofocus
+              required
+            />
+            <Input
+              value={question.correct_answer}
+              name="correct_answer"
+              onChange={onChange}
+              placeholder="Correct Answer"
+              required
+            />
+            <Input
+              type="text"
+              value={question.incorrect_answer1}
+              name="incorrect_answer1"
+              onChange={onChange}
+              placeholder="Wrong Answer 1"
+              required
+            />
+            <Input
+              type="text"
+              value={question.incorrect_answer2}
+              name="incorrect_answer2"
+              onChange={onChange}
+              placeholder="Wrong Answer 2"
+              required
+            />
+            <Input
+              type="text"
+              value={question.incorrect_answer3}
+              name="incorrect_answer3"
+              onChange={onChange}
+              placeholder="Wrong Answer 3"
+              required
+            />
+            <Nav>
+              <NavButton>Submit </NavButton>
+              <NavButton value="Submit" onClick={onClickFinished}>
+                Finished adding{' '}
+              </NavButton>
+            </Nav>
+          </Form>
+        </BigContainer>
+      )}
+      {finished && isPrivateSet === 'true' && (
+        <PrivateConfirmationCard addMore={addMore} questions={questionsCounter} />
+      )}
+      {finished && isPrivateSet === 'false' && (
+        <PublicConfirmationCard addMore={addMore} questions={questionsCounter} />
+      )}
+    </>
   );
 }
