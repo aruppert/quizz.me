@@ -4,6 +4,7 @@ import QuestionCard from '../components/QuestionCard';
 import AnswerCard from '../components/AnswerCard';
 import Footer from '../components/Footer';
 import styled from '@emotion/styled';
+import Star from '../icons/Star';
 
 const Main = styled.main`
   display: flex;
@@ -26,6 +27,26 @@ const PassButton = styled(AnswerCard)`
   margin: 0px;
 `;
 
+const GameOverButton = styled(AnswerCard)`
+  height: 30px;
+  background-image: linear-gradient(to right, #f78ca0 0%, #f9748f 19%, #fd868c 60%, #fe9a8b 100%);
+  margin: 0px;
+`;
+const GameOverContainer = styled.div``;
+
+const StarPositioned = styled(Star)`
+  position: absolute;
+  top: 50vh;
+  left: 50vw;
+  height: 375px;
+`;
+const TextWrapper = styled.div`
+  position: absolute;
+  top: 50vh;
+  left: 50vw;
+  transform: translate(-50%, -50%);
+`;
+
 export default function PlayPage() {
   const [ids, setIds] = React.useState([]);
   const [category, setCategory] = React.useState('');
@@ -36,6 +57,7 @@ export default function PlayPage() {
   const [incorrect_answer3, setIncorrect_answer3] = React.useState('');
   const [points, setPoints] = React.useState(0);
   const [questionsPlayed, setQuestionsPlayed] = React.useState(0);
+  const [gameOver, setGameOver] = React.useState(false);
 
   const randomNumber = Math.floor(Math.random() * 5) + 1;
 
@@ -89,8 +111,9 @@ export default function PlayPage() {
   }
 
   function passQuestion() {
-    getNextQuestion(randomNumber);
     setPoints(points - 0.25);
+    setQuestionsPlayed(questionsPlayed + 1);
+    getNextQuestion(randomNumber);
   }
 
   React.useEffect(() => {
@@ -100,19 +123,32 @@ export default function PlayPage() {
   return (
     <Main>
       <Header />
-      <QuestionCard
-        total={questionsPlayed}
-        score={points}
-        category={category}
-        question={question}
-      />
-      <AnswerContainer>
-        <AnswerCard value={allAnswers[0]} onClick={() => verifyAnswer(allAnswers[0])} />
-        <AnswerCard value={allAnswers[1]} onClick={() => verifyAnswer(allAnswers[1])} />
-        <AnswerCard value={allAnswers[2]} onClick={() => verifyAnswer(allAnswers[2])} />
-        <AnswerCard value={allAnswers[3]} onClick={() => verifyAnswer(allAnswers[3])} />
-      </AnswerContainer>
-      <PassButton value="Pass (-0.25 points)" onClick={() => passQuestion()} />
+      {!gameOver && (
+        <>
+          <QuestionCard
+            total={questionsPlayed}
+            score={points}
+            category={category}
+            question={question}
+          />
+          <AnswerContainer>
+            <AnswerCard value={allAnswers[0]} onClick={() => verifyAnswer(allAnswers[0])} />
+            <AnswerCard value={allAnswers[1]} onClick={() => verifyAnswer(allAnswers[1])} />
+            <AnswerCard value={allAnswers[2]} onClick={() => verifyAnswer(allAnswers[2])} />
+            <AnswerCard value={allAnswers[3]} onClick={() => verifyAnswer(allAnswers[3])} />
+          </AnswerContainer>
+          <PassButton value="Pass (-0.25 points)" onClick={() => passQuestion()} />
+          <GameOverButton value="Enough!" onClick={() => setGameOver(true)} />
+        </>
+      )}
+      {gameOver && (
+        <GameOverContainer>
+          <StarPositioned />
+          <TextWrapper>
+            <p>You scored {points} points </p> <p>playing {questionsPlayed} cards!</p>
+          </TextWrapper>
+        </GameOverContainer>
+      )}
       <Footer />
     </Main>
   );
