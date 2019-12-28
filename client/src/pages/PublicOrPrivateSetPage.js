@@ -39,7 +39,7 @@ const TextWrapper = styled.div`
   margin: 20px;
 `;
 
-export default function FormPage() {
+export default function PublicOrPrivateSetPage() {
   const [uniqueCode, setUniqueCode] = React.useState('');
 
   function onChange(event) {
@@ -57,8 +57,8 @@ export default function FormPage() {
   }
 
   function handleClickOnPublic() {
-    sessionStorage.removeItem('category');
-    sessionStorage.removeItem('isPrivateSet');
+    sessionStorage.setItem('category', '');
+    sessionStorage.setItem('isPrivateSet', false);
   }
 
   return (

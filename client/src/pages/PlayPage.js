@@ -58,6 +58,7 @@ export default function PlayPage() {
   const [points, setPoints] = React.useState(0);
   const [questionsPlayed, setQuestionsPlayed] = React.useState(0);
   const [gameOver, setGameOver] = React.useState(false);
+  // const [showCorrectAnswer, setShowCorrectAnswer] = React.useState(false);
 
   const randomNumber = Math.floor(Math.random() * 5) + 1;
 
@@ -96,10 +97,12 @@ export default function PlayPage() {
   function verifyAnswer(value) {
     if (sessionStorage.getItem('firstAnswer') === 'true') {
       if (value === correct_answer) {
+        alert(`Perfect! That's right!`);
         setPoints(points + 1);
         setQuestionsPlayed(questionsPlayed + 1);
         getNextQuestion(randomNumber);
       } else {
+        alert(`Sorry, the correct answer is "${correct_answer}"!`);
         setPoints(points - 1);
         setQuestionsPlayed(questionsPlayed + 1);
         getNextQuestion(randomNumber);
@@ -109,6 +112,25 @@ export default function PlayPage() {
     }
     sessionStorage.setItem('firstAnswer', false);
   }
+
+  // MIGHT BE USED LATER FOR NICER WAY TO SHOW THE CORRECT ANSWER
+
+  // function findRightAnswerInArray() {
+  //   switch (correct_answer) {
+  //     case allAnswers[0]:
+  //       console.log(`Answers[0] is right`);
+  //       break;
+  //     case allAnswers[1]:
+  //       console.log('Answers[1] is right');
+  //       break;
+  //     case allAnswers[2]:
+  //       console.log('Answers[2] is right');
+  //       break;
+  //     case allAnswers[3]:
+  //       console.log('Answers[3] is right');
+  //       break;
+  //   }
+  // }
 
   function passQuestion() {
     setPoints(points - 0.25);
