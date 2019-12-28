@@ -8,9 +8,16 @@ import FormPage from './pages/FormPage';
 import ChooseGameModePage from './pages/ChooseGameModePage';
 import PlayOrAddSetPage from './pages/PlayOrAddSetPage';
 import PlayPage from './pages/PlayPage';
+import MultiPlayerPage from './pages/MultiPlayerPage';
 import PublicOrPrivateSetPage from './pages/PublicOrPrivateSetPage';
 
 function App() {
+  const [numberOfPlayers, setNumberOfPlayers] = React.useState(1);
+
+  function setPlayers(number) {
+    setNumberOfPlayers(number);
+  }
+
   return (
     <>
       <ThemeProvider theme={primary}>
@@ -21,13 +28,14 @@ function App() {
               <FormPage />
             </Route>
             <Route path="/choose">
-              <ChooseGameModePage />
+              <ChooseGameModePage setPlayers={setPlayers} />
             </Route>
             <Route path="/puborprivate">
               <PublicOrPrivateSetPage />
             </Route>
             <Route path="/play">
-              <PlayPage />
+              {numberOfPlayers === 1 && <PlayPage />}
+              {numberOfPlayers === 2 && <MultiPlayerPage />}
             </Route>
             <Route path="/playoradd">
               <PlayOrAddSetPage />

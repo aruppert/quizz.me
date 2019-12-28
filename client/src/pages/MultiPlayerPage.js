@@ -22,6 +22,13 @@ const AnswerContainer = styled.div`
   margin: 20px;
 `;
 
+const TurnOfPlayer = styled.p`
+  text-align: center;
+  height: 30px;
+  width: 200px;
+  margin: 0px;
+`;
+
 const PassButton = styled(AnswerCard)`
   height: 30px;
   margin: 0px;
@@ -55,10 +62,11 @@ export default function PlayPage() {
   const [incorrect_answer1, setIncorrect_answer1] = React.useState('');
   const [incorrect_answer2, setIncorrect_answer2] = React.useState('');
   const [incorrect_answer3, setIncorrect_answer3] = React.useState('');
-  const [points, setPoints] = React.useState(0);
+  const [pointsPlayer1, setPointsPlayer1] = React.useState(0);
+  const [pointsPlayer2, setPointsPlayer2] = React.useState(0);
   const [questionsPlayed, setQuestionsPlayed] = React.useState(0);
   const [gameOver, setGameOver] = React.useState(false);
-  // const [showCorrectAnswer, setShowCorrectAnswer] = React.useState(false);
+  const [nowPlaying, setNowPlaying] = React.useState(1);
 
   const randomNumber = Math.floor(Math.random() * 5) + 1;
 
@@ -92,50 +100,56 @@ export default function PlayPage() {
 
   shuffle(allAnswers);
 
-  sessionStorage.setItem('firstAnswer', true);
-
   function verifyAnswer(value) {
-    if (sessionStorage.getItem('firstAnswer') === 'true') {
+    if (nowPlaying === 1) {
       if (value === correct_answer) {
-        alert(`Perfect! That's right!`);
-        setPoints(points + 1);
+        setPointsPlayer1(pointsPlayer1 + 1);
+        setNowPlaying(2);
+      } else {
+        setPointsPlayer1(pointsPlayer1 - 1);
+        setNowPlaying(2);
+      }
+    }
+    if (nowPlaying === 2) {
+      if (value === correct_answer) {
+        alert(`The correct answer is "${correct_answer}"!`);
+        setPointsPlayer2(pointsPlayer2 + 1);
         setQuestionsPlayed(questionsPlayed + 1);
+        setNowPlaying(1);
         getNextQuestion(randomNumber);
       } else {
-        alert(`Sorry, the correct answer is "${correct_answer}"!`);
-        setPoints(points - 1);
+        alert(`The correct answer is "${correct_answer}"!`);
+        setPointsPlayer2(pointsPlayer2 - 1);
         setQuestionsPlayed(questionsPlayed + 1);
+        setNowPlaying(1);
         getNextQuestion(randomNumber);
       }
-    } else {
-      return null;
     }
-    sessionStorage.setItem('firstAnswer', false);
   }
 
-  // MIGHT BE USED LATER FOR NICER WAY TO SHOW THE CORRECT ANSWER
-
-  // function findRightAnswerInArray() {
-  //   switch (correct_answer) {
-  //     case allAnswers[0]:
-  //       console.log(`Answers[0] is right`);
-  //       break;
-  //     case allAnswers[1]:
-  //       console.log('Answers[1] is right');
-  //       break;
-  //     case allAnswers[2]:
-  //       console.log('Answers[2] is right');
-  //       break;
-  //     case allAnswers[3]:
-  //       console.log('Answers[3] is right');
-  //       break;
-  //   }
-  // }
+  function determineResult(points1, points2) {
+    if (points1 === points2) {
+      return 'Draw!';
+    } else {
+      if (points1 > points2) {
+        return 'Player 1 won!';
+      }
+      {
+        return 'Player 2 won!';
+      }
+    }
+  }
 
   function passQuestion() {
-    setPoints(points - 0.25);
-    setQuestionsPlayed(questionsPlayed + 1);
-    getNextQuestion(randomNumber);
+    if (nowPlaying === 1) {
+      setPointsPlayer1(pointsPlayer1 - 0.25);
+      setNowPlaying(2);
+    } else {
+      setPointsPlayer2(pointsPlayer2 - 0.25);
+      setQuestionsPlayed(questionsPlayed + 1);
+      setNowPlaying(1);
+      getNextQuestion(randomNumber);
+    }
   }
 
   React.useEffect(() => {
@@ -147,10 +161,10 @@ export default function PlayPage() {
       <Header />
       {!gameOver && (
         <>
-          <p>Single Player Mode!</p>
+          <TurnOfPlayer>Player {nowPlaying} is on!</TurnOfPlayer>
           <QuestionCard
+            score={nowPlaying === 1 ? pointsPlayer1 : pointsPlayer2}
             total={questionsPlayed}
-            score={points}
             category={category}
             question={question}
           />
@@ -168,7 +182,8 @@ export default function PlayPage() {
         <GameOverContainer>
           <StarPositioned />
           <TextWrapper>
-            <p>You scored {points} points </p> <p>playing {questionsPlayed} cards!</p>
+            <p>Player 1 has {pointsPlayer1} points, </p> <p>Player 2 has {pointsPlayer2} points:</p>
+            <p>{determineResult(pointsPlayer1, pointsPlayer2)}</p>
           </TextWrapper>
         </GameOverContainer>
       )}
