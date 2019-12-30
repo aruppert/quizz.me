@@ -16,9 +16,7 @@ function App() {
   const [numberOfPlayers, setNumberOfPlayers] = React.useState(1);
   const [categories, setCategories] = React.useState([]);
   const [privateCode, setPrivateCode] = React.useState('');
-  console.log(amountOfQuestions);
-  console.log(numberOfPlayers);
-  console.log(categories);
+
   function addCategory(name) {
     setCategories([...categories, name]);
   }
