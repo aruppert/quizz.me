@@ -67,16 +67,9 @@ const category5 = 'Nature';
 const category6 = 'Computers';
 
 export default function ChooseGameModePage(props) {
-  function onAmountClick(amount) {
-    props.setAmountOfQuestions(amount);
-  }
-
-  function onPlayersClick(value) {
-    props.setNumberOfPlayers(value);
-  }
-  function onCategoryClick(name) {
-    props.addCategory(name);
-  }
+  // function onCategoryClick(name) {
+  //   props.addCategory(name);
+  // }
 
   return (
     <Main>
@@ -84,13 +77,13 @@ export default function ChooseGameModePage(props) {
       <Container>
         How many questions?
         <div>
-          <RadioButton onClick={() => onAmountClick(4)} type="radio">
+          <RadioButton onClick={() => props.setAmountOfQuestions(4)} type="radio">
             4
           </RadioButton>
-          <RadioButton onClick={() => onAmountClick(8)} type="radio">
+          <RadioButton onClick={() => props.setAmountOfQuestions(8)} type="radio">
             8
           </RadioButton>
-          <RadioButton onClick={() => onAmountClick(12)} type="radio">
+          <RadioButton onClick={() => props.setAmountOfQuestions(12)} type="radio">
             12
           </RadioButton>
         </div>
@@ -108,29 +101,29 @@ export default function ChooseGameModePage(props) {
         <Form>
           <div>
             <Label>
-              <input type="radio" value={category1} onClick={() => onCategoryClick(category1)} />{' '}
+              <input type="radio" value={category1} onClick={() => props.addCategory(category1)} />{' '}
               {category1}
             </Label>
             <Label>
-              <input type="radio" value={category2} onClick={() => onCategoryClick(category1)} />{' '}
+              <input type="radio" value={category2} onClick={() => props.addCategory(category2)} />{' '}
               {category2}
             </Label>
             <Label>
-              <input type="radio" value={category3} onClick={() => onCategoryClick(category3)} />{' '}
+              <input type="radio" value={category3} onClick={() => props.addCategory(category3)} />{' '}
               {category3}
             </Label>
           </div>
           <div>
             <Label>
-              <input type="radio" value={category4} onClick={() => onCategoryClick(category4)} />{' '}
+              <input type="radio" value={category4} onClick={() => props.addCategory(category4)} />{' '}
               {category4}
             </Label>
             <Label>
-              <input type="radio" value={category5} onClick={() => onCategoryClick(category5)} />{' '}
+              <input type="radio" value={category5} onClick={() => props.addCategory(category5)} />{' '}
               {category5}
             </Label>
             <Label>
-              <input type="radio" value={category6} onClick={() => onCategoryClick(category6)} />{' '}
+              <input type="radio" value={category6} onClick={() => props.addCategory(category6)} />{' '}
               {category6}
             </Label>
           </div>

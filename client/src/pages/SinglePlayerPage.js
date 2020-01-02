@@ -63,8 +63,8 @@ export default function SinglePlayerPage(props) {
 
   // PARAMS TO GET NEW QUESTIONS (UNUSED ARE FOR MONGODB)
   const randomNumber = Math.floor(Math.random() * 5) + 1;
-  const privateCode = props.privateCode;
-  const selecctedCategories = props.selectedCategories;
+  // const privateCode = props.privateCode;
+  // const selecctedCategories = props.selectedCategories;
 
   const amountOfQuestions = props.amountOfQuestions;
 
