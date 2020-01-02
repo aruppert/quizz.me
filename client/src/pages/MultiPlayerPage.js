@@ -54,7 +54,7 @@ const TextWrapper = styled.div`
   transform: translate(-50%, -50%);
 `;
 
-export default function PlayPage() {
+export default function PlayPage(props) {
   const [ids, setIds] = React.useState([]);
   const [category, setCategory] = React.useState('');
   const [question, setQuestion] = React.useState('');
@@ -68,7 +68,12 @@ export default function PlayPage() {
   const [gameOver, setGameOver] = React.useState(false);
   const [nowPlaying, setNowPlaying] = React.useState(1);
 
+  // PARAMS TO GET NEW QUESTIONS (UNUSED ARE FOR MONGODB)
   const randomNumber = Math.floor(Math.random() * 5) + 1;
+  // const privateCode = props.privateCode;
+  // const selecctedCategories = props.selectedCategories;
+
+  const amountOfQuestions = props.amountOfQuestions;
 
   async function fetchQuestion(randomNumber) {
     const response = await fetch('http://localhost:8080/questions/' + randomNumber);
@@ -111,6 +116,7 @@ export default function PlayPage() {
       }
     }
     if (nowPlaying === 2) {
+      isQuestionLimitReached(questionsPlayed + 1);
       if (value === correct_answer) {
         alert(`The correct answer is "${correct_answer}"!`);
         setPointsPlayer2(pointsPlayer2 + 1);
@@ -149,6 +155,12 @@ export default function PlayPage() {
       setQuestionsPlayed(questionsPlayed + 1);
       setNowPlaying(1);
       getNextQuestion(randomNumber);
+    }
+  }
+
+  function isQuestionLimitReached(questionsPlayed) {
+    if (questionsPlayed === amountOfQuestions) {
+      setGameOver(true);
     }
   }
 

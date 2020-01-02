@@ -32,6 +32,7 @@ const GameOverButton = styled(AnswerCard)`
   background-image: linear-gradient(to right, #f78ca0 0%, #f9748f 19%, #fd868c 60%, #fe9a8b 100%);
   margin: 0px;
 `;
+
 const GameOverContainer = styled.div``;
 
 const StarPositioned = styled(Star)`
@@ -47,7 +48,7 @@ const TextWrapper = styled.div`
   transform: translate(-50%, -50%);
 `;
 
-export default function PlayPage() {
+export default function SinglePlayerPage(props) {
   const [ids, setIds] = React.useState([]);
   const [category, setCategory] = React.useState('');
   const [question, setQuestion] = React.useState('');
@@ -60,7 +61,12 @@ export default function PlayPage() {
   const [gameOver, setGameOver] = React.useState(false);
   // const [showCorrectAnswer, setShowCorrectAnswer] = React.useState(false);
 
+  // PARAMS TO GET NEW QUESTIONS (UNUSED ARE FOR MONGODB)
   const randomNumber = Math.floor(Math.random() * 5) + 1;
+  // const privateCode = props.privateCode;
+  // const selecctedCategories = props.selectedCategories;
+
+  const amountOfQuestions = props.amountOfQuestions;
 
   async function fetchQuestion(randomNumber) {
     const response = await fetch('http://localhost:8080/questions/' + randomNumber);
@@ -95,6 +101,7 @@ export default function PlayPage() {
   sessionStorage.setItem('firstAnswer', true);
 
   function verifyAnswer(value) {
+    isQuestionLimitReached(questionsPlayed + 1);
     if (sessionStorage.getItem('firstAnswer') === 'true') {
       if (value === correct_answer) {
         alert(`Perfect! That's right!`);
@@ -138,41 +145,50 @@ export default function PlayPage() {
     getNextQuestion(randomNumber);
   }
 
+  function isQuestionLimitReached(questionsPlayed) {
+    if (questionsPlayed === amountOfQuestions) {
+      setGameOver(true);
+    }
+  }
+
   React.useEffect(() => {
     fetchQuestion(randomNumber);
   }, []);
 
   return (
-    <Main>
+    <>
       <Header />
-      {!gameOver && (
-        <>
-          <p>Single Player Mode!</p>
-          <QuestionCard
-            total={questionsPlayed}
-            score={points}
-            category={category}
-            question={question}
-          />
-          <AnswerContainer>
-            <AnswerCard value={allAnswers[0]} onClick={() => verifyAnswer(allAnswers[0])} />
-            <AnswerCard value={allAnswers[1]} onClick={() => verifyAnswer(allAnswers[1])} />
-            <AnswerCard value={allAnswers[2]} onClick={() => verifyAnswer(allAnswers[2])} />
-            <AnswerCard value={allAnswers[3]} onClick={() => verifyAnswer(allAnswers[3])} />
-          </AnswerContainer>
-          <PassButton value="Pass (-0.25 points)" onClick={() => passQuestion()} />
-          <GameOverButton value="Enough!" onClick={() => setGameOver(true)} />
-        </>
-      )}
-      {gameOver && (
-        <GameOverContainer>
-          <StarPositioned />
-          <TextWrapper>
-            <p>You scored {points} points </p> <p>playing {questionsPlayed} cards!</p>
-          </TextWrapper>
-        </GameOverContainer>
-      )}
+      <Main>
+        {!gameOver && (
+          <>
+            <p>Single Player Mode! </p>
+
+            <QuestionCard
+              total={questionsPlayed}
+              score={points}
+              category={category}
+              question={question}
+            />
+            <AnswerContainer>
+              <AnswerCard value={allAnswers[0]} onClick={() => verifyAnswer(allAnswers[0])} />
+              <AnswerCard value={allAnswers[1]} onClick={() => verifyAnswer(allAnswers[1])} />
+              <AnswerCard value={allAnswers[2]} onClick={() => verifyAnswer(allAnswers[2])} />
+              <AnswerCard value={allAnswers[3]} onClick={() => verifyAnswer(allAnswers[3])} />
+            </AnswerContainer>
+            <PassButton value="Pass (-0.25 points)" onClick={() => passQuestion()} />
+            <GameOverButton value="Enough!" onClick={() => setGameOver(true)} />
+          </>
+        )}
+        {gameOver && (
+          <GameOverContainer>
+            <StarPositioned />
+            <TextWrapper>
+              <p>You scored {points} points </p> <p>playing {questionsPlayed} cards!</p>
+            </TextWrapper>
+          </GameOverContainer>
+        )}
+      </Main>
       <Footer />
-    </Main>
+    </>
   );
 }
