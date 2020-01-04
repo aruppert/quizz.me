@@ -5,6 +5,7 @@ import AnswerCard from '../components/AnswerCard';
 import Footer from '../components/Footer';
 import styled from '@emotion/styled';
 import Star from '../icons/Star';
+import StarBG from '../icons/StarBG';
 
 const Main = styled.main`
   display: flex;
@@ -34,13 +35,12 @@ const GameOverButton = styled(AnswerCard)`
 `;
 
 const GameOverContainer = styled.div``;
-
-const StarPositioned = styled(Star)`
-  position: absolute;
-  top: 50vh;
-  left: 50vw;
-  height: 375px;
+const StarWrapper = styled.svg`
+  position: relative;
+  height: 450px;
+  width: 450px;
 `;
+
 const TextWrapper = styled.div`
   position: absolute;
   top: 50vh;
@@ -49,7 +49,7 @@ const TextWrapper = styled.div`
 `;
 
 export default function SinglePlayerPage(props) {
-  const [ids, setIds] = React.useState([]);
+  const [_ids, set_Ids] = React.useState([]);
   const [category, setCategory] = React.useState('');
   const [question, setQuestion] = React.useState('');
   const [correct_answer, setCorrect_answer] = React.useState('');
@@ -61,31 +61,26 @@ export default function SinglePlayerPage(props) {
   const [gameOver, setGameOver] = React.useState(false);
   // const [showCorrectAnswer, setShowCorrectAnswer] = React.useState(false);
 
-  // PARAMS TO GET NEW QUESTIONS (UNUSED ARE FOR MONGODB)
-  const randomNumber = Math.floor(Math.random() * 5) + 1;
-  // const privateCode = props.privateCode;
-  // const selecctedCategories = props.selectedCategories;
-
+  const selectedCategories = props.selectedCategories;
   const amountOfQuestions = props.amountOfQuestions;
 
-  async function fetchQuestion(randomNumber) {
-    const response = await fetch('http://localhost:8080/questions/' + randomNumber);
+  async function getNextQuestion() {
+    const response = await fetch('/api/questions/random');
     const data = await response.json();
-    setIds(ids => [...ids, data.id]);
-    setCategory(data.category);
-    setQuestion(data.question);
-    setCorrect_answer(data.correct_answer);
-    setIncorrect_answer1(data.incorrect_answer1);
-    setIncorrect_answer2(data.incorrect_answer2);
-    setIncorrect_answer3(data.incorrect_answer3);
-  }
+    const categoryOfNextQuestion = data.category;
 
-  function getNextQuestion(number) {
-    if (ids.includes(number)) {
-      const randomNumber = Math.floor(Math.random() * 5) + 1;
-      getNextQuestion(randomNumber);
+    if (_ids.includes(data._id) || !selectedCategories.includes(categoryOfNextQuestion)) {
+      getNextQuestion();
+      console.log(`first ${_ids}`);
     } else {
-      fetchQuestion(number);
+      set_Ids(_ids => [..._ids, data._id]);
+      console.log(`second ${_ids}`);
+      setCategory(data.category);
+      setQuestion(data.question);
+      setCorrect_answer(data.correct_answer);
+      setIncorrect_answer1(data.incorrect_answer1);
+      setIncorrect_answer2(data.incorrect_answer2);
+      setIncorrect_answer3(data.incorrect_answer3);
     }
   }
 
@@ -107,12 +102,12 @@ export default function SinglePlayerPage(props) {
         alert(`Perfect! That's right!`);
         setPoints(points + 1);
         setQuestionsPlayed(questionsPlayed + 1);
-        getNextQuestion(randomNumber);
+        getNextQuestion();
       } else {
         alert(`Sorry, the correct answer is "${correct_answer}"!`);
         setPoints(points - 1);
         setQuestionsPlayed(questionsPlayed + 1);
-        getNextQuestion(randomNumber);
+        getNextQuestion();
       }
     } else {
       return null;
@@ -142,7 +137,7 @@ export default function SinglePlayerPage(props) {
   function passQuestion() {
     setPoints(points - 0.25);
     setQuestionsPlayed(questionsPlayed + 1);
-    getNextQuestion(randomNumber);
+    getNextQuestion();
   }
 
   function isQuestionLimitReached(questionsPlayed) {
@@ -152,7 +147,7 @@ export default function SinglePlayerPage(props) {
   }
 
   React.useEffect(() => {
-    fetchQuestion(randomNumber);
+    getNextQuestion();
   }, []);
 
   return (
@@ -181,7 +176,10 @@ export default function SinglePlayerPage(props) {
         )}
         {gameOver && (
           <GameOverContainer>
-            <StarPositioned />
+            <StarWrapper>
+              <StarBG />
+              <Star />
+            </StarWrapper>
             <TextWrapper>
               <p>You scored {points} points </p> <p>playing {questionsPlayed} cards!</p>
             </TextWrapper>

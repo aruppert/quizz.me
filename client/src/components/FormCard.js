@@ -2,10 +2,11 @@ import React from 'react';
 import styled from '@emotion/styled';
 import Input from './Input';
 import Planet from '../icons/Planet';
-import QuestionMark from '../icons/QuestionMark';
 import Lock from '../icons/Lock';
 import PrivateConfirmationCard from '../components/PrivateConfirmationCard';
 import PublicConfirmationCard from '../components/PublicConfirmationCard';
+import QuestionCardsAdded from '../icons/QuestionCardsAdded';
+import { addQuestion } from '../api/questions';
 
 const BigContainer = styled.div`
   width: 340px;
@@ -86,21 +87,15 @@ export default function FormCard() {
 
   async function handleSubmit(event) {
     event.preventDefault();
-    await fetch('http://localhost:8080/questions', {
-      method: 'POST',
-      headers: {
-        'Content-type': 'application/json'
-      },
-      body: JSON.stringify({
-        category: question.category,
-        question: question.question,
-        correct_answer: question.correct_answer,
-        incorrect_answer1: question.incorrect_answer1,
-        incorrect_answer2: question.incorrect_answer2,
-        incorrect_answer3: question.incorrect_answer3,
-        status: questionStatus
-      })
-    });
+    addQuestion(
+      question.category,
+      question.question,
+      question.correct_answer,
+      question.incorrect_answer1,
+      question.incorrect_answer2,
+      question.incorrect_answer3,
+      questionStatus
+    );
     if (privateCategory !== '') {
       setQuestion({
         category: privateCategory,
@@ -151,7 +146,7 @@ export default function FormCard() {
               {isPrivateSet === 'true' && <Lock />}
               {isPrivateSet === 'false' && <Planet />}
               <QuestionsCounter>
-                <QuestionMark />
+                <QuestionCardsAdded />
                 <Text>{questionsCounter}</Text>
               </QuestionsCounter>
             </Status>
