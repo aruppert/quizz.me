@@ -6,6 +6,7 @@ const ButtonLink = styled(Link)`
   outline: none;
   background: none;
   align-self: center;
+  text-decoration: none;
 `;
 
 export default ButtonLink;

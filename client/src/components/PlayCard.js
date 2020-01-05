@@ -29,8 +29,8 @@ const TextWrapper = styled.div`
 
 export default function PlayCard() {
   return (
-    <PlayContainer to="/play">
-      <TextWrapper>Play single player mode</TextWrapper>
+    <PlayContainer to="/choose">
+      <TextWrapper>Play a single- or multiplayer game</TextWrapper>
       <Dice />
     </PlayContainer>
   );

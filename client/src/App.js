@@ -15,7 +15,6 @@ function App() {
   const [amountOfQuestions, setAmountOfQuestions] = React.useState(4);
   const [numberOfPlayers, setNumberOfPlayers] = React.useState(1);
   const [categories, setCategories] = React.useState([]);
-  const [privateCode, setPrivateCode] = React.useState('');
 
   function addCategory(name) {
     setCategories([...categories, name]);
@@ -34,7 +33,7 @@ function App() {
                 setAmountOfQuestions={setAmountOfQuestions}
                 setNumberOfPlayers={setNumberOfPlayers}
                 addCategory={addCategory}
-                setPrivateCode={setPrivateCode}
+                setPrivateCode={setCategories}
               />
             </Route>
             <Route path="/puborprivate">
@@ -42,16 +41,11 @@ function App() {
             </Route>
             <Route path="/play">
               {numberOfPlayers === 1 && (
-                <SinglePlayerPage
-                  amountOfQuestions={amountOfQuestions}
-                  selectedCategories={categories}
-                  privateCode={privateCode}
-                />
+                <SinglePlayerPage amountOfQuestions={amountOfQuestions} privateCode={privateCode} />
               )}
               {numberOfPlayers === 2 && (
                 <MultiPlayerPage
                   amountOfQuestions={amountOfQuestions}
-                  privateCode={privateCode}
                   selectedCategories={categories}
                 />
               )}
