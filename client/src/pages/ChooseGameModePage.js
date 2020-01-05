@@ -147,8 +147,8 @@ export default function ChooseGameModePage(props) {
 ChooseGameModePage.propTypes = {
   setAmountOfQuestions: PropTypes.number,
   setNumberOfPlayers: PropTypes.number,
-  addCategory: PropTypes.string,
+  addCategory: PropTypes.func,
   setPrivateCode: PropTypes.string,
-  chooseNamePlayer1: PropTypes.string,
-  chooseNamePlayer2: PropTypes.string
+  chooseNamePlayer1: PropTypes.func,
+  chooseNamePlayer2: PropTypes.func
 };
