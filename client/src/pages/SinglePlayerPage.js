@@ -1,9 +1,10 @@
 import React from 'react';
+import styled from '@emotion/styled';
+import PropTypes from 'prop-types';
 import Header from '../components/Header';
 import QuestionCard from '../components/QuestionCard';
 import AnswerCard from '../components/AnswerCard';
 import Footer from '../components/Footer';
-import styled from '@emotion/styled';
 import Star from '../icons/Star';
 import StarBG from '../icons/StarBG';
 
@@ -190,3 +191,9 @@ export default function SinglePlayerPage(props) {
     </>
   );
 }
+
+SinglePlayerPage.propTypes = {
+  amountOfQuestions: PropTypes.number,
+  nameOfPlayer1: PropTypes.string,
+  selectedCategories: PropTypes.array
+};
