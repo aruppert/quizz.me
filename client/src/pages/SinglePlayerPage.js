@@ -35,6 +35,7 @@ const GameOverButton = styled(AnswerCard)`
 `;
 
 const GameOverContainer = styled.div``;
+
 const StarWrapper = styled.svg`
   position: relative;
   height: 450px;
@@ -71,10 +72,8 @@ export default function SinglePlayerPage(props) {
 
     if (_ids.includes(data._id) || !selectedCategories.includes(categoryOfNextQuestion)) {
       getNextQuestion();
-      console.log(`first ${_ids}`);
     } else {
       set_Ids(_ids => [..._ids, data._id]);
-      console.log(`second ${_ids}`);
       setCategory(data.category);
       setQuestion(data.question);
       setCorrect_answer(data.correct_answer);
@@ -156,7 +155,7 @@ export default function SinglePlayerPage(props) {
       <Main>
         {!gameOver && (
           <>
-            <p>Single Player Mode! </p>
+            <p>Welcome {props.nameOfPlayer1} - GL & HF! </p>
 
             <QuestionCard
               total={questionsPlayed}
@@ -181,6 +180,7 @@ export default function SinglePlayerPage(props) {
               <Star />
             </StarWrapper>
             <TextWrapper>
+              <p>Congrats {props.nameOfPlayer1}!</p>
               <p>You scored {points} points </p> <p>playing {questionsPlayed} cards!</p>
             </TextWrapper>
           </GameOverContainer>

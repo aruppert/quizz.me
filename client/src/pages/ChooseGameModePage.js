@@ -3,6 +3,7 @@ import styled from '@emotion/styled';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import HashInsertCard from '../components/HashInsertCard';
+import Input from '../components/Input';
 
 const Main = styled.main`
   display: flex;
@@ -67,6 +68,15 @@ const category5 = 'Nature';
 const category6 = 'Computers';
 
 export default function ChooseGameModePage(props) {
+  function handleChangePlayer1(event) {
+    const value = event.target.value;
+    props.chooseNamePlayer1(value);
+  }
+  function handleChangePlayer2(event) {
+    const value = event.target.value;
+    props.chooseNamePlayer2(value);
+  }
+
   return (
     <Main>
       <Header />
@@ -92,7 +102,9 @@ export default function ChooseGameModePage(props) {
             2 Players
           </RadioButton>{' '}
         </div>
-        <p> ------------------------------- </p>
+        Enter your name(s):
+        <Input placeholder="Player 1" onChange={handleChangePlayer1}></Input>
+        <Input placeholder="Player 2" onChange={handleChangePlayer2}></Input>
         Please select game categories:
         <Form>
           <div>
