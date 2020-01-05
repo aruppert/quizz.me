@@ -67,10 +67,6 @@ const category5 = 'Nature';
 const category6 = 'Computers';
 
 export default function ChooseGameModePage(props) {
-  // function onCategoryClick(name) {
-  //   props.addCategory(name);
-  // }
-
   return (
     <Main>
       <Header />
