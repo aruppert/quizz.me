@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled';
+import PropTypes from 'prop-types';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import HashInsertCard from '../components/HashInsertCard';
@@ -142,3 +143,12 @@ export default function ChooseGameModePage(props) {
     </Main>
   );
 }
+
+ChooseGameModePage.propTypes = {
+  setAmountOfQuestions: PropTypes.func,
+  setNumberOfPlayers: PropTypes.func,
+  addCategory: PropTypes.func,
+  setPrivateCode: PropTypes.func,
+  chooseNamePlayer1: PropTypes.func,
+  chooseNamePlayer2: PropTypes.func
+};
