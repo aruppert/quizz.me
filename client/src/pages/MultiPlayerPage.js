@@ -1,9 +1,10 @@
 import React from 'react';
+import styled from '@emotion/styled';
+import PropTypes from 'prop-types';
 import Header from '../components/Header';
 import QuestionCard from '../components/QuestionCard';
 import AnswerCard from '../components/AnswerCard';
 import Footer from '../components/Footer';
-import styled from '@emotion/styled';
 import Star from '../icons/Star';
 import StarBG from '../icons/StarBG';
 
@@ -56,7 +57,7 @@ const TextWrapper = styled.div`
   transform: translate(-50%, -50%);
 `;
 
-export default function PlayPage(props) {
+export default function MultiPlayerPage(props) {
   const [_ids, set_Ids] = React.useState([]);
   const [category, setCategory] = React.useState('');
   const [question, setQuestion] = React.useState('');
@@ -169,9 +170,9 @@ export default function PlayPage(props) {
       {!gameOver && (
         <>
           {nowPlaying === 1 ? (
-            <TurnOfPlayer>{props.nameOfPlayer1} - it's your turn!</TurnOfPlayer>
+            <TurnOfPlayer>{props.nameOfPlayer1} - it is your turn!</TurnOfPlayer>
           ) : (
-            <TurnOfPlayer>{props.nameOfPlayer2} - it's your turn!</TurnOfPlayer>
+            <TurnOfPlayer>{props.nameOfPlayer2} - it is your turn!</TurnOfPlayer>
           )}
           <QuestionCard
             score={nowPlaying === 1 ? pointsPlayer1 : pointsPlayer2}
@@ -211,3 +212,10 @@ export default function PlayPage(props) {
     </Main>
   );
 }
+
+MultiPlayerPage.propTypes = {
+  amountOfQuestions: PropTypes.number,
+  nameOfPlayer1: PropTypes.string,
+  nameOfPlayer2: PropTypes.string,
+  selectedCategories: PropTypes.array
+};
