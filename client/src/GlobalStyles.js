@@ -29,6 +29,13 @@ function GlobalStyles() {
           background: ${theme.colors.background};
           height: 100vh;
           width: 100vw;
+
+          > link {
+            text-decoration: none;
+          }
+          button {
+            font-family: 'Gilroy';
+          }
         }
       `}
     />
