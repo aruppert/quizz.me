@@ -23,16 +23,33 @@ const AnswerContainer = styled.div`
   width: 360px;
   margin: 20px;
 `;
+const ButtonBar = styled.div`
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+`;
 
 const PassButton = styled(AnswerCard)`
   height: 30px;
-  margin: 0px;
+  width: 120px;
+  border: none;
+  margin: 0;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.15) 0%, rgba(0, 0, 0, 0.15) 100%),
+    radial-gradient(at top center, rgba(255, 255, 255, 0.4) 0%, rgba(0, 0, 0, 0.4) 120%) #989898;
+  background-blend-mode: multiply, multiply;
+  font-family: 'Leckerli One', cursive;
+  color: #fff;
 `;
 
 const GameOverButton = styled(AnswerCard)`
   height: 30px;
+  width: 120px;
+  border: none;
+
   background-image: linear-gradient(to right, #f78ca0 0%, #f9748f 19%, #fd868c 60%, #fe9a8b 100%);
-  margin: 0px;
+  margin: 0;
+  font-family: 'Leckerli One', cursive;
+  color: white;
 `;
 
 const GameOverContainer = styled.div``;
@@ -156,7 +173,7 @@ export default function SinglePlayerPage(props) {
       <Main>
         {!gameOver && (
           <>
-            <p>Welcome {props.nameOfPlayer1} - GL & HF! </p>
+            {/* <p>Welcome {props.nameOfPlayer1} - GL & HF! </p> */}
 
             <QuestionCard
               total={questionsPlayed}
@@ -170,8 +187,10 @@ export default function SinglePlayerPage(props) {
               <AnswerCard value={allAnswers[2]} onClick={() => verifyAnswer(allAnswers[2])} />
               <AnswerCard value={allAnswers[3]} onClick={() => verifyAnswer(allAnswers[3])} />
             </AnswerContainer>
-            <PassButton value="Pass (-0.25 points)" onClick={() => passQuestion()} />
-            <GameOverButton value="Enough!" onClick={() => setGameOver(true)} />
+            <ButtonBar>
+              <GameOverButton value="End game" onClick={() => setGameOver(true)} />{' '}
+              <PassButton value="Pass question " onClick={() => passQuestion()} />
+            </ButtonBar>
           </>
         )}
         {gameOver && (
