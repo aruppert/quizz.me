@@ -2,7 +2,7 @@ import React from 'react';
 import GlobalStyles from './GlobalStyles';
 import { ThemeProvider } from 'emotion-theming';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import primary from './themes/primary';
+import { secondary } from './themes/themes';
 import LandingPage from './pages/LandingPage';
 import FormPage from './pages/FormPage';
 import ChooseGameModePage from './pages/ChooseGameModePage';
@@ -31,7 +31,7 @@ function App() {
   }
   return (
     <>
-      <ThemeProvider theme={primary}>
+      <ThemeProvider theme={secondary}>
         <Router>
           <GlobalStyles />
           <Switch>
