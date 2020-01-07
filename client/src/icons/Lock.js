@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 
 const Svg = styled.svg`
   fill: ${props => props.theme.colors.icon1};
-  height: 58px;
+  height: 60px;
   stroke: ${props => props.theme.colors.icon1};
   stroke-width: 2;
   stroke-linecap: round;

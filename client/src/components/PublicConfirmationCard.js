@@ -20,6 +20,7 @@ const BigContainer = styled.div`
 
 const Nav = styled.div`
   display: flex;
+  justify-content: center;
 `;
 
 const NavButton = styled.button`
@@ -30,17 +31,20 @@ const NavButton = styled.button`
   border-radius: 10px;
   font-size: 1em;
   font-weight: bold;
-  margin: 0px 5px 0px 5px;
+  margin: 0px 5px;
   color: ${props => props.theme.colors.text1};
-  width: 50%;
-  flex-grow: 1;
+  width: fit-content;
 `;
 
-const TextWrapper = styled.div`
+const TextWrapper = styled.p`
   text-align: center;
   align-self: center;
   color: ${props => props.theme.colors.text1};
   margin: 20px;
+`;
+
+const TextWrapperWarning = styled(TextWrapper)`
+  color: ${props => props.theme.colors.warn};
 `;
 
 export default function PublicConfirmationCard(props) {
@@ -49,20 +53,32 @@ export default function PublicConfirmationCard(props) {
   }
   return (
     <BigContainer>
-      <TextWrapper>
-        Thank you for contributing <p>{props.questions}</p> questions to the public domain. Your
-        questions will be reviewed by an admin and set active very soon. Wanna play now? Hit the
-        dice!
-      </TextWrapper>
-      <ButtonLink to="/play">
-        <Dice />
-      </ButtonLink>
-      <Nav>
-        <NavButton onClick={handleClickOnMore}>
-          {' '}
-          Wait, let me add more or I forgot to submit last question
-        </NavButton>
-      </Nav>
+      {props.questions === 0 ? (
+        <>
+          <TextWrapperWarning>Oops, you didn't add any questions.</TextWrapperWarning>
+          <TextWrapper>
+            Please go back with the button below or start a game with the dice:
+          </TextWrapper>
+          <Nav>
+            <NavButton onClick={handleClickOnMore}> I will do better this time</NavButton>
+          </Nav>
+        </>
+      ) : (
+        <>
+          <TextWrapper>
+            Thank you for contributing <p>{props.questions}</p> question(s) to the public domain.
+            Your question(s) will be reviewed by an admin and set active very soon. To play click
+            the dice:
+          </TextWrapper>
+          <ButtonLink to="/play">
+            <Dice />
+          </ButtonLink>
+          <TextWrapper>or add more with the button below:</TextWrapper>
+          <Nav>
+            <NavButton onClick={handleClickOnMore}> Wait, I love this - let me add more!</NavButton>
+          </Nav>
+        </>
+      )}
     </BigContainer>
   );
 }

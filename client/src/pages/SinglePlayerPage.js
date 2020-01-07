@@ -38,18 +38,17 @@ const PassButton = styled(AnswerCard)`
     radial-gradient(at top center, rgba(255, 255, 255, 0.4) 0%, rgba(0, 0, 0, 0.4) 120%) #989898;
   background-blend-mode: multiply, multiply;
   font-family: 'Leckerli One', cursive;
-  color: #fff;
+  color: ${props => props.theme.colors.text1};
 `;
 
 const GameOverButton = styled(AnswerCard)`
   height: 30px;
   width: 120px;
   border: none;
-
   background-image: linear-gradient(to right, #f78ca0 0%, #f9748f 19%, #fd868c 60%, #fe9a8b 100%);
   margin: 0;
   font-family: 'Leckerli One', cursive;
-  color: white;
+  color: ${props => props.theme.colors.text1};
 `;
 
 const GameOverContainer = styled.div``;
@@ -69,7 +68,6 @@ const TextWrapper = styled.div`
 
 export default function SinglePlayerPage(props) {
   const [_ids, set_Ids] = React.useState([]);
-  const [category, setCategory] = React.useState('');
   const [question, setQuestion] = React.useState('');
   const [correct_answer, setCorrect_answer] = React.useState('');
   const [incorrect_answer1, setIncorrect_answer1] = React.useState('');
@@ -80,19 +78,16 @@ export default function SinglePlayerPage(props) {
   const [gameOver, setGameOver] = React.useState(false);
   // const [showCorrectAnswer, setShowCorrectAnswer] = React.useState(false);
 
-  const selectedCategories = props.selectedCategories;
   const amountOfQuestions = props.amountOfQuestions;
 
   async function getNextQuestion() {
     const response = await fetch('/api/questions/random');
     const data = await response.json();
-    const categoryOfNextQuestion = data.category;
 
-    if (_ids.includes(data._id) || !selectedCategories.includes(categoryOfNextQuestion)) {
+    if (_ids.includes(data._id)) {
       getNextQuestion();
     } else {
       set_Ids(_ids => [..._ids, data._id]);
-      setCategory(data.category);
       setQuestion(data.question);
       setCorrect_answer(data.correct_answer);
       setIncorrect_answer1(data.incorrect_answer1);
@@ -173,14 +168,9 @@ export default function SinglePlayerPage(props) {
       <Main>
         {!gameOver && (
           <>
-            {/* <p>Welcome {props.nameOfPlayer1} - GL & HF! </p> */}
+            <p>Welcome {props.nameOfPlayer1} - GL & HF! </p>
 
-            <QuestionCard
-              total={questionsPlayed}
-              score={points}
-              category={category}
-              question={question}
-            />
+            <QuestionCard total={questionsPlayed} score={points} question={question} />
             <AnswerContainer>
               <AnswerCard value={allAnswers[0]} onClick={() => verifyAnswer(allAnswers[0])} />
               <AnswerCard value={allAnswers[1]} onClick={() => verifyAnswer(allAnswers[1])} />
@@ -213,6 +203,5 @@ export default function SinglePlayerPage(props) {
 
 SinglePlayerPage.propTypes = {
   amountOfQuestions: PropTypes.number,
-  nameOfPlayer1: PropTypes.string,
-  selectedCategories: PropTypes.array
+  nameOfPlayer1: PropTypes.string
 };

@@ -14,7 +14,7 @@ import PublicOrPrivateSetPage from './pages/PublicOrPrivateSetPage';
 function App() {
   const [amountOfQuestions, setAmountOfQuestions] = React.useState(4);
   const [numberOfPlayers, setNumberOfPlayers] = React.useState(1);
-  const [categories, setCategories] = React.useState(['General']);
+  const [privateCode, setPrivateCode] = React.useState('');
   const [nameOfPlayer1, setNameOfPlayer1] = React.useState('' || 'Player 1');
   const [nameOfPlayer2, setNameOfPlayer2] = React.useState('' || 'Player 2');
 
@@ -26,9 +26,6 @@ function App() {
     setNameOfPlayer2(name);
   }
 
-  function addCategory(name) {
-    setCategories([...categories, name]);
-  }
   return (
     <>
       <ThemeProvider theme={secondary}>
@@ -41,9 +38,10 @@ function App() {
             <Route path="/choose">
               <ChooseGameModePage
                 setAmountOfQuestions={setAmountOfQuestions}
-                setNumberOfPlayers={setNumberOfPlayers}
-                addCategory={addCategory}
-                setPrivateCode={setCategories}
+                amountOfQuestions={amountOfQuestions}
+                setNumberOfPlayers={number => setNumberOfPlayers(number)}
+                numberOfPlayers={numberOfPlayers}
+                setPrivateCode={value => setPrivateCode(value)}
                 chooseNamePlayer1={chooseNamePlayer1}
                 chooseNamePlayer2={chooseNamePlayer2}
               />
@@ -55,14 +53,14 @@ function App() {
               {numberOfPlayers === 1 && (
                 <SinglePlayerPage
                   amountOfQuestions={amountOfQuestions}
-                  selectedCategories={categories}
+                  privateCode={privateCode}
                   nameOfPlayer1={nameOfPlayer1}
                 />
               )}
               {numberOfPlayers === 2 && (
                 <MultiPlayerPage
                   amountOfQuestions={amountOfQuestions}
-                  selectedCategories={categories}
+                  privateCode={privateCode}
                   nameOfPlayer1={nameOfPlayer1}
                   nameOfPlayer2={nameOfPlayer2}
                 />

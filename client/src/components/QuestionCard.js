@@ -23,10 +23,9 @@ const TextWrapper = styled.div`
 export default function QuestionCard(props) {
   return (
     <QuestionContainer>
-      {/* <TextWrapper>
+      <TextWrapper>
         Score: {props.score} of possible {props.total}
       </TextWrapper>
-      <TextWrapper>Category: {props.category}</TextWrapper> */}
       <TextWrapper>{props.question}</TextWrapper>
     </QuestionContainer>
   );
