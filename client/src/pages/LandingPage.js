@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import Logo from '../icons/Logo';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 const Container = styled(Link)`
   height: 100vh;
@@ -21,6 +21,10 @@ const LandingLogo = styled(Logo)`
 `;
 
 export default function LandingPage() {
+  const history = useHistory();
+
+  setTimeout(() => history.push('/playoradd'), 5000);
+
   return (
     <Container to="/playoradd">
       <LandingLogo />

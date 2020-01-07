@@ -1,6 +1,4 @@
 export function addQuestion(
-  category,
-  question,
   correct_answer,
   incorrect_answer1,
   incorrect_answer2,
@@ -8,8 +6,6 @@ export function addQuestion(
   status
 ) {
   const questionData = {
-    category,
-    question,
     correct_answer,
     incorrect_answer1,
     incorrect_answer2,

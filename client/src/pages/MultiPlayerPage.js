@@ -5,8 +5,8 @@ import Header from '../components/Header';
 import QuestionCard from '../components/QuestionCard';
 import AnswerCard from '../components/AnswerCard';
 import Footer from '../components/Footer';
-import Star from '../icons/Star';
-import StarBG from '../icons/StarBG';
+import { pulse } from '../components/Animations';
+import GameOver from '../components/GameOver';
 
 const Main = styled.main`
   display: flex;
@@ -23,43 +23,77 @@ const AnswerContainer = styled.div`
   width: 360px;
   margin: 20px;
 `;
-
-const TurnOfPlayer = styled.p`
-  text-align: center;
-  height: 30px;
-  width: 200px;
-  margin: 0px;
+const ButtonBar = styled.div`
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
 `;
 
 const PassButton = styled(AnswerCard)`
   height: 30px;
-  margin: 0px;
+  width: 120px;
+  border: none;
+  margin: 0;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.15) 0%, rgba(0, 0, 0, 0.15) 100%),
+    radial-gradient(at top center, rgba(255, 255, 255, 0.4) 0%, rgba(0, 0, 0, 0.4) 120%) #989898;
+  background-blend-mode: multiply, multiply;
+  font-family: 'Leckerli One', cursive;
+  color: ${props => props.theme.colors.text1};
 `;
 
 const GameOverButton = styled(AnswerCard)`
   height: 30px;
+  width: 120px;
+  border: none;
   background-image: linear-gradient(to right, #f78ca0 0%, #f9748f 19%, #fd868c 60%, #fe9a8b 100%);
+  margin: 0;
+  font-family: 'Leckerli One', cursive;
+  color: ${props => props.theme.colors.text1};
+`;
+
+const TextWrapperOutsideCard1 = styled.div`
+  text-align: center;
+  height: 30px;
+  width: 200px;
   margin: 0px;
+  margin: 0 0 10px;
+  color: ${props => props.theme.colors.card1};
+`;
+const TextWrapperOutsideCard2 = styled.div`
+  text-align: center;
+  height: 30px;
+  width: 200px;
+  margin: 0px;
+  margin: 0 0 10px;
+  color: ${props => props.theme.colors.card2};
+`;
+const CorrectAnswerText = styled.p`
+  color: ${props => props.theme.colors.correct};
+  font-family: 'Leckerli One', cursive;
+  font-size: 1.5rem;
 `;
 
-const GameOverContainer = styled.div``;
-
-const StarWrapper = styled.svg`
-  position: relative;
-  height: 450px;
-  width: 450px;
+const CorrectAnswerCard = styled(AnswerCard)`
+  border: 4px solid ${props => props.theme.colors.correct};
+  align-self: center;
+  animation: ${pulse} 0.8s 2;
 `;
 
-const TextWrapper = styled.div`
+const CorrectAnswerContainer = styled.div`
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: center;
   position: absolute;
-  top: 50vh;
-  left: 50vw;
-  transform: translate(-50%, -50%);
+  top: 310px;
+  z-index: 1000;
+  width: 360px;
+  height: 250px;
+  background: ${props => props.theme.colors.background};
 `;
 
 export default function MultiPlayerPage(props) {
   const [_ids, set_Ids] = React.useState([]);
-  const [category, setCategory] = React.useState('');
   const [question, setQuestion] = React.useState('');
   const [correct_answer, setCorrect_answer] = React.useState('');
   const [incorrect_answer1, setIncorrect_answer1] = React.useState('');
@@ -70,29 +104,25 @@ export default function MultiPlayerPage(props) {
   const [questionsPlayed, setQuestionsPlayed] = React.useState(0);
   const [gameOver, setGameOver] = React.useState(false);
   const [nowPlaying, setNowPlaying] = React.useState(1);
-
-  const selectedCategories = props.selectedCategories;
+  const [showCorrectAnswer, setShowCorrectAnswer] = React.useState(false);
   const amountOfQuestions = props.amountOfQuestions;
+  const allAnswers = [correct_answer, incorrect_answer1, incorrect_answer2, incorrect_answer3];
 
   async function getNextQuestion() {
     const response = await fetch('/api/questions/random');
     const data = await response.json();
-    const categoryOfNextQuestion = data.category;
-
-    if (_ids.includes(data._id) || !selectedCategories.includes(categoryOfNextQuestion)) {
+    if (_ids.includes(data._id)) {
       getNextQuestion();
     } else {
       set_Ids(_ids => [..._ids, data._id]);
-      setCategory(data.category);
       setQuestion(data.question);
       setCorrect_answer(data.correct_answer);
       setIncorrect_answer1(data.incorrect_answer1);
       setIncorrect_answer2(data.incorrect_answer2);
       setIncorrect_answer3(data.incorrect_answer3);
+      setShowCorrectAnswer(false);
     }
   }
-
-  const allAnswers = [correct_answer, incorrect_answer1, incorrect_answer2, incorrect_answer3];
 
   function shuffle(array) {
     const shuffledArray = array.sort(() => Math.random() - 0.5);
@@ -101,7 +131,7 @@ export default function MultiPlayerPage(props) {
 
   shuffle(allAnswers);
 
-  function verifyAnswer(value) {
+  async function verifyAnswer(value) {
     if (nowPlaying === 1) {
       if (value === correct_answer) {
         setPointsPlayer1(pointsPlayer1 + 1);
@@ -114,30 +144,17 @@ export default function MultiPlayerPage(props) {
     if (nowPlaying === 2) {
       isQuestionLimitReached(questionsPlayed + 1);
       if (value === correct_answer) {
-        alert(`The correct answer is "${correct_answer}"!`);
+        setShowCorrectAnswer(true);
         setPointsPlayer2(pointsPlayer2 + 1);
-        setQuestionsPlayed(questionsPlayed + 1);
         setNowPlaying(1);
-        getNextQuestion();
+        setQuestionsPlayed(questionsPlayed + 1);
+        setTimeout(() => getNextQuestion(), 1800);
       } else {
-        alert(`The correct answer is "${correct_answer}"!`);
+        setShowCorrectAnswer(true);
         setPointsPlayer2(pointsPlayer2 - 1);
         setQuestionsPlayed(questionsPlayed + 1);
         setNowPlaying(1);
-        getNextQuestion();
-      }
-    }
-  }
-
-  function determineResult(points1, points2) {
-    if (points1 === points2) {
-      return 'Draw!';
-    } else {
-      if (points1 > points2) {
-        return 'Player 1 won!';
-      }
-      {
-        return 'Player 2 won!';
+        setTimeout(() => getNextQuestion(), 1800);
       }
     }
   }
@@ -169,15 +186,24 @@ export default function MultiPlayerPage(props) {
       <Header />
       {!gameOver && (
         <>
+          {showCorrectAnswer && (
+            <CorrectAnswerContainer>
+              <CorrectAnswerText>correct answer is:</CorrectAnswerText>
+              <CorrectAnswerCard value={correct_answer} />
+            </CorrectAnswerContainer>
+          )}
           {nowPlaying === 1 ? (
-            <TurnOfPlayer>{props.nameOfPlayer1} - it is your turn!</TurnOfPlayer>
+            <TextWrapperOutsideCard1>
+              {props.nameOfPlayer1} - it is your turn!
+            </TextWrapperOutsideCard1>
           ) : (
-            <TurnOfPlayer>{props.nameOfPlayer2} - it is your turn!</TurnOfPlayer>
+            <TextWrapperOutsideCard2>
+              {props.nameOfPlayer2} - it is your turn!
+            </TextWrapperOutsideCard2>
           )}
           <QuestionCard
             score={nowPlaying === 1 ? pointsPlayer1 : pointsPlayer2}
             total={questionsPlayed}
-            category={category}
             question={question}
           />
           <AnswerContainer>
@@ -186,27 +212,20 @@ export default function MultiPlayerPage(props) {
             <AnswerCard value={allAnswers[2]} onClick={() => verifyAnswer(allAnswers[2])} />
             <AnswerCard value={allAnswers[3]} onClick={() => verifyAnswer(allAnswers[3])} />
           </AnswerContainer>
-          <PassButton value="Pass (-0.25 points)" onClick={() => passQuestion()} />
-          <GameOverButton value="Enough!" onClick={() => setGameOver(true)} />
+
+          <ButtonBar>
+            <GameOverButton value="End game" onClick={() => setGameOver(true)} />
+            <PassButton value="Pass question" onClick={() => passQuestion()} />
+          </ButtonBar>
         </>
       )}
       {gameOver && (
-        <GameOverContainer>
-          <StarWrapper>
-            <StarBG />
-            <Star />
-          </StarWrapper>
-          <TextWrapper>
-            <p>
-              {props.nameOfPlayer1} has {pointsPlayer1} points,{' '}
-            </p>{' '}
-            <p>
-              {' '}
-              {props.nameOfPlayer2} has {pointsPlayer2} points:
-            </p>
-            <p>{determineResult(pointsPlayer1, pointsPlayer2)}</p>
-          </TextWrapper>
-        </GameOverContainer>
+        <GameOver
+          nameOfPlayer1={props.nameOfPlayer1}
+          nameOfPlayer2={props.nameOfPlayer2}
+          pointsPlayer1={pointsPlayer1}
+          pointsPlayer2={pointsPlayer2}
+        />
       )}
       <Footer />
     </Main>

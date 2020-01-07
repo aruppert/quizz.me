@@ -31,6 +31,7 @@ const Form = styled.form`
 
 const Nav = styled.div`
   display: flex;
+  margin: 0 10px 0 0;
 `;
 
 const NavButton = styled.button`
@@ -41,7 +42,7 @@ const NavButton = styled.button`
   border-radius: 10px;
   font-size: 1em;
   font-weight: bold;
-  margin: 0px 5px 0px 5px;
+  margin: 0px 0px 0px 10px;
   color: ${props => props.theme.colors.text1};
   width: 50%;
   flex-grow: 1;
@@ -64,9 +65,20 @@ const Text = styled.div`
   font-size: 1.5rem;
 `;
 
+const ErrorContainer = styled.div`
+  position: absolute;
+  z-index: 1000;
+  text-align: center;
+  color: ${props => props.theme.colors.warn};
+`;
+
+const TextWrapperOutsideCard = styled.div`
+  margin: 0 0 10px;
+  color: ${props => props.theme.colors.card2};
+`;
+
 export default function FormCard() {
   const [question, setQuestion] = React.useState({
-    category: '',
     question: '',
     correct_answer: '',
     incorrect_answer1: '',
@@ -76,6 +88,7 @@ export default function FormCard() {
   const [questionStatus, setQuestionStatus] = React.useState('inactive');
   const [questionsCounter, setQuestionsCounter] = React.useState(0);
   const [finished, setFinished] = React.useState(false);
+  const [showError, setShowError] = React.useState(false);
 
   function onChange(event) {
     const value = event.target.value;
@@ -87,49 +100,56 @@ export default function FormCard() {
 
   async function handleSubmit(event) {
     event.preventDefault();
-    addQuestion(
-      question.category,
-      question.question,
-      question.correct_answer,
-      question.incorrect_answer1,
-      question.incorrect_answer2,
-      question.incorrect_answer3,
-      questionStatus
-    );
-    if (privateCategory !== '') {
+    if (checkIfFormIsCompletelyFilled(event)) {
+      addQuestion(
+        question.question,
+        question.correct_answer,
+        question.incorrect_answer1,
+        question.incorrect_answer2,
+        question.incorrect_answer3,
+        questionStatus
+      );
       setQuestion({
-        category: privateCategory,
         question: '',
         correct_answer: '',
         incorrect_answer1: '',
         incorrect_answer2: '',
         incorrect_answer3: ''
       });
-      setQuestionStatus('active');
+      setShowError(false);
+      setQuestionsCounter(questionsCounter + 1);
     } else {
-      setQuestion({
-        category: question.category,
-        question: '',
-        correct_answer: '',
-        incorrect_answer1: '',
-        incorrect_answer2: '',
-        incorrect_answer3: ''
-      });
+      return null;
     }
-    setQuestionsCounter(questionsCounter + 1);
   }
 
-  const privateCategory = sessionStorage.getItem('category');
+  const privateCode = sessionStorage.getItem('privateCode');
   const isPrivateSet = sessionStorage.getItem('isPrivateSet');
 
   React.useEffect(() => {
-    if (privateCategory !== '') {
-      setQuestion({ category: privateCategory });
+    if (privateCode !== '') {
       setQuestionStatus('active');
     }
   }, []);
 
-  function onClickFinished() {
+  function checkIfFormIsCompletelyFilled() {
+    if (
+      question.question &&
+      question.correct_answer &&
+      question.incorrect_answer1 &&
+      question.incorrect_answer2 &&
+      question.incorrect_answer3
+    ) {
+      return true;
+    }
+    {
+      setShowError(true);
+      return false;
+    }
+  }
+
+  function onClickFinished(event) {
+    handleSubmit(event);
     setFinished(true);
   }
 
@@ -140,72 +160,65 @@ export default function FormCard() {
   return (
     <>
       {!finished && (
-        <BigContainer>
-          <Form onSubmit={handleSubmit}>
-            <Status>
-              {isPrivateSet === 'true' && <Lock />}
-              {isPrivateSet === 'false' && <Planet />}
-              <QuestionsCounter>
-                <QuestionCardsAdded />
-                <Text>{questionsCounter}</Text>
-              </QuestionsCounter>
-            </Status>
-            <Input
-              type="text"
-              value={question.category}
-              name="category"
-              onChange={onChange}
-              placeholder="Category"
-              required
-            />
-            <Input
-              type="text"
-              value={question.question}
-              name="question"
-              onChange={onChange}
-              placeholder="Question"
-              autofocus
-              required
-            />
-            <Input
-              value={question.correct_answer}
-              name="correct_answer"
-              onChange={onChange}
-              placeholder="Correct Answer"
-              required
-            />
-            <Input
-              type="text"
-              value={question.incorrect_answer1}
-              name="incorrect_answer1"
-              onChange={onChange}
-              placeholder="Wrong Answer 1"
-              required
-            />
-            <Input
-              type="text"
-              value={question.incorrect_answer2}
-              name="incorrect_answer2"
-              onChange={onChange}
-              placeholder="Wrong Answer 2"
-              required
-            />
-            <Input
-              type="text"
-              value={question.incorrect_answer3}
-              name="incorrect_answer3"
-              onChange={onChange}
-              placeholder="Wrong Answer 3"
-              required
-            />
-            <Nav>
-              <NavButton>Submit </NavButton>
-              <NavButton value="Submit" onClick={onClickFinished}>
-                Finished adding{' '}
-              </NavButton>
-            </Nav>
-          </Form>
-        </BigContainer>
+        <>
+          {showError && <ErrorContainer> Please fill in all fields. </ErrorContainer>}
+          {isPrivateSet === 'true' ? (
+            <TextWrapperOutsideCard> Your private code is {privateCode} </TextWrapperOutsideCard>
+          ) : (
+            <TextWrapperOutsideCard>Thanks for sharing your questions!</TextWrapperOutsideCard>
+          )}
+          <BigContainer>
+            <Form onSubmit={handleSubmit}>
+              <Status>
+                {isPrivateSet === 'true' ? <Lock /> : <Planet height="58px" />}
+                <QuestionsCounter>
+                  <QuestionCardsAdded />
+                  <Text>{questionsCounter}</Text>
+                </QuestionsCounter>
+              </Status>
+              <Input
+                type="text"
+                value={question.question}
+                name="question"
+                onChange={onChange}
+                placeholder="Question"
+              />
+              <Input
+                value={question.correct_answer}
+                name="correct_answer"
+                onChange={onChange}
+                placeholder="Correct Answer"
+              />
+              <Input
+                type="text"
+                value={question.incorrect_answer1}
+                name="incorrect_answer1"
+                onChange={onChange}
+                placeholder="Wrong Answer 1"
+              />
+              <Input
+                type="text"
+                value={question.incorrect_answer2}
+                name="incorrect_answer2"
+                onChange={onChange}
+                placeholder="Wrong Answer 2"
+              />
+              <Input
+                type="text"
+                value={question.incorrect_answer3}
+                name="incorrect_answer3"
+                onChange={onChange}
+                placeholder="Wrong Answer 3"
+              />
+              <Nav>
+                <NavButton>Add question</NavButton>
+                <NavButton value="Submit" onClick={event => onClickFinished(event)}>
+                  Submit{' '}
+                </NavButton>
+              </Nav>
+            </Form>
+          </BigContainer>
+        </>
       )}
       {finished && isPrivateSet === 'true' && (
         <PrivateConfirmationCard addMore={addMore} questions={questionsCounter} />

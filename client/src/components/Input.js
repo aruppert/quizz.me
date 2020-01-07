@@ -1,21 +1,14 @@
-import React from 'react';
 import styled from '@emotion/styled';
 
-const InputField = styled.input`
+const Input = styled.input`
+  background: ${props => props.theme.colors.background};
   border: none;
   border-radius: 5px 0px 5px 0px;
   text-align: center;
+  font-family: 'Gilroy';
+  font-size: 14px;
+  margin: 0 10px 0 10px;
+  height: 25px;
 `;
 
-export default function Input(props) {
-  return (
-    <InputField
-      type="text"
-      name={props.name}
-      placeholder={props.placeholder}
-      value={props.value}
-      onChange={props.onChange}
-      autoFocus={props.autoFocus}
-    ></InputField>
-  );
-}
+export default Input;
