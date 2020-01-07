@@ -63,7 +63,6 @@ const TextWrapperOutsideCard2 = styled.div`
   text-align: center;
   height: 30px;
   width: 200px;
-  margin: 0px;
   margin: 0 0 10px;
   color: ${props => props.theme.colors.card2};
 `;

@@ -31,7 +31,7 @@ const NavButton = styled.button`
   border-radius: 10px;
   font-size: 1em;
   font-weight: bold;
-  margin: 0px 5px 0px 5px;
+  margin: 0px 5px;
   color: ${props => props.theme.colors.text1};
   width: fit-content;
 `;

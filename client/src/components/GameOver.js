@@ -31,7 +31,6 @@ const TextWrapper = styled.div`
   width: 100%;
   align-content: center;
   justify-content: center;
-  /* transform: translate(-50%, -50%); */
   font-family: 'Leckerli One', cursive;
   font-size: 1.2rem;
   color: ${props => props.theme.colors.text1};
