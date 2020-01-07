@@ -7,6 +7,7 @@ import Planet from '../icons/Planet';
 import Lock from '../icons/Lock';
 import Input from '../components/Input';
 import ButtonLink from '../components/ButtonLink';
+import Button from '../components/Button';
 
 const Main = styled.main`
   display: flex;
@@ -94,10 +95,10 @@ export default function PublicOrPrivateSetPage() {
             <Lock />
           </ButtonLink>
         ) : (
-          <ButtonLink onClick={handlePrivateClick}>
+          <Button onClick={handlePrivateClick} to="">
             {' '}
             <Lock />
-          </ButtonLink>
+          </Button>
         )}
         <TextWrapper>
           Note: Your code should look something like this "Carls_wedding_2019_CW"

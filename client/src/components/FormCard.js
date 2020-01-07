@@ -100,7 +100,7 @@ export default function FormCard() {
 
   async function handleSubmit(event) {
     event.preventDefault();
-    if (checkIfFormIsCompletelyFilled(event)) {
+    if (checkIfFormIsCompletelyFilled()) {
       addQuestion(
         question.question,
         question.correct_answer,
@@ -126,7 +126,7 @@ export default function FormCard() {
   const privateCode = sessionStorage.getItem('privateCode');
   const isPrivateSet = sessionStorage.getItem('isPrivateSet');
 
-  React.useEffect(() => {
+  React.useEffect(privateCode => {
     if (privateCode !== '') {
       setQuestionStatus('active');
     }
@@ -141,8 +141,7 @@ export default function FormCard() {
       question.incorrect_answer3
     ) {
       return true;
-    }
-    {
+    } else {
       setShowError(true);
       return false;
     }

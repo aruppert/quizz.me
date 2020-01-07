@@ -5,6 +5,7 @@ import StarBG from '../icons/StarBG';
 import Header from './Header';
 import Footer from './Footer';
 import { tada } from './Animations';
+import PropTypes from 'prop-types';
 
 const Main = styled.main`
   display: flex;
@@ -76,8 +77,7 @@ export default function GameOver(props) {
     } else {
       if (points1 > points2) {
         return 'Player 1 won!';
-      }
-      {
+      } else {
         return 'Player 2 won!';
       }
     }
@@ -110,3 +110,10 @@ export default function GameOver(props) {
     </Main>
   );
 }
+
+GameOver.propTypes = {
+  pointsPlayer1: PropTypes.number,
+  pointsPlayer2: PropTypes.number,
+  nameOfPlayer1: PropTypes.string,
+  nameOfPlayer2: PropTypes.string
+};

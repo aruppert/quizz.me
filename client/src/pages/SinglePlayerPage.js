@@ -203,6 +203,5 @@ export default function SinglePlayerPage(props) {
 
 SinglePlayerPage.propTypes = {
   amountOfQuestions: PropTypes.number,
-  nameOfPlayer1: PropTypes.string,
-  selectedCategories: PropTypes.array
+  nameOfPlayer1: PropTypes.string
 };

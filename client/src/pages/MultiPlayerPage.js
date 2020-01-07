@@ -235,6 +235,5 @@ export default function MultiPlayerPage(props) {
 MultiPlayerPage.propTypes = {
   amountOfQuestions: PropTypes.number,
   nameOfPlayer1: PropTypes.string,
-  nameOfPlayer2: PropTypes.string,
-  selectedCategories: PropTypes.array
+  nameOfPlayer2: PropTypes.string
 };

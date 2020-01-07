@@ -1,4 +1,5 @@
 export function addQuestion(
+  question,
   correct_answer,
   incorrect_answer1,
   incorrect_answer2,
@@ -6,6 +7,7 @@ export function addQuestion(
   status
 ) {
   const questionData = {
+    question,
     correct_answer,
     incorrect_answer1,
     incorrect_answer2,
