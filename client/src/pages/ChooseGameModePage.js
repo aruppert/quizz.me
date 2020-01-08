@@ -113,7 +113,7 @@ export default function ChooseGameModePage(props) {
   }
 
   function handleQuestionAmountClick(number) {
-    props.setAmountOfQuestions(number);
+    props.onAmountOfQuestionsChange(number);
   }
 
   function handlePrivateClick(event) {
@@ -121,11 +121,13 @@ export default function ChooseGameModePage(props) {
       setShowError(true);
       return null;
     } else {
+      props.onChangePrivateCode(uniqueCode);
       sessionStorage.setItem('privateCode', uniqueCode);
       sessionStorage.setItem('isPrivateSet', true);
       setShowFirstSettings(false);
     }
   }
+  console.log(uniqueCode);
 
   function handlePublicClick() {
     sessionStorage.setItem('privateCode', '');
@@ -224,7 +226,7 @@ export default function ChooseGameModePage(props) {
           </StyledButton>
         </Container>
       )}
-      {showError && <ErrorContainer> Code is missing!</ErrorContainer>}
+      {showError && <ErrorContainer>Code is missing!</ErrorContainer>}
 
       <Footer />
     </Main>
@@ -232,9 +234,11 @@ export default function ChooseGameModePage(props) {
 }
 
 ChooseGameModePage.propTypes = {
-  setAmountOfQuestions: PropTypes.func,
+  amountOfQuestions: PropTypes.number,
+  onAmountOfQuestionsChange: PropTypes.func,
   setNumberOfPlayers: PropTypes.func,
   setPrivateCode: PropTypes.func,
   chooseNamePlayer1: PropTypes.func,
-  chooseNamePlayer2: PropTypes.func
+  chooseNamePlayer2: PropTypes.func,
+  onChangePrivateCode: PropTypes.string
 };

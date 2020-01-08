@@ -1,6 +1,7 @@
 /* eslint-disable react/no-unescaped-entities */
 import React from 'react';
 import styled from '@emotion/styled';
+import PropTypes from 'prop-types';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import Planet from '../icons/Planet';
@@ -8,6 +9,7 @@ import Lock from '../icons/Lock';
 import Input from '../components/Input';
 import ButtonLink from '../components/ButtonLink';
 import Button from '../components/Button';
+import { checkPropTypes } from 'prop-types';
 
 const Main = styled.main`
   display: flex;
@@ -54,23 +56,23 @@ const ErrorContainer = styled.div`
   color: ${props => props.theme.colors.warn};
 `;
 
-export default function PublicOrPrivateSetPage() {
-  const [uniqueCode, setUniqueCode] = React.useState('');
+export default function PublicOrPrivateSetPage({ onChangePrivateCode, privateCode }) {
   const [showError, setShowError] = React.useState(false);
 
   function handleChange(event) {
     const value = event.target.value;
-    setUniqueCode(value);
+    onChangePrivateCode(value);
   }
 
   function handlePrivateClick() {
-    if (uniqueCode === '') {
+    if (privateCode === '') {
       setShowError(true);
       return null;
-    } else {
-      sessionStorage.setItem('privateCode', uniqueCode);
-      sessionStorage.setItem('isPrivateSet', true);
     }
+    // else {
+    //   sessionStorage.setItem('privateCode', privateCode);
+    //   sessionStorage.setItem('isPrivateSet', true);
+    // }
   }
 
   function handleClickOnPublic() {
@@ -90,7 +92,7 @@ export default function PublicOrPrivateSetPage() {
           Enter a unique private code and click the lock to create a private game:
         </TextWrapper>
         <StyledInput name="unique" placeholder="please enter unique code" onChange={handleChange} />
-        {uniqueCode ? (
+        {privateCode ? (
           <ButtonLink onClick={handlePrivateClick} to="/add">
             <Lock />
           </ButtonLink>
@@ -109,3 +111,8 @@ export default function PublicOrPrivateSetPage() {
     </Main>
   );
 }
+
+PublicOrPrivateSetPage.propTypes = {
+  onChangePrivateCode: PropTypes.func,
+  privateCode: PropTypes.string
+};

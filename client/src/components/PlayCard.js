@@ -1,7 +1,12 @@
 import React from 'react';
+import { css } from '@emotion/core';
 import styled from '@emotion/styled';
 import Dice from '../icons/Dice';
 import { Link } from 'react-router-dom';
+
+const background = props => css`
+  background: linear-gradient(to right, ${props.theme.colors.card2}, ${props.theme.colors.card1});
+`;
 
 const PlayContainer = styled(Link)`
   display: flex;
@@ -10,11 +15,7 @@ const PlayContainer = styled(Link)`
   align-items: center;
   width: 160px;
   height: 220px;
-  background: linear-gradient(
-    to right,
-    ${props => props.theme.colors.card2},
-    ${props => props.theme.colors.card1}
-  );
+  ${background};
   border-radius: 25px 0px 25px 0px;
   box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
   text-decoration: none;

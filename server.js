@@ -1,23 +1,14 @@
 require('dotenv').config();
+require;
 const express = require('express');
 const { dbInit } = require('./lib/db');
+const { addQuestion, getRandomQuestion } = require('./lib/questions');
+
 const app = express();
 const DB_Name = process.env.DB_NAME;
 const DB_URL = process.env.DB_URL;
 
-const { addQuestion, getQuestion, getRandomQuestion } = require('./lib/questions');
-
 app.use(express.json({ extended: false }));
-
-app.get('/api/questions', async (req, res) => {
-  try {
-    const result = await getQuestion(req.params.username);
-    res.send(result);
-  } catch (error) {
-    console.error(error);
-    res.send(error);
-  }
-});
 
 app.get('/api/questions/random', async (request, response) => {
   try {
@@ -28,11 +19,15 @@ app.get('/api/questions/random', async (request, response) => {
   }
 });
 
-app.post('/api/questions', (req, res) => {
+app.post('/api/questions', async (req, res) => {
   const questionData = req.body;
-  addQuestion(questionData);
+  await addQuestion(questionData);
   res.end();
 });
+
+// app.get('*', function(req, res) {
+//   res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
+// });
 
 dbInit(DB_URL, DB_Name).then(async () => {
   console.log(`Database ${DB_Name} is ready`);
