@@ -20,10 +20,6 @@ app.get('/api/questions', async (req, res) => {
   }
 });
 
-app.get('*', function(req, res) {
-  res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
-});
-
 app.get('/api/questions/random', async (request, response) => {
   try {
     const question = await getRandomQuestion();
@@ -37,6 +33,10 @@ app.post('/api/questions', (req, res) => {
   const questionData = req.body;
   addQuestion(questionData);
   res.end();
+});
+
+app.get('*', function(req, res) {
+  res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
 });
 
 dbInit(DB_URL, DB_Name).then(async () => {
