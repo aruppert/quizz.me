@@ -7,11 +7,8 @@ const QuestionContainer = styled.div`
   flex-flow: column;
   width: 340px;
   height: 180px;
-  background: linear-gradient(
-    to right,
-    ${props => props.theme.colors.card2},
-    ${props => props.theme.colors.card1}
-  );
+  font-size: 18px;
+  border: 5px solid white;
   border-radius: 25px 0px 25px 0px;
   box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
 `;
@@ -19,7 +16,7 @@ const QuestionContainer = styled.div`
 const TextWrapper = styled.div`
   text-align: center;
   align-self: center;
-  color: ${props => props.theme.colors.text1};
+  color: ${props => props.theme.colors.card1};
   margin: 20px;
 `;
 
@@ -29,7 +26,6 @@ export default function QuestionCard(props) {
       <TextWrapper>
         Score: {props.score} of possible {props.total}
       </TextWrapper>
-      <TextWrapper>Category: {props.category}</TextWrapper>
       <TextWrapper>{props.question}</TextWrapper>
     </QuestionContainer>
   );

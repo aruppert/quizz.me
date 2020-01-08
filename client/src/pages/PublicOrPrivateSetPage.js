@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 import React from 'react';
 import styled from '@emotion/styled';
 import Header from '../components/Header';
@@ -6,6 +7,7 @@ import Planet from '../icons/Planet';
 import Lock from '../icons/Lock';
 import Input from '../components/Input';
 import ButtonLink from '../components/ButtonLink';
+import Button from '../components/Button';
 
 const Main = styled.main`
   display: flex;
@@ -31,33 +33,48 @@ const BigContainer = styled.div`
   box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
 `;
 
+const StyledInput = styled(Input)`
+  align-self: center;
+  width: 250px;
+  margin: 15px;
+`;
+
 const TextWrapper = styled.div`
   text-align: center;
   align-self: center;
 
   color: ${props => props.theme.colors.text1};
-  margin: 20px;
+  margin: 15px;
+`;
+
+const ErrorContainer = styled.div`
+  position: absolute;
+  z-index: 1000;
+  align-self: center;
+  color: ${props => props.theme.colors.warn};
 `;
 
 export default function PublicOrPrivateSetPage() {
   const [uniqueCode, setUniqueCode] = React.useState('');
+  const [showError, setShowError] = React.useState(false);
 
-  function onChange(event) {
+  function handleChange(event) {
     const value = event.target.value;
     setUniqueCode(value);
   }
 
-  function handleClickOnPrivate() {
+  function handlePrivateClick() {
     if (uniqueCode === '') {
-      alert(`Please enter unique code first`);
+      setShowError(true);
+      return null;
     } else {
-      sessionStorage.setItem('category', uniqueCode);
+      sessionStorage.setItem('privateCode', uniqueCode);
       sessionStorage.setItem('isPrivateSet', true);
     }
   }
 
   function handleClickOnPublic() {
-    sessionStorage.setItem('category', '');
+    sessionStorage.setItem('privateCode', '');
     sessionStorage.setItem('isPrivateSet', false);
   }
 
@@ -65,19 +82,29 @@ export default function PublicOrPrivateSetPage() {
     <Main>
       <Header />
       <BigContainer>
-        <TextWrapper>I want to add questions to the public domain:</TextWrapper>
+        <TextWrapper>Click the planet to create questions for the public domain:</TextWrapper>
         <ButtonLink to="/add" onClick={handleClickOnPublic}>
           <Planet />
         </ButtonLink>
         <TextWrapper>
-          I want to create a private set of questions with the following unique code:
+          Enter a unique private code and click the lock to create a private game:
         </TextWrapper>
-        <Input name="unique" placeholder="please enter unique code" onChange={onChange} />
-        <TextWrapper>Note: Please use a unique code like "Carls_wedding_2019_CW"</TextWrapper>
-        <ButtonLink to="/add" onClick={handleClickOnPrivate}>
-          <Lock />
-        </ButtonLink>
+        <StyledInput name="unique" placeholder="please enter unique code" onChange={handleChange} />
+        {uniqueCode ? (
+          <ButtonLink onClick={handlePrivateClick} to="/add">
+            <Lock />
+          </ButtonLink>
+        ) : (
+          <Button onClick={handlePrivateClick} to="">
+            {' '}
+            <Lock />
+          </Button>
+        )}
+        <TextWrapper>
+          Note: Your code should look something like this "Carls_wedding_2019_CW"
+        </TextWrapper>
       </BigContainer>
+      {showError && <ErrorContainer> Code is missing!</ErrorContainer>}
       <Footer />
     </Main>
   );

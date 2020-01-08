@@ -20,6 +20,7 @@ const BigContainer = styled.div`
 
 const Nav = styled.div`
   display: flex;
+  justify-content: center;
 `;
 
 const NavButton = styled.button`
@@ -32,15 +33,17 @@ const NavButton = styled.button`
   font-weight: bold;
   margin: 0px 5px 0px 5px;
   color: ${props => props.theme.colors.text1};
-  width: 50%;
-  flex-grow: 1;
+  width: fit-content;
 `;
 
-const TextWrapper = styled.div`
+const TextWrapper = styled.p`
   text-align: center;
   align-self: center;
   color: ${props => props.theme.colors.text1};
   margin: 20px;
+`;
+const TextWrapperWarning = styled(TextWrapper)`
+  color: ${props => props.theme.colors.warn};
 `;
 
 export default function PrivateConfirmationCard(props) {
@@ -49,22 +52,33 @@ export default function PrivateConfirmationCard(props) {
   }
   return (
     <BigContainer>
-      <TextWrapper>
-        Congrats ! You’ve created a private set with<p> {props.questions} </p>questions. Just share
-        this unique code
-        <p>{sessionStorage.getItem('category')}</p>
-        with your friends. No one, without the hash can see your set ! Wanna test your set? hit the
-        dice!
-      </TextWrapper>
-      <ButtonLink to="/play">
-        <Dice />
-      </ButtonLink>
-      <Nav>
-        <NavButton onClick={handleClickOnMore}>
-          {' '}
-          Wait, let me add more or I forgot to submit last question
-        </NavButton>
-      </Nav>
+      {props.questions === 0 ? (
+        <>
+          <TextWrapperWarning>Oops, you didn't add any questions.</TextWrapperWarning>
+          <TextWrapper>
+            Please go back with the button below or start a game with the dice:
+          </TextWrapper>
+          <Nav>
+            <NavButton onClick={handleClickOnMore}> I will do better this time</NavButton>
+          </Nav>
+        </>
+      ) : (
+        <>
+          <TextWrapper>
+            Congrats! You’ve created a private set with<p> {props.questions} </p>question(s). Just
+            share this unique code
+            <p>{sessionStorage.getItem('privateCode')}</p>
+            with your friends. No one, without the private code can play your set! Wanna test your
+            set? Hit the dice and enter your code!
+          </TextWrapper>
+          <ButtonLink to="/play">
+            <Dice />
+          </ButtonLink>
+          <Nav>
+            <NavButton onClick={handleClickOnMore}> Wait, I love this - let me add more!</NavButton>
+          </Nav>{' '}
+        </>
+      )}
     </BigContainer>
   );
 }

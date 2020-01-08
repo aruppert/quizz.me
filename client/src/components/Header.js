@@ -29,7 +29,7 @@ const HeaderBar = styled(Link)`
 const HeadText = styled.h1`
   all: unset;
   color: ${props => props.theme.colors.text1};
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Leckerli One', cursive;
   font-size: 35px;
   font-weight: bold;
 `;
@@ -46,7 +46,7 @@ export default function Header() {
   return (
     <HeaderBar to="/">
       <Logo />
-      <HeadText>QuiZZ.me</HeadText>
+      <HeadText>quizz.Me</HeadText>
       <HeadButton>
         <ColorPalette />
       </HeadButton>
