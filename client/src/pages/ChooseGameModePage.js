@@ -217,5 +217,5 @@ ChooseGameModePage.propTypes = {
   setNumberOfPlayers: PropTypes.func,
   chooseNamePlayer1: PropTypes.func,
   chooseNamePlayer2: PropTypes.func,
-  onChangePrivateCode: PropTypes.string
+  onChangePrivateCode: PropTypes.func
 };
