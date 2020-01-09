@@ -2,10 +2,11 @@ import React from 'react';
 import styled from '@emotion/styled';
 import ColorPalette from '../icons/ColorPalette';
 import Logo from '../icons/Logo';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { linearGradientBoxShadow, noBorderOutlineBGTextDeco } from '../styles/General';
 
-const HeaderBar = styled(Link)`
+const HeaderBar = styled.div`
   ${linearGradientBoxShadow};
   display: flex;
   justify-content: space-around;
@@ -30,18 +31,27 @@ const HeadText = styled.h1`
 
 const HeadButton = styled.button`
   ${noBorderOutlineBGTextDeco};
-  width: 24px;
-  height: 24px;
+  width: 50px;
+  height: 50px;
 `;
 
-export default function Header() {
+const HeaderLink = styled(Link)``;
+
+export default function Header({ onThemeButtonClick }) {
   return (
-    <HeaderBar to="/">
-      <Logo />
+    <HeaderBar>
+      <HeaderLink to="/">
+        <Logo />
+      </HeaderLink>
       <HeadText>quizz.Me</HeadText>
-      <HeadButton>
+
+      <HeadButton onClick={onThemeButtonClick()}>
         <ColorPalette />
       </HeadButton>
     </HeaderBar>
   );
 }
+
+Header.propTypes = {
+  onThemeButtonClick: PropTypes.func
+};

@@ -44,7 +44,7 @@ const DiceButtonBackground = styled.div`
   ${flexRowWrapCenter};
   width: 80px;
   height: 80px;
-  background: ${props => props.theme.colors.background};
+  background: ${props => props.theme.colors.icon1};
   border-radius: 50%;
   margin-bottom: 20px;
 `;

@@ -2,7 +2,17 @@ import React from 'react';
 import GlobalStyles from './GlobalStyles';
 import { ThemeProvider } from 'emotion-theming';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import { secondary } from './themes/themes';
+import {
+  secondary,
+  primary,
+  tertiary,
+  quaternary,
+  quinary,
+  senary,
+  septenary,
+  octonary,
+  nonary
+} from './themes/themes';
 import LandingPage from './pages/LandingPage';
 import FormPage from './pages/FormPage';
 import ChooseGameModePage from './pages/ChooseGameModePage';
@@ -19,6 +29,7 @@ function App() {
   const [privateCode, setPrivateCode] = React.useState('');
   const [nameOfPlayer1, setNameOfPlayer1] = React.useState('Player 1');
   const [nameOfPlayer2, setNameOfPlayer2] = React.useState('Player 2');
+  const [theme, setTheme] = React.useState(8);
 
   function chooseNamePlayer1(name) {
     setNameOfPlayer1(name);
@@ -28,15 +39,36 @@ function App() {
     setNameOfPlayer2(name);
   }
 
+  const themeColors = {
+    1: primary,
+    2: secondary,
+    3: tertiary,
+    4: quaternary,
+    5: quinary,
+    6: senary,
+    7: septenary,
+    8: octonary,
+    9: nonary
+  };
+
+  const activeTheme = themeColors[theme];
+
+  function handleThemeClick() {
+    if (theme < 9) {
+      setTheme(theme + 1);
+    } else {
+      setTheme(1);
+    }
+  }
   return (
     <>
-      <ThemeProvider theme={secondary}>
+      <ThemeProvider theme={activeTheme}>
         <Router>
           <GlobalStyles />
           <Switch>
             <Route exact path="/" component={LandingPage} />
             <Route>
-              <Header />
+              <Header onThemeButtonClick={() => handleThemeClick} />
               <Switch>
                 <Route path="/add">
                   <FormPage privateCode={privateCode} />
