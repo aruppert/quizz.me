@@ -91,11 +91,11 @@ export default function FormPage({ privateCode }) {
     incorrect_answer3: '',
     privateCode: privateCode
   });
-  const [questionStatus, setQuestionStatus] = React.useState('inactive');
+  const [questionStatus, setQuestionStatus] = React.useState('active');
   const [questionsCounter, setQuestionsCounter] = React.useState(0);
   const [finished, setFinished] = React.useState(false);
   const [showError, setShowError] = React.useState(false);
-  console.log(privateCode);
+
   function onChange(event) {
     const value = event.target.value;
     setQuestion({
@@ -126,10 +126,7 @@ export default function FormPage({ privateCode }) {
     }
   }
 
-  // const privateCode = sessionStorage.getItem('privateCode');
-  // const isPrivateSet = sessionStorage.getItem('isPrivateSet');
-
-  React.useEffect(privateCode => {
+  React.useEffect(() => {
     if (privateCode !== '') {
       setQuestionStatus('active');
     }
@@ -223,7 +220,11 @@ export default function FormPage({ privateCode }) {
         </>
       )}
       {finished && privateCode !== '' && (
-        <PrivateConfirmationCard addMore={addMore} questions={questionsCounter} />
+        <PrivateConfirmationCard
+          addMore={addMore}
+          privateCode={privateCode}
+          questions={questionsCounter}
+        />
       )}
       {finished && privateCode === '' && (
         <PublicConfirmationCard addMore={addMore} questions={questionsCounter} />

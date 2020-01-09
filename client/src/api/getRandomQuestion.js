@@ -1,5 +1,5 @@
-export default async function getRandomQuestion() {
-  return fetch(`/api/questions/random`, {
+export default async function getRandomQuestion(privateCode) {
+  return fetch(`/api/questions/random?privateCode=${privateCode}`, {
     method: 'GET'
   })
     .then(response => {

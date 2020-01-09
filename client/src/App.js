@@ -15,11 +15,10 @@ import Footer from './components/Footer';
 
 function App() {
   const [amountOfQuestions, setAmountOfQuestions] = React.useState(4);
-  const [numberOfPlayers, setNumberOfPlayers] = React.useState(1);
+  const [numberOfPlayers, setNumberOfPlayers] = React.useState(2);
   const [privateCode, setPrivateCode] = React.useState('');
   const [nameOfPlayer1, setNameOfPlayer1] = React.useState('Player 1');
   const [nameOfPlayer2, setNameOfPlayer2] = React.useState('Player 2');
-  console.log(privateCode);
 
   function chooseNamePlayer1(name) {
     setNameOfPlayer1(name);
@@ -48,9 +47,10 @@ function App() {
                       setAmountOfQuestions(amountOfQuestions)
                     }
                     amountOfQuestions={amountOfQuestions}
+                    privateCode={privateCode}
                     setNumberOfPlayers={number => setNumberOfPlayers(number)}
                     numberOfPlayers={numberOfPlayers}
-                    setPrivateCode={value => setPrivateCode(value)}
+                    onChangePrivateCode={value => setPrivateCode(value)}
                     chooseNamePlayer1={chooseNamePlayer1}
                     chooseNamePlayer2={chooseNamePlayer2}
                   />

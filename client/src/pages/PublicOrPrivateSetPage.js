@@ -58,7 +58,7 @@ export default function PublicOrPrivateSetPage({ onChangePrivateCode, privateCod
   }
 
   function handleClickOnPublic() {
-    sessionStorage.setItem('privateCode', '');
+    onChangePrivateCode('');
     sessionStorage.setItem('isPrivateSet', false);
   }
 

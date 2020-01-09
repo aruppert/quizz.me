@@ -14,13 +14,17 @@ const QuestionContainer = styled.div`
   border-radius: 25px 0px;
 `;
 
+const StyledTextWrapper = styled(TextWrapper)`
+  color: ${props => props.theme.colors.card2};
+`;
+
 export default function QuestionCard(props) {
   return (
     <QuestionContainer>
-      <TextWrapper>
+      <StyledTextWrapper>
         Score: {props.score} of possible {props.total}
-      </TextWrapper>
-      <TextWrapper>{props.question}</TextWrapper>
+      </StyledTextWrapper>
+      <StyledTextWrapper>{props.question}</StyledTextWrapper>
     </QuestionContainer>
   );
 }
