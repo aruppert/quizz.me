@@ -1,6 +1,7 @@
 require('dotenv').config();
 require;
 const express = require('express');
+const path = require('path');
 const { dbInit } = require('./lib/db');
 const { addQuestion, getRandomQuestion } = require('./lib/questions');
 
@@ -25,9 +26,11 @@ app.post('/api/questions', async (req, res) => {
   res.end();
 });
 
+
 // app.get('*', function(req, res) {
 //   res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
 // });
+
 
 dbInit(DB_URL, DB_Name).then(async () => {
   console.log(`Database ${DB_Name} is ready`);
