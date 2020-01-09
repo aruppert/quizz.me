@@ -87,7 +87,6 @@ const RadioButton = styled(SettingsButton)``;
 
 export default function ChooseGameModePage(props) {
   const [showFirstSettings, setShowFirstSettings] = React.useState(true);
-  const [uniqueCode, setUniqueCode] = React.useState('');
   const [showError, setShowError] = React.useState(false);
 
   function handleChangePlayer1(event) {
@@ -103,21 +102,17 @@ export default function ChooseGameModePage(props) {
     props.onAmountOfQuestionsChange(number);
   }
 
-  function handlePrivateClick(event) {
-    if (uniqueCode === '') {
+  function handlePrivateClick() {
+    if (props.privateCode === '') {
       setShowError(true);
       return null;
     } else {
-      props.onChangePrivateCode(uniqueCode);
-      sessionStorage.setItem('privateCode', uniqueCode);
       sessionStorage.setItem('isPrivateSet', true);
       setShowFirstSettings(false);
     }
   }
-  console.log(uniqueCode);
 
   function handlePublicClick() {
-    sessionStorage.setItem('privateCode', '');
     sessionStorage.setItem('isPrivateSet', false);
     setShowFirstSettings(false);
     setShowError(false);
@@ -125,8 +120,7 @@ export default function ChooseGameModePage(props) {
 
   function handleCodeChange(event) {
     const value = event.target.value;
-    setUniqueCode(value);
-    props.setPrivateCode(value);
+    props.onChangePrivateCode(value);
   }
 
   return (
@@ -221,8 +215,7 @@ ChooseGameModePage.propTypes = {
   amountOfQuestions: PropTypes.number,
   onAmountOfQuestionsChange: PropTypes.func,
   setNumberOfPlayers: PropTypes.func,
-  setPrivateCode: PropTypes.func,
   chooseNamePlayer1: PropTypes.func,
   chooseNamePlayer2: PropTypes.func,
-  onChangePrivateCode: PropTypes.string
+  onChangePrivateCode: PropTypes.func
 };

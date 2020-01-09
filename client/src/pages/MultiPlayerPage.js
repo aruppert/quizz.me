@@ -6,6 +6,8 @@ import AnswerCard from '../components/AnswerCard';
 import { pulse } from '../components/Animations';
 import GameOverPage from './GameOverPage';
 import { flexColumnCenter } from '../styles/General';
+// import getRandomPublicQuestion from '../api/getRandomPublicQuestion';
+import getRandomQuestion from '../api/getRandomQuestion';
 
 const Main = styled.main`
   ${flexColumnCenter};
@@ -83,7 +85,12 @@ const CorrectAnswerContainer = styled.div`
   background: ${props => props.theme.colors.background};
 `;
 
-export default function MultiPlayerPage(props) {
+export default function MultiPlayerPage({
+  amountOfQuestions,
+  privateCode,
+  nameOfPlayer1,
+  nameOfPlayer2
+}) {
   const [_ids, set_Ids] = React.useState([]);
   const [question, setQuestion] = React.useState('');
   const [correct_answer, setCorrect_answer] = React.useState('');
@@ -96,12 +103,11 @@ export default function MultiPlayerPage(props) {
   const [gameOver, setGameOver] = React.useState(false);
   const [nowPlaying, setNowPlaying] = React.useState(1);
   const [showCorrectAnswer, setShowCorrectAnswer] = React.useState(false);
-  const amountOfQuestions = props.amountOfQuestions;
+
   const allAnswers = [correct_answer, incorrect_answer1, incorrect_answer2, incorrect_answer3];
 
   async function getNextQuestion() {
-    const response = await fetch('/api/questions/random');
-    const data = await response.json();
+    const data = await getRandomQuestion(privateCode);
     if (_ids.includes(data._id)) {
       getNextQuestion();
     } else {
@@ -155,10 +161,14 @@ export default function MultiPlayerPage(props) {
       setPointsPlayer1(pointsPlayer1 - 0.25);
       setNowPlaying(2);
     } else {
+      setShowCorrectAnswer(true);
       setPointsPlayer2(pointsPlayer2 - 0.25);
       setQuestionsPlayed(questionsPlayed + 1);
       setNowPlaying(1);
-      getNextQuestion();
+      setTimeout(() => {
+        isQuestionLimitReached(questionsPlayed + 1);
+        getNextQuestion();
+      }, 1800);
     }
   }
 
@@ -183,13 +193,9 @@ export default function MultiPlayerPage(props) {
             </CorrectAnswerContainer>
           )}
           {nowPlaying === 1 ? (
-            <TextWrapperOutsideCard1>
-              {props.nameOfPlayer1} - it is your turn!
-            </TextWrapperOutsideCard1>
+            <TextWrapperOutsideCard1>{nameOfPlayer1} - it is your turn!</TextWrapperOutsideCard1>
           ) : (
-            <TextWrapperOutsideCard2>
-              {props.nameOfPlayer2} - it is your turn!
-            </TextWrapperOutsideCard2>
+            <TextWrapperOutsideCard2>{nameOfPlayer2} - it is your turn!</TextWrapperOutsideCard2>
           )}
           <QuestionCard
             score={nowPlaying === 1 ? pointsPlayer1 : pointsPlayer2}
@@ -211,8 +217,8 @@ export default function MultiPlayerPage(props) {
       )}
       {gameOver && (
         <GameOverPage
-          nameOfPlayer1={props.nameOfPlayer1}
-          nameOfPlayer2={props.nameOfPlayer2}
+          nameOfPlayer1={nameOfPlayer1}
+          nameOfPlayer2={nameOfPlayer2}
           pointsPlayer1={pointsPlayer1}
           pointsPlayer2={pointsPlayer2}
         />

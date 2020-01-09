@@ -125,25 +125,6 @@ export default function SinglePlayerPage(props) {
     sessionStorage.setItem('firstAnswer', false);
   }
 
-  // MIGHT BE USED LATER FOR NICER WAY TO SHOW THE CORRECT ANSWER
-
-  // function findRightAnswerInArray() {
-  //   switch (correct_answer) {
-  //     case allAnswers[0]:
-  //       console.log(`Answers[0] is right`);
-  //       break;
-  //     case allAnswers[1]:
-  //       console.log('Answers[1] is right');
-  //       break;
-  //     case allAnswers[2]:
-  //       console.log('Answers[2] is right');
-  //       break;
-  //     case allAnswers[3]:
-  //       console.log('Answers[3] is right');
-  //       break;
-  //   }
-  // }
-
   function passQuestion() {
     setPoints(points - 0.25);
     setQuestionsPlayed(questionsPlayed + 1);

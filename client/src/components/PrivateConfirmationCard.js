@@ -31,7 +31,7 @@ const NavButton = styled.button`
   width: fit-content;
 `;
 
-const TextWrapper = styled.p`
+const TextWrapper = styled.div`
   ${TextCenterColorOneMargin20};
 `;
 const TextWrapperWarning = styled(TextWrapper)`
@@ -42,6 +42,8 @@ export default function PrivateConfirmationCard(props) {
   function handleClickOnMore() {
     props.addMore();
   }
+
+  console.log(props.privateCode);
   return (
     <StyledBigContainer>
       {props.questions === 0 ? (
@@ -59,7 +61,7 @@ export default function PrivateConfirmationCard(props) {
           <TextWrapper>
             Congrats! You’ve created a private set with<p> {props.questions} </p>question(s). Just
             share this unique code
-            <p>{sessionStorage.getItem('privateCode')}</p>
+            <p>{props.privateCode}</p>
             with your friends. No one, without the private code can play your set! Wanna test your
             set? Hit the dice and enter your code!
           </TextWrapper>
