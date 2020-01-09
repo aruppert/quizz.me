@@ -2,21 +2,8 @@ import React from 'react';
 import styled from '@emotion/styled';
 import ButtonLink from './ButtonLink';
 import Dice from '../icons/Dice';
-
-const BigContainer = styled.div`
-  display: flex;
-  flex-flow: column;
-  justify-content: center;
-  width: 340px;
-  height: 380px;
-  background: linear-gradient(
-    to right,
-    ${props => props.theme.colors.card2},
-    ${props => props.theme.colors.card1}
-  );
-  border-radius: 25px 0px 25px 0px;
-  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
-`;
+import BigContainer from './BigContainer';
+import TextWrapper from './TextWrapper';
 
 const Nav = styled.div`
   display: flex;
@@ -34,13 +21,6 @@ const NavButton = styled.button`
   margin: 0px 5px;
   color: ${props => props.theme.colors.text1};
   width: fit-content;
-`;
-
-const TextWrapper = styled.p`
-  text-align: center;
-  align-self: center;
-  color: ${props => props.theme.colors.text1};
-  margin: 20px;
 `;
 
 const TextWrapperWarning = styled(TextWrapper)`

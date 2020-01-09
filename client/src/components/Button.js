@@ -1,11 +1,9 @@
 import styled from '@emotion/styled';
+import { noBorderOutlineBGTextDeco } from '../styles/General';
 
 const Button = styled.button`
-  border: none;
-  outline: none;
-  background: none;
+  ${noBorderOutlineBGTextDeco};
   align-self: center;
-  text-decoration: none;
 `;
 
 export default Button;

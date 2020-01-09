@@ -2,37 +2,23 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import PropTypes from 'prop-types';
-import Header from '../components/Header';
-import Footer from '../components/Footer';
 import Planet from '../icons/Planet';
 import Lock from '../icons/Lock';
 import Input from '../components/Input';
 import ButtonLink from '../components/ButtonLink';
 import Button from '../components/Button';
-import { checkPropTypes } from 'prop-types';
+import BigContainer from '../components/BigContainer';
+import { flexColumnCenter } from '../styles/General';
+import TextWrapper from '../components/TextWrapper';
 
 const Main = styled.main`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-flow: column nowrap;
+  ${flexColumnCenter};
   height: 100vh;
   width: 100vw;
 `;
 
-const BigContainer = styled.div`
-  display: flex;
-  flex-flow: column;
+const StyledBigContainer = styled(BigContainer)`
   justify-content: center;
-  width: 340px;
-  height: 380px;
-  background: linear-gradient(
-    to right,
-    ${props => props.theme.colors.card2},
-    ${props => props.theme.colors.card1}
-  );
-  border-radius: 25px 0px 25px 0px;
-  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
 `;
 
 const StyledInput = styled(Input)`
@@ -41,11 +27,7 @@ const StyledInput = styled(Input)`
   margin: 15px;
 `;
 
-const TextWrapper = styled.div`
-  text-align: center;
-  align-self: center;
-
-  color: ${props => props.theme.colors.text1};
+const StyledTextWrapper = styled(TextWrapper)`
   margin: 15px;
 `;
 
@@ -82,15 +64,16 @@ export default function PublicOrPrivateSetPage({ onChangePrivateCode, privateCod
 
   return (
     <Main>
-      <Header />
-      <BigContainer>
-        <TextWrapper>Click the planet to create questions for the public domain:</TextWrapper>
+      <StyledBigContainer>
+        <StyledTextWrapper>
+          Click the planet to create questions for the public domain:
+        </StyledTextWrapper>
         <ButtonLink to="/add" onClick={handleClickOnPublic}>
           <Planet />
         </ButtonLink>
-        <TextWrapper>
+        <StyledTextWrapper>
           Enter a unique private code and click the lock to create a private game:
-        </TextWrapper>
+        </StyledTextWrapper>
         <StyledInput name="unique" placeholder="please enter unique code" onChange={handleChange} />
         {privateCode ? (
           <ButtonLink onClick={handlePrivateClick} to="/add">
@@ -102,12 +85,11 @@ export default function PublicOrPrivateSetPage({ onChangePrivateCode, privateCod
             <Lock />
           </Button>
         )}
-        <TextWrapper>
+        <StyledTextWrapper>
           Note: Your code should look something like this "Carls_wedding_2019_CW"
-        </TextWrapper>
-      </BigContainer>
+        </StyledTextWrapper>
+      </StyledBigContainer>
       {showError && <ErrorContainer> Code is missing!</ErrorContainer>}
-      <Footer />
     </Main>
   );
 }

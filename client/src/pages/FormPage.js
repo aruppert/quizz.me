@@ -1,8 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import PropTypes from 'prop-types';
-import Header from '../components/Header';
-import Footer from '../components/Footer';
 import Input from '../components/Input';
 import Planet from '../icons/Planet';
 import Lock from '../icons/Lock';
@@ -10,17 +8,18 @@ import PrivateConfirmationCard from '../components/PrivateConfirmationCard';
 import PublicConfirmationCard from '../components/PublicConfirmationCard';
 import QuestionCardsAdded from '../icons/QuestionCardsAdded';
 import { addQuestion } from '../api/questions';
+import {
+  linearGradientBoxShadow,
+  flexRowWrapCenter,
+  flexColumnCenter,
+  noBorderOutlineBGTextDeco
+} from '../styles/General';
 
 const BigContainer = styled.div`
+  ${linearGradientBoxShadow};
   width: 340px;
   height: 380px;
-  background: linear-gradient(
-    to right,
-    ${props => props.theme.colors.card2},
-    ${props => props.theme.colors.card1}
-  );
-  border-radius: 25px 0px 25px 0px;
-  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
+  border-radius: 25px 0px;
 `;
 
 const Form = styled.form`
@@ -29,7 +28,7 @@ const Form = styled.form`
   justify-content: space-evenly;
   height: 100%;
   color: ${props => props.theme.colors.text1};
-  padding: 0px 20px 0px 20px;
+  padding: 0px 20px;
 `;
 
 const Nav = styled.div`
@@ -38,23 +37,20 @@ const Nav = styled.div`
 `;
 
 const NavButton = styled.button`
-  border: none;
-  outline: none;
-  background: none;
-  border: 2px solid white;
+  ${noBorderOutlineBGTextDeco};
+  border: 2px solid ${props => props.theme.colors.text1};
   border-radius: 10px;
   font-size: 1em;
   font-weight: bold;
-  margin: 0px 0px 0px 10px;
+  margin: 0 0 0 10px;
   color: ${props => props.theme.colors.text1};
   width: 50%;
   flex-grow: 1;
 `;
 
 const Status = styled.div`
-  display: flex;
+  ${flexRowWrapCenter};
   width: 100%;
-  align-self: center;
   justify-content: space-around;
 `;
 
@@ -81,10 +77,7 @@ const TextWrapperOutsideCard = styled.div`
 `;
 
 const Main = styled.main`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-flow: column nowrap;
+  ${flexColumnCenter};
   height: 100vh;
   width: 100vw;
 `;
@@ -115,11 +108,6 @@ export default function FormPage({ privateCode }) {
     event.preventDefault();
     if (checkIfFormIsCompletelyFilled()) {
       addQuestion({
-        ...question,
-        status: questionStatus,
-        privateCode: privateCode
-      });
-      console.log({
         ...question,
         status: questionStatus,
         privateCode: privateCode
@@ -173,7 +161,6 @@ export default function FormPage({ privateCode }) {
 
   return (
     <Main>
-      <Header />
       {!finished && (
         <>
           {showError && <ErrorContainer> Please fill in all fields. </ErrorContainer>}
@@ -241,7 +228,6 @@ export default function FormPage({ privateCode }) {
       {finished && privateCode === '' && (
         <PublicConfirmationCard addMore={addMore} questions={questionsCounter} />
       )}
-      <Footer />
     </Main>
   );
 }

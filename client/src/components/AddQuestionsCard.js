@@ -2,34 +2,25 @@ import React from 'react';
 import styled from '@emotion/styled';
 import AddQuestion from '../icons/AddQuestion';
 import { Link } from 'react-router-dom';
+import { flexColumnCenter, linearGradientBoxShadow, TextCenterColorOneMargin20 } from '../styles/General';
 
 const AddQuestionsContainer = styled(Link)`
-  display: flex;
-  flex-flow: column;
+  ${flexColumnCenter};
+  ${linearGradientBoxShadow};
   justify-content: space-evenly;
-  align-items: center;
   width: 160px;
   height: 220px;
-  background: linear-gradient(
-    to right,
-    ${props => props.theme.colors.card2},
-    ${props => props.theme.colors.card1}
-  );
-  border-radius: 25px 0px 25px 0px;
-  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
+  border-radius: 25px 0px;
   text-decoration: none;
 `;
 
 const TextWrapper = styled.div`
-  margin: 20px;
-  text-align: center;
-  align-self: center;
-  color: ${props => props.theme.colors.text1};
+  ${TextCenterColorOneMargin20};
 `;
 
 export default function AddQuestionsCard() {
   return (
-    <AddQuestionsContainer to="/puborprivate">
+    <AddQuestionsContainer to="/privacy">
       <TextWrapper>Add questions</TextWrapper>
       <AddQuestion />
     </AddQuestionsContainer>

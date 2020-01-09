@@ -1,10 +1,8 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import PropTypes from 'prop-types';
-import Header from '../components/Header';
 import QuestionCard from '../components/QuestionCard';
 import AnswerCard from '../components/AnswerCard';
-import Footer from '../components/Footer';
 import Star from '../icons/Star';
 import StarBG from '../icons/StarBG';
 
@@ -164,7 +162,6 @@ export default function SinglePlayerPage(props) {
 
   return (
     <>
-      <Header />
       <Main>
         {!gameOver && (
           <>
@@ -196,7 +193,6 @@ export default function SinglePlayerPage(props) {
           </GameOverContainer>
         )}
       </Main>
-      <Footer />
     </>
   );
 }

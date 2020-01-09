@@ -11,6 +11,7 @@ import SinglePlayerPage from './pages/SinglePlayerPage';
 import MultiPlayerPage from './pages/MultiPlayerPage';
 import PublicOrPrivateSetPage from './pages/PublicOrPrivateSetPage';
 import Header from './components/Header';
+import Footer from './components/Footer';
 
 function App() {
   const [amountOfQuestions, setAmountOfQuestions] = React.useState(4);
@@ -37,52 +38,50 @@ function App() {
             <Route exact path="/" component={LandingPage} />
             <Route>
               <Header />
-              <Main>
-                <Switch>
-                  <Route path="/add">
-                    <FormPage privateCode={privateCode} />
-                  </Route>
-                  <Route path="/choose">
-                    <ChooseGameModePage
-                      onAmountOfQuestionsChange={amountOfQuestions =>
-                        setAmountOfQuestions(amountOfQuestions)
-                      }
+              <Switch>
+                <Route path="/add">
+                  <FormPage privateCode={privateCode} />
+                </Route>
+                <Route path="/choose">
+                  <ChooseGameModePage
+                    onAmountOfQuestionsChange={amountOfQuestions =>
+                      setAmountOfQuestions(amountOfQuestions)
+                    }
+                    amountOfQuestions={amountOfQuestions}
+                    setNumberOfPlayers={number => setNumberOfPlayers(number)}
+                    numberOfPlayers={numberOfPlayers}
+                    setPrivateCode={value => setPrivateCode(value)}
+                    chooseNamePlayer1={chooseNamePlayer1}
+                    chooseNamePlayer2={chooseNamePlayer2}
+                  />
+                </Route>
+                <Route path="/privacy">
+                  <PublicOrPrivateSetPage
+                    onChangePrivateCode={privateCode => setPrivateCode(privateCode)}
+                    privateCode={privateCode}
+                  />
+                </Route>
+                <Route path="/play">
+                  {numberOfPlayers === 1 && (
+                    <SinglePlayerPage
                       amountOfQuestions={amountOfQuestions}
-                      setNumberOfPlayers={number => setNumberOfPlayers(number)}
-                      numberOfPlayers={numberOfPlayers}
-                      setPrivateCode={value => setPrivateCode(value)}
-                      chooseNamePlayer1={chooseNamePlayer1}
-                      chooseNamePlayer2={chooseNamePlayer2}
-                    />
-                  </Route>
-                  <Route path="/puborprivate">
-                    <PublicOrPrivateSetPage
-                      onChangePrivateCode={privateCode => setPrivateCode(privateCode)}
                       privateCode={privateCode}
+                      nameOfPlayer1={nameOfPlayer1}
                     />
-                  </Route>
-                  <Route path="/play">
-                    {numberOfPlayers === 1 && (
-                      <SinglePlayerPage
-                        amountOfQuestions={amountOfQuestions}
-                        privateCode={privateCode}
-                        nameOfPlayer1={nameOfPlayer1}
-                      />
-                    )}
-                    {numberOfPlayers === 2 && (
-                      <MultiPlayerPage
-                        amountOfQuestions={amountOfQuestions}
-                        privateCode={privateCode}
-                        nameOfPlayer1={nameOfPlayer1}
-                        nameOfPlayer2={nameOfPlayer2}
-                      />
-                    )}
-                  </Route>
-                  <Route path="/playoradd">
-                    <PlayOrAddSetPage />
-                  </Route>
-                </Switch>
-              </Main>
+                  )}
+                  {numberOfPlayers === 2 && (
+                    <MultiPlayerPage
+                      amountOfQuestions={amountOfQuestions}
+                      privateCode={privateCode}
+                      nameOfPlayer1={nameOfPlayer1}
+                      nameOfPlayer2={nameOfPlayer2}
+                    />
+                  )}
+                </Route>
+                <Route path="/playoradd">
+                  <PlayOrAddSetPage />
+                </Route>
+              </Switch>
               <Footer />
             </Route>
           </Switch>

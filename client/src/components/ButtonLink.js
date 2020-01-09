@@ -1,12 +1,10 @@
 import styled from '@emotion/styled';
 import { Link } from 'react-router-dom';
+import { noBorderOutlineBGTextDeco } from '../styles/General';
 
 const ButtonLink = styled(Link)`
-  border: none;
-  outline: none;
-  background: none;
+  ${noBorderOutlineBGTextDeco};
   align-self: center;
-  text-decoration: none;
 `;
 
 export default ButtonLink;

@@ -3,20 +3,15 @@ import styled from '@emotion/styled';
 import ButtonLink from './ButtonLink';
 import Planet from '../icons/Planet';
 import Lock from '../icons/Lock';
+import { linearGradientBoxShadow, flexColumnCenter } from '../styles/General';
 
 const PrivacyContainer = styled.div`
-  display: flex;
-  flex-flow: column wrap;
+  ${linearGradientBoxShadow};
+  ${flexColumnCenter};
   justify-content: space-around;
   width: 340px;
   height: 180px;
-  background: linear-gradient(
-    to right,
-    ${props => props.theme.colors.card2},
-    ${props => props.theme.colors.card1}
-  );
-  border-radius: 25px 0px 25px 0px;
-  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
+  border-radius: 25px 0px;
 `;
 
 const TextWrapper = styled.div`

@@ -1,18 +1,14 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import PropTypes from 'prop-types';
-import Header from '../components/Header';
 import QuestionCard from '../components/QuestionCard';
 import AnswerCard from '../components/AnswerCard';
-import Footer from '../components/Footer';
 import { pulse } from '../components/Animations';
-import GameOver from '../components/GameOver';
+import GameOverPage from './GameOverPage';
+import { flexColumnCenter } from '../styles/General';
 
 const Main = styled.main`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-flow: column nowrap;
+  ${flexColumnCenter};
   height: 100vh;
   width: 100vw;
 `;
@@ -55,7 +51,6 @@ const TextWrapperOutsideCard1 = styled.div`
   text-align: center;
   height: 30px;
   width: 200px;
-  margin: 0px;
   margin: 0 0 10px;
   color: ${props => props.theme.colors.card1};
 `;
@@ -79,10 +74,7 @@ const CorrectAnswerCard = styled(AnswerCard)`
 `;
 
 const CorrectAnswerContainer = styled.div`
-  display: flex;
-  flex-flow: column;
-  align-items: center;
-  justify-content: center;
+  ${flexColumnCenter};
   position: absolute;
   top: 310px;
   z-index: 1000;
@@ -182,7 +174,6 @@ export default function MultiPlayerPage(props) {
 
   return (
     <Main>
-      <Header />
       {!gameOver && (
         <>
           {showCorrectAnswer && (
@@ -219,14 +210,13 @@ export default function MultiPlayerPage(props) {
         </>
       )}
       {gameOver && (
-        <GameOver
+        <GameOverPage
           nameOfPlayer1={props.nameOfPlayer1}
           nameOfPlayer2={props.nameOfPlayer2}
           pointsPlayer1={pointsPlayer1}
           pointsPlayer2={pointsPlayer2}
         />
       )}
-      <Footer />
     </Main>
   );
 }

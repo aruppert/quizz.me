@@ -1,43 +1,32 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import PropTypes from 'prop-types';
-import Header from '../components/Header';
-import Footer from '../components/Footer';
 import Input from '../components/Input';
 import Planet from '../icons/Planet';
 import Lock from '../icons/Lock';
 import ButtonLink from '../components/ButtonLink';
 import SettingsButton from '../components/SettingsButton';
 import Rocket from '../icons/Rocket';
+import { flexColumnCenter, linearGradientBoxShadow } from '../styles/General';
+import TextWrapper from '../components/TextWrapper';
 
 const Main = styled.main`
-  display: flex;
+  ${flexColumnCenter};
   justify-content: space-around;
-  align-items: center;
-  flex-flow: column nowrap;
   height: 100vh;
   width: 100vw;
   overflow: scroll;
 `;
 const Container = styled.div`
-  display: flex;
-  flex-flow: column;
+  ${flexColumnCenter};
+  ${linearGradientBoxShadow};
   justify-content: space-around;
-  align-items: center;
   align-self: center;
+  text-align: center;
+  color: ${props => props.theme.colors.text1};
   width: 340px;
   height: 50%;
-
-  background: linear-gradient(
-    to right,
-    ${props => props.theme.colors.card2},
-    ${props => props.theme.colors.card1}
-  );
-  border-radius: 25px 0px 25px 0px;
-  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
-  text-align: center;
-  align-self: center;
-  color: ${props => props.theme.colors.text1};
+  border-radius: 25px 0px;
 `;
 const FlexContainer = styled.div`
   display: flex;
@@ -46,10 +35,7 @@ const FlexContainer = styled.div`
   justify-content: space-evenly;
 `;
 
-const TextWrapper = styled.p`
-  text-align: center;
-  align-self: center;
-  color: ${props => props.theme.colors.text1};
+const StyledTextWrapper = styled(TextWrapper)`
   margin: 30px 0 20px;
 `;
 
@@ -64,11 +50,10 @@ const StyledButton = styled(ButtonLink)`
 `;
 
 const FlexColumn = styled.div`
-  display: flex;
+  ${flexColumnCenter};
+  justify-content: space-evenly;
   height: 100%;
   width: 50%;
-  flex-flow: column;
-  justify-content: space-evenly;
 `;
 
 const CodeInput = styled(Input)`
@@ -78,12 +63,14 @@ const CodeInput = styled(Input)`
 
 const InputContainer = styled.div`
   display: flex;
-  width: 100%;
   justify-content: space-around;
+  width: 100%;
 `;
+
 const PlayerContainer = styled.div`
   margin: 0 0 30px;
 `;
+
 const QuestionsContainer = styled.div`
   margin: 0 0 20px;
 `;
@@ -144,10 +131,9 @@ export default function ChooseGameModePage(props) {
 
   return (
     <Main>
-      <Header />
       {showFirstSettings && (
         <Container>
-          <TextWrapper>How many want to play?</TextWrapper>
+          <StyledTextWrapper>How many want to play?</StyledTextWrapper>
           <PlayerContainer>
             <RadioButton
               active={props.numberOfPlayers === 1}
@@ -164,7 +150,7 @@ export default function ChooseGameModePage(props) {
               2 Players
             </RadioButton>
           </PlayerContainer>
-          <TextWrapper>Please choose public or enter your code:</TextWrapper>
+          <StyledTextWrapper>Please choose public or enter your code:</StyledTextWrapper>
           <FlexContainer>
             <FlexColumn>
               <StyledButton onClick={handlePublicClick}>
@@ -184,19 +170,19 @@ export default function ChooseGameModePage(props) {
         <Container>
           {props.numberOfPlayers === 1 ? (
             <>
-              <TextWrapper>Enter your name:</TextWrapper>
+              <StyledTextWrapper>Enter your name:</StyledTextWrapper>
               <Input placeholder="Player 1" hanldeCodeChange={handleChangePlayer1}></Input>{' '}
             </>
           ) : (
             <>
-              <TextWrapper>Enter your names:</TextWrapper>
+              <StyledTextWrapper>Enter your names:</StyledTextWrapper>
               <InputContainer>
                 <Input placeholder="Player 1" onChange={handleChangePlayer1}></Input>
                 <Input placeholder="Player 2" onChange={handleChangePlayer2}></Input>{' '}
               </InputContainer>
             </>
           )}
-          <TextWrapper> How many questions do you want to play?</TextWrapper>
+          <StyledTextWrapper> How many questions do you want to play?</StyledTextWrapper>
 
           <QuestionsContainer>
             <RadioButton
@@ -227,8 +213,6 @@ export default function ChooseGameModePage(props) {
         </Container>
       )}
       {showError && <ErrorContainer>Code is missing!</ErrorContainer>}
-
-      <Footer />
     </Main>
   );
 }

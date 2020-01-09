@@ -3,10 +3,10 @@ import styled from '@emotion/styled';
 import ColorPalette from '../icons/ColorPalette';
 import Logo from '../icons/Logo';
 import { Link } from 'react-router-dom';
+import { linearGradientBoxShadow, noBorderOutlineBGTextDeco } from '../styles/General';
 
 const HeaderBar = styled(Link)`
-  position: absolute;
-  top: 0px;
+  ${linearGradientBoxShadow};
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -14,15 +14,9 @@ const HeaderBar = styled(Link)`
   top: 0px;
   width: 100vw;
   height: 70px;
-  background: linear-gradient(
-    to right,
-    ${props => props.theme.colors.card2},
-    ${props => props.theme.colors.card1}
-  );
   border-radius: 0px 0px 25px;
-  border-bottom: 3px solid #fff;
-  border-right: 3px solid #fff;
-  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
+  border-bottom: 3px solid ${props => props.theme.colors.icon1};
+  border-right: 3px solid ${props => props.theme.colors.icon1};
   text-decoration: none;
 `;
 
@@ -35,9 +29,7 @@ const HeadText = styled.h1`
 `;
 
 const HeadButton = styled.button`
-  border: none;
-  outline: none;
-  background: none;
+  ${noBorderOutlineBGTextDeco};
   width: 24px;
   height: 24px;
 `;
