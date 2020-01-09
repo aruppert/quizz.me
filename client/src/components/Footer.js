@@ -4,60 +4,44 @@ import Dice from '../icons/Dice';
 import AddQuestion from '../icons/AddQuestion';
 import ButtonLink from './ButtonLink';
 import Highscore from '../icons/HighScore';
+import {
+  linearGradientBoxShadow,
+  flexRowWrapCenter,
+  noBorderOutlineBGTextDeco
+} from '../styles/General';
 
 const FooterBar = styled.div`
-  position: absolute;
-  bottom: 0px;
+  ${linearGradientBoxShadow};
   display: flex;
   justify-content: space-around;
   align-items: center;
-  position: absolute;
   bottom: 0px;
+  position: absolute;
   width: 100vw;
   height: 70px;
-  background: linear-gradient(
-    to right,
-    ${props => props.theme.colors.card2},
-    ${props => props.theme.colors.card1}
-  );
   border-radius: 25px 0px 0px;
-  border-top: 3px solid #fff;
-  border-left: 3px solid #fff;
-  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
+  border-top: 3px solid ${props => props.theme.colors.icon1};
+  border-left: 3px solid ${props => props.theme.colors.icon1};
 `;
 
 const FooterButton = styled(ButtonLink)`
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  ${flexRowWrapCenter};
   width: 1fr;
   height: 100%;
   flex-grow: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 `;
 
 const DiceButton = styled(ButtonLink)`
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  ${flexRowWrapCenter};
+  ${noBorderOutlineBGTextDeco};
+  ${linearGradientBoxShadow};
   width: 75px;
   height: 75px;
-  background: linear-gradient(
-    to right,
-    ${props => props.theme.colors.card2},
-    ${props => props.theme.colors.card1}
-  );
   border-radius: 50%;
-  outline: none;
-  border: none;
 `;
 
 const DiceButtonBackground = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  ${flexRowWrapCenter};
   width: 80px;
   height: 80px;
   background: ${props => props.theme.colors.background};
@@ -76,7 +60,7 @@ export default function Footer() {
           <Dice />
         </DiceButton>
       </DiceButtonBackground>
-      <FooterButton to="/puborprivate">
+      <FooterButton to="/privacy">
         <AddQuestion />
       </FooterButton>
     </FooterBar>

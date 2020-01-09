@@ -2,20 +2,17 @@ import React from 'react';
 import styled from '@emotion/styled';
 import ButtonLink from './ButtonLink';
 import Dice from '../icons/Dice';
+import {
+  flexColumnCenter,
+  noBorderOutlineBGTextDeco,
+  TextCenterColorOneMargin20
+} from '../styles/General';
+import BigContainer from './BigContainer';
 
-const BigContainer = styled.div`
-  display: flex;
+const StyledBigContainer = styled(BigContainer)`
+  ${flexColumnCenter};
   flex-flow: column;
   justify-content: center;
-  width: 340px;
-  height: 380px;
-  background: linear-gradient(
-    to right,
-    ${props => props.theme.colors.card2},
-    ${props => props.theme.colors.card1}
-  );
-  border-radius: 25px 0px 25px 0px;
-  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
 `;
 
 const Nav = styled.div`
@@ -24,23 +21,18 @@ const Nav = styled.div`
 `;
 
 const NavButton = styled.button`
-  border: none;
-  outline: none;
-  background: none;
+  ${noBorderOutlineBGTextDeco};
   border: 2px solid white;
   border-radius: 10px;
   font-size: 1em;
   font-weight: bold;
-  margin: 0px 5px 0px 5px;
+  margin: 0px 5px;
   color: ${props => props.theme.colors.text1};
   width: fit-content;
 `;
 
 const TextWrapper = styled.p`
-  text-align: center;
-  align-self: center;
-  color: ${props => props.theme.colors.text1};
-  margin: 20px;
+  ${TextCenterColorOneMargin20};
 `;
 const TextWrapperWarning = styled(TextWrapper)`
   color: ${props => props.theme.colors.warn};
@@ -51,7 +43,7 @@ export default function PrivateConfirmationCard(props) {
     props.addMore();
   }
   return (
-    <BigContainer>
+    <StyledBigContainer>
       {props.questions === 0 ? (
         <>
           <TextWrapperWarning>Oops, you didn't add any questions.</TextWrapperWarning>
@@ -79,6 +71,6 @@ export default function PrivateConfirmationCard(props) {
           </Nav>{' '}
         </>
       )}
-    </BigContainer>
+    </StyledBigContainer>
   );
 }

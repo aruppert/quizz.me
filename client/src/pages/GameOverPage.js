@@ -2,16 +2,14 @@ import React from 'react';
 import styled from '@emotion/styled';
 import Star from '../icons/Star';
 import StarBG from '../icons/StarBG';
-import Header from './Header';
-import Footer from './Footer';
-import { tada } from './Animations';
+import Header from '../components/Header';
+import Footer from '../components/Footer';
+import { tada } from '../components/Animations';
 import PropTypes from 'prop-types';
+import { flexColumnCenter } from '../styles/General';
 
 const Main = styled.main`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-flow: column nowrap;
+  ${flexColumnCenter};
   height: 100vh;
   width: 100vw;
 `;
@@ -25,12 +23,10 @@ const StarWrapper = styled.svg`
 const TextWrapper = styled.div`
   position: absolute;
   z-index: 1000;
-  display: flex;
+  ${flexColumnCenter};
   top: 47vh;
   left: 0px;
   width: 100%;
-  align-content: center;
-  justify-content: center;
   font-family: 'Leckerli One', cursive;
   font-size: 1.2rem;
   color: ${props => props.theme.colors.text1};
@@ -47,9 +43,7 @@ const ScoreContainer = styled.div`
   width: 100%;
 `;
 const ScoreCircle = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  ${flexColumnCenter};
   background: ${props => props.theme.colors.active};
   border-radius: 50%;
   height: 100px;
@@ -69,7 +63,7 @@ const Score = styled.p`
   font-family: 'Leckerli One', cursive;
 `;
 
-export default function GameOver(props) {
+export default function GameOverPage(props) {
   function determineResult(points1, points2) {
     if (points1 === points2) {
       return 'Draw!';
@@ -110,7 +104,7 @@ export default function GameOver(props) {
   );
 }
 
-GameOver.propTypes = {
+GameOverPage.propTypes = {
   pointsPlayer1: PropTypes.number,
   pointsPlayer2: PropTypes.number,
   nameOfPlayer1: PropTypes.string,

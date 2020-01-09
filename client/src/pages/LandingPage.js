@@ -2,18 +2,13 @@ import React from 'react';
 import styled from '@emotion/styled';
 import Logo from '../icons/Logo';
 import { Link, useHistory } from 'react-router-dom';
+import { linearGradientBoxShadow, flexRowWrapCenter } from '../styles/General';
 
 const Container = styled(Link)`
   height: 100vh;
   width: 100vw;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: linear-gradient(
-    to right,
-    ${props => props.theme.colors.card2},
-    ${props => props.theme.colors.card1}
-  );
+  ${flexRowWrapCenter};
+  ${linearGradientBoxShadow};
 `;
 
 const LandingLogo = styled(Logo)`
