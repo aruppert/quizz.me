@@ -215,7 +215,6 @@ ChooseGameModePage.propTypes = {
   amountOfQuestions: PropTypes.number,
   onAmountOfQuestionsChange: PropTypes.func,
   setNumberOfPlayers: PropTypes.func,
-  setPrivateCode: PropTypes.func,
   chooseNamePlayer1: PropTypes.func,
   chooseNamePlayer2: PropTypes.func,
   onChangePrivateCode: PropTypes.string
