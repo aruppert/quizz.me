@@ -2,8 +2,6 @@ import React from 'react';
 import styled from '@emotion/styled';
 import Star from '../icons/Star';
 import StarBG from '../icons/StarBG';
-import Header from '../components/Header';
-import Footer from '../components/Footer';
 import { tada } from '../components/Animations';
 import PropTypes from 'prop-types';
 import { flexColumnCenter } from '../styles/General';
@@ -77,7 +75,6 @@ export default function GameOverPage(props) {
   }
   return (
     <Main>
-      <Header />
       <GameOverContainer>
         <ScoreContainer>
           <ScoreCircle>
@@ -99,7 +96,6 @@ export default function GameOverPage(props) {
         </StarWrapper>
         <TextWrapper>{determineResult(props.pointsPlayer1, props.pointsPlayer2)}</TextWrapper>
       </GameOverContainer>
-      <Footer />
     </Main>
   );
 }
