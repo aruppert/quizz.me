@@ -5,6 +5,7 @@ import StarBG from '../icons/StarBG';
 import { tada } from '../components/Animations';
 import PropTypes from 'prop-types';
 import { flexColumnCenter } from '../styles/General';
+import { addHighscore } from '../api/addHighscore';
 
 const Main = styled.main`
   ${flexColumnCenter};
@@ -61,7 +62,13 @@ const Score = styled.p`
   font-family: 'Leckerli One', cursive;
 `;
 
-export default function GameOverPage(props) {
+export default function GameOverPage({
+  nameOfPlayer1,
+  nameOfPlayer2,
+  pointsPlayer1,
+  pointsPlayer2,
+  questionsPlayed
+}) {
   function determineResult(points1, points2) {
     if (points1 === points2) {
       return 'Draw!';
@@ -73,20 +80,27 @@ export default function GameOverPage(props) {
       }
     }
   }
+  React.useEffect(() => {
+    async function submitHighscore() {
+      addHighscore({ name: nameOfPlayer1, score: pointsPlayer1, questionsPlayed: questionsPlayed });
+      addHighscore({ name: nameOfPlayer2, score: pointsPlayer2, questionsPlayed: questionsPlayed });
+    }
+    submitHighscore();
+  }, []);
   return (
     <Main>
       <GameOverContainer>
         <ScoreContainer>
           <ScoreCircle>
             <ScoreTextWrapper>
-              <Name>{props.nameOfPlayer1}:</Name>
-              <Score>{props.pointsPlayer1} points</Score>
+              <Name>{nameOfPlayer1}:</Name>
+              <Score>{pointsPlayer1} points</Score>
             </ScoreTextWrapper>
           </ScoreCircle>
           <ScoreCircle>
             <ScoreTextWrapper>
-              <Name>{props.nameOfPlayer2}:</Name>
-              <Score>{props.pointsPlayer2} points</Score>
+              <Name>{nameOfPlayer2}:</Name>
+              <Score>{pointsPlayer2} points</Score>
             </ScoreTextWrapper>
           </ScoreCircle>
         </ScoreContainer>
@@ -94,7 +108,7 @@ export default function GameOverPage(props) {
           <StarBG />
           <Star />
         </StarWrapper>
-        <TextWrapper>{determineResult(props.pointsPlayer1, props.pointsPlayer2)}</TextWrapper>
+        <TextWrapper>{determineResult(pointsPlayer1, pointsPlayer2)}</TextWrapper>
       </GameOverContainer>
     </Main>
   );
