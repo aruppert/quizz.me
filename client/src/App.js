@@ -22,6 +22,7 @@ import MultiPlayerPage from './pages/MultiPlayerPage';
 import PublicOrPrivateSetPage from './pages/PublicOrPrivateSetPage';
 import Header from './components/Header';
 import Footer from './components/Footer';
+import HighscorePage from './pages/HighscorePage';
 
 function App() {
   const [amountOfQuestions, setAmountOfQuestions] = React.useState(4);
@@ -29,7 +30,7 @@ function App() {
   const [privateCode, setPrivateCode] = React.useState('');
   const [nameOfPlayer1, setNameOfPlayer1] = React.useState('Player 1');
   const [nameOfPlayer2, setNameOfPlayer2] = React.useState('Player 2');
-  const [theme, setTheme] = React.useState(8);
+  const [theme, setTheme] = React.useState(4);
 
   function chooseNamePlayer1(name) {
     setNameOfPlayer1(name);
@@ -112,6 +113,9 @@ function App() {
                 </Route>
                 <Route path="/playoradd">
                   <PlayOrAddSetPage />
+                </Route>
+                <Route path="/highscore">
+                  <HighscorePage />
                 </Route>
               </Switch>
               <Footer />

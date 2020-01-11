@@ -2,13 +2,22 @@ require('dotenv').config();
 const express = require('express');
 const path = require('path');
 const { dbInit } = require('./lib/db');
-const { addQuestion, getRandomQuestion } = require('./lib/questions');
+const { addQuestion, addHighscore, getRandomQuestion, getHighscores } = require('./lib/questions');
 
 const app = express();
 const DB_Name = process.env.DB_NAME;
 const DB_URL = process.env.DB_URL;
 
 app.use(express.json({ extended: false }, path.join(__dirname, 'client/build')));
+
+app.get('/api/questions', async (request, response) => {
+  try {
+    const highscores = await getHighscores();
+    return response.json(highscores);
+  } catch (error) {
+    console.error(error);
+  }
+});
 
 app.get('/api/questions/random', async (request, response) => {
   try {
@@ -18,6 +27,12 @@ app.get('/api/questions/random', async (request, response) => {
   } catch (error) {
     console.error(error);
   }
+});
+
+app.post('/api/questions', async (req, res) => {
+  const highscoreData = req.body;
+  await addHighscore(highscoreData);
+  res.end();
 });
 
 app.post('/api/questions', async (req, res) => {

@@ -143,15 +143,19 @@ export default function MultiPlayerPage({
       if (value === correct_answer) {
         setShowCorrectAnswer(true);
         setPointsPlayer2(pointsPlayer2 + 1);
-        setNowPlaying(1);
         setQuestionsPlayed(questionsPlayed + 1);
-        setTimeout(() => getNextQuestion(), 1800);
+        setTimeout(() => {
+          setNowPlaying(1);
+          getNextQuestion();
+        }, 1800);
       } else {
         setShowCorrectAnswer(true);
         setPointsPlayer2(pointsPlayer2 - 1);
         setQuestionsPlayed(questionsPlayed + 1);
-        setNowPlaying(1);
-        setTimeout(() => getNextQuestion(), 1800);
+        setTimeout(() => {
+          setNowPlaying(1);
+          getNextQuestion();
+        }, 1800);
       }
     }
   }
@@ -164,9 +168,10 @@ export default function MultiPlayerPage({
       setShowCorrectAnswer(true);
       setPointsPlayer2(pointsPlayer2 - 0.25);
       setQuestionsPlayed(questionsPlayed + 1);
-      setNowPlaying(1);
+
       setTimeout(() => {
         isQuestionLimitReached(questionsPlayed + 1);
+        setNowPlaying(1);
         getNextQuestion();
       }, 1800);
     }
@@ -221,6 +226,7 @@ export default function MultiPlayerPage({
           nameOfPlayer2={nameOfPlayer2}
           pointsPlayer1={pointsPlayer1}
           pointsPlayer2={pointsPlayer2}
+          questionsPlayed={questionsPlayed}
         />
       )}
     </Main>

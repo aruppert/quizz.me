@@ -23,6 +23,7 @@ function GlobalStyles() {
             url('./fonts/gilroy-extrabold.woff2') format('woff2');
         }
         body {
+          display: flex;
           font-family: 'Gilroy';
           font-size: 16px;
           margin: 0;
