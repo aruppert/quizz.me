@@ -2,7 +2,7 @@ import React from 'react';
 import styled from '@emotion/styled';
 import Star from '../icons/Star';
 import StarBG from '../icons/StarBG';
-import { tada } from '../components/Animations';
+import { tada } from '../animations/General';
 import PropTypes from 'prop-types';
 import { flexColumnCenter } from '../styles/General';
 import { addHighscore } from '../api/addHighscore';

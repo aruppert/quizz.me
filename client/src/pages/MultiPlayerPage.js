@@ -3,10 +3,9 @@ import styled from '@emotion/styled';
 import PropTypes from 'prop-types';
 import QuestionCard from '../components/QuestionCard';
 import AnswerCard from '../components/AnswerCard';
-import { pulse } from '../components/Animations';
+import { pulse } from '../animations/General';
 import GameOverPage from './GameOverPage';
 import { flexColumnCenter } from '../styles/General';
-// import getRandomPublicQuestion from '../api/getRandomPublicQuestion';
 import getRandomQuestion from '../api/getRandomQuestion';
 
 const Main = styled.main`
@@ -131,9 +130,15 @@ export default function MultiPlayerPage({
   async function verifyAnswer(value) {
     if (nowPlaying === 1) {
       if (value === correct_answer) {
+        setTimeout(() => {
+          navigator.vibrate([100, 100, 100]);
+        }, 500);
         setPointsPlayer1(pointsPlayer1 + 1);
         setNowPlaying(2);
       } else {
+        setTimeout(() => {
+          navigator.vibrate([500]);
+        }, 500);
         setPointsPlayer1(pointsPlayer1 - 1);
         setNowPlaying(2);
       }
@@ -145,6 +150,7 @@ export default function MultiPlayerPage({
         setPointsPlayer2(pointsPlayer2 + 1);
         setQuestionsPlayed(questionsPlayed + 1);
         setTimeout(() => {
+          navigator.vibrate([100, 100, 100]);
           setNowPlaying(1);
           getNextQuestion();
         }, 1800);
@@ -153,6 +159,7 @@ export default function MultiPlayerPage({
         setPointsPlayer2(pointsPlayer2 - 1);
         setQuestionsPlayed(questionsPlayed + 1);
         setTimeout(() => {
+          navigator.vibrate([500]);
           setNowPlaying(1);
           getNextQuestion();
         }, 1800);
