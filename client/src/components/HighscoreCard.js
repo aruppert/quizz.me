@@ -1,11 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import {
-  linearGradientBoxShadow,
-  TextCenterColorOneMargin20,
-  flexColumnCenter,
-  flexRowWrapCenter
-} from '../styles/General';
+import { linearGradientBoxShadow, flexColumnCenter, flexRowWrapCenter } from '../styles/General';
 
 const HighscoreCardContainerBorder = styled.div`
   ${linearGradientBoxShadow};
