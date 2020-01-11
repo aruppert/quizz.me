@@ -52,7 +52,7 @@ const DiceButtonBackground = styled.div`
 export default function Footer() {
   return (
     <FooterBar>
-      <FooterButton to="/choose">
+      <FooterButton to="/highscore">
         <Highscore />
       </FooterButton>
       <DiceButtonBackground>

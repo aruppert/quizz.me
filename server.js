@@ -10,20 +10,20 @@ const DB_URL = process.env.DB_URL;
 
 app.use(express.json({ extended: false }, path.join(__dirname, 'client/build')));
 
-app.get('/api/questions/random', async (request, response) => {
+app.get('/api/questions', async (request, response) => {
   try {
-    const { privateCode } = request.query;
-    const question = await getRandomQuestion(privateCode);
-    return response.json(question);
+    const highscores = await getHighscores();
+    return response.json(highscores);
   } catch (error) {
     console.error(error);
   }
 });
 
-app.get('/api/questions', async (request, response) => {
+app.get('/api/questions/random', async (request, response) => {
   try {
-    const highscores = await getHighscores();
-    return response.json(highscores);
+    const { privateCode } = request.query;
+    const question = await getRandomQuestion(privateCode);
+    return response.json(question);
   } catch (error) {
     console.error(error);
   }

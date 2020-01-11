@@ -22,6 +22,7 @@ import MultiPlayerPage from './pages/MultiPlayerPage';
 import PublicOrPrivateSetPage from './pages/PublicOrPrivateSetPage';
 import Header from './components/Header';
 import Footer from './components/Footer';
+import HighscorePage from './pages/HighscorePage';
 
 function App() {
   const [amountOfQuestions, setAmountOfQuestions] = React.useState(4);
@@ -112,6 +113,9 @@ function App() {
                 </Route>
                 <Route path="/playoradd">
                   <PlayOrAddSetPage />
+                </Route>
+                <Route path="/highscore">
+                  <HighscorePage />
                 </Route>
               </Switch>
               <Footer />
