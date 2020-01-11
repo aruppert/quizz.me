@@ -72,3 +72,40 @@ export const tada = keyframes`
 .tada {
   animation-name: tada;
 }`;
+
+export const fadeInLeftFadeOutRight = keyframes` 
+  0% {
+    opacity: 0;
+    transform: translate3d(-100%, 0, 0);
+  }
+  33% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+  66% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    opacity: 0;
+    transform: translate3d(100%, 0, 0);
+  }
+}
+
+.fadeInLeftFadeOutRight {
+  animation-name: fadeInLeftFadeOutRight;
+}`;
+
+export const fadeIn = keyframes`
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.fadeIn {
+  animation-name: fadeIn;
+}`;
