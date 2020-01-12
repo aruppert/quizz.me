@@ -3,7 +3,6 @@ import styled from '@emotion/styled';
 import { flexColumnCenter, linearGradientBoxShadow } from '../styles/General';
 import TextWrapper from './TextWrapper';
 import PropTypes from 'prop-types';
-import QuestionCardsAdded from '../icons/QuestionCardsAdded';
 
 const QuestionContainer = styled.div`
   ${flexColumnCenter};
