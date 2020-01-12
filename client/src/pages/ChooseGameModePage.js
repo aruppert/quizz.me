@@ -13,9 +13,9 @@ import TextWrapper from '../components/TextWrapper';
 const Main = styled.main`
   ${flexColumnCenter};
   justify-content: space-around;
-  height: 100vh;
-  width: 100vw;
-  overflow: scroll;
+  height: 100%;
+  margin: auto;
+  width: 375px;
 `;
 const Container = styled.div`
   ${flexColumnCenter};
@@ -25,7 +25,7 @@ const Container = styled.div`
   text-align: center;
   color: ${props => props.theme.colors.text1};
   width: 340px;
-  height: 50%;
+  height: 325px;
   border-radius: 25px 0px;
 `;
 const FlexContainer = styled.div`
@@ -165,7 +165,7 @@ export default function ChooseGameModePage(props) {
           {props.numberOfPlayers === 1 ? (
             <>
               <StyledTextWrapper>Enter your name:</StyledTextWrapper>
-              <Input placeholder="Player 1" hanldeCodeChange={handleChangePlayer1}></Input>{' '}
+              <Input placeholder="Player 1" onChange={handleChangePlayer1}></Input>{' '}
             </>
           ) : (
             <>

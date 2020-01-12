@@ -13,15 +13,19 @@ import {
 const FooterBar = styled.div`
   ${linearGradientBoxShadow};
   display: flex;
-  justify-content: space-around;
-  align-items: center;
-  bottom: 0px;
-  position: absolute;
   width: 100vw;
   height: 70px;
   border-radius: 25px 0px 0px;
   border-top: 3px solid ${props => props.theme.colors.icon1};
   border-left: 3px solid ${props => props.theme.colors.icon1};
+`;
+
+const FooterContainer = styled.div`
+  ${flexRowWrapCenter};
+  margin: auto;
+  flex-flow: nowrap;
+  height: 70px;
+  width: 375px;
 `;
 
 const FooterButton = styled(ButtonLink)`
@@ -52,17 +56,19 @@ const DiceButtonBackground = styled.div`
 export default function Footer() {
   return (
     <FooterBar>
-      <FooterButton to="/highscore">
-        <Highscore />
-      </FooterButton>
-      <DiceButtonBackground>
-        <DiceButton to="/choose">
-          <Dice />
-        </DiceButton>
-      </DiceButtonBackground>
-      <FooterButton to="/privacy">
-        <AddQuestion />
-      </FooterButton>
+      <FooterContainer>
+        <FooterButton to="/highscore">
+          <Highscore />
+        </FooterButton>
+        <DiceButtonBackground>
+          <DiceButton to="/choose">
+            <Dice />
+          </DiceButton>
+        </DiceButtonBackground>
+        <FooterButton to="/privacy">
+          <AddQuestion />
+        </FooterButton>
+      </FooterContainer>
     </FooterBar>
   );
 }

@@ -6,10 +6,12 @@ import { tada } from '../animations/General';
 import PropTypes from 'prop-types';
 import { flexColumnCenter } from '../styles/General';
 import { addHighscore } from '../api/addHighscore';
+import TextWrapperOutsideCard from '../components/TextWrapperOutsideCard';
 
 const Main = styled.main`
   ${flexColumnCenter};
-  height: 100vh;
+  height: 100%;
+  flex-grow: 1;
   width: 100vw;
 `;
 
@@ -32,37 +34,24 @@ const TextWrapper = styled.div`
   animation: ${tada} 1.2s infinite;
 `;
 
-const ScoreContainer = styled.div`
-  position: absolute;
-  z-index: 1000;
-  display: flex;
-  justify-content: space-between;
-  top: 120px;
-  left: 0px;
-  width: 100%;
-`;
-const ScoreCircle = styled.div`
-  ${flexColumnCenter};
-  background: ${props => props.theme.colors.active};
-  border-radius: 50%;
-  height: 100px;
-  width: 100px;
-`;
-const ScoreTextWrapper = styled.p``;
-
 const GameOverContainer = styled.div``;
 
-const Name = styled.p`
-  color: ${props => props.theme.colors.text1};
+const TextWrapperOutsideCardPlayer1 = styled(TextWrapperOutsideCard)`
   font-family: 'Leckerli One', cursive;
+  margin: auto;
+  width: 375px;
+  font-size: 1.2rem;
 `;
-
-const Score = styled.p`
-  color: ${props => props.theme.colors.text1};
+const TextWrapperOutsideCardPlayer2 = styled(TextWrapperOutsideCard)`
+  color: ${props => props.theme.colors.card2};
   font-family: 'Leckerli One', cursive;
+  margin: auto;
+  width: 375px;
+  font-size: 1.2rem;
 `;
 
 export default function GameOverPage({
+  numberOfPlayers,
   nameOfPlayer1,
   nameOfPlayer2,
   pointsPlayer1,
@@ -90,25 +79,23 @@ export default function GameOverPage({
   return (
     <Main>
       <GameOverContainer>
-        <ScoreContainer>
-          <ScoreCircle>
-            <ScoreTextWrapper>
-              <Name>{nameOfPlayer1}:</Name>
-              <Score>{pointsPlayer1} points</Score>
-            </ScoreTextWrapper>
-          </ScoreCircle>
-          <ScoreCircle>
-            <ScoreTextWrapper>
-              <Name>{nameOfPlayer2}:</Name>
-              <Score>{pointsPlayer2} points</Score>
-            </ScoreTextWrapper>
-          </ScoreCircle>
-        </ScoreContainer>
+        <TextWrapperOutsideCardPlayer1>
+          {nameOfPlayer1} scored {pointsPlayer1} points
+        </TextWrapperOutsideCardPlayer1>
         <StarWrapper>
           <StarBG />
           <Star />
         </StarWrapper>
-        <TextWrapper>{determineResult(pointsPlayer1, pointsPlayer2)}</TextWrapper>
+        {numberOfPlayers === 1 ? (
+          <TextWrapper>Good job!</TextWrapper>
+        ) : (
+          <TextWrapper>{determineResult(pointsPlayer1, pointsPlayer2)}</TextWrapper>
+        )}
+        {numberOfPlayers === 2 && (
+          <TextWrapperOutsideCardPlayer2>
+            {nameOfPlayer2} scored {pointsPlayer2} points
+          </TextWrapperOutsideCardPlayer2>
+        )}
       </GameOverContainer>
     </Main>
   );
