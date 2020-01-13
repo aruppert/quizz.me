@@ -109,7 +109,7 @@ export const octonary = {
   colors: {
     text1: '#373737',
     text2: '#fff',
-    background: '##cccccc',
+    background: '#F2F2F2',
     card1: '#d4fc79',
     card2: '#96e6a1',
     active: '#fda34b',

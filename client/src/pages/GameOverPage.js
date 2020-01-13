@@ -1,7 +1,5 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import Star from '../icons/Star';
-import StarBG from '../icons/StarBG';
 import { tada } from '../animations/General';
 import PropTypes from 'prop-types';
 import { flexColumnCenter } from '../styles/General';
@@ -13,12 +11,6 @@ const Main = styled.main`
   height: 100%;
   flex-grow: 1;
   width: 100vw;
-`;
-
-const StarWrapper = styled.svg`
-  position: relative;
-  height: 450px;
-  width: 450px;
 `;
 
 const TextWrapper = styled.div`
@@ -82,10 +74,8 @@ export default function GameOverPage({
         <TextWrapperOutsideCardPlayer1>
           {nameOfPlayer1} scored {pointsPlayer1} points
         </TextWrapperOutsideCardPlayer1>
-        <StarWrapper>
-          <StarBG />
-          <Star />
-        </StarWrapper>
+
+        <img src="./images/star-3d-360px.webp" alt="Star in 3D" />
         {numberOfPlayers === 1 ? (
           <TextWrapper>Good job!</TextWrapper>
         ) : (
