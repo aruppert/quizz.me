@@ -10,6 +10,8 @@ const PORT = process.env.PORT || 8080;
 const DB_Name = process.env.DB_NAME;
 const DB_URL = process.env.DB_URL;
 
+app.use(express.json({ extended: false }));
+
 app.get('/api/highscores', async (request, response) => {
   try {
     const highscores = await getHighscores();
@@ -31,19 +33,20 @@ app.get('/api/questions/random', async (request, response) => {
 
 app.post('/api/highscores', async (req, res) => {
   const highscoreData = req.body;
+  console.log(highscoreData);
   await addHighscore(highscoreData);
   res.end();
 });
 
 app.post('/api/questions', async (req, res) => {
   const questionData = req.body;
+  console.log(questionData);
   await addQuestion(questionData);
   res.end();
 });
 
-app.use(express.json({ extended: false }));
-
 app.use(express.static(path.join(__dirname, 'client/build')));
+
 app.get('*', function(req, res) {
   res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
 });

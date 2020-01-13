@@ -177,7 +177,6 @@ export default function PlayPage({
 
   React.useEffect(() => {
     getNextQuestion();
-    setTimeout(() => getNextQuestion(), 5000);
   }, []);
 
   return (
