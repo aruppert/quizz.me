@@ -3,7 +3,6 @@ import styled from '@emotion/styled';
 import PropTypes from 'prop-types';
 import QuestionCard from '../components/QuestionCard';
 import AnswerCard from '../components/AnswerCard';
-import AnswerCard2 from '../components/AnswerCard';
 import { pulse } from '../animations/General';
 import GameOverPage from './GameOverPage';
 import { flexColumnCenter } from '../styles/General';
@@ -205,10 +204,10 @@ export default function PlayPage({
           )}
           <QuestionCard question={question} />
           <AnswerContainer>
-            <AnswerCard2 value={allAnswers[0]} onClick={() => verifyAnswer(allAnswers[0])} />
-            <AnswerCard2 value={allAnswers[1]} onClick={() => verifyAnswer(allAnswers[1])} />
-            <AnswerCard2 value={allAnswers[2]} onClick={() => verifyAnswer(allAnswers[2])} />
-            <AnswerCard2 value={allAnswers[3]} onClick={() => verifyAnswer(allAnswers[3])} />
+            <AnswerCard value={allAnswers[0]} onClick={() => verifyAnswer(allAnswers[0])} />
+            <AnswerCard value={allAnswers[1]} onClick={() => verifyAnswer(allAnswers[1])} />
+            <AnswerCard value={allAnswers[2]} onClick={() => verifyAnswer(allAnswers[2])} />
+            <AnswerCard value={allAnswers[3]} onClick={() => verifyAnswer(allAnswers[3])} />
           </AnswerContainer>
 
           <ButtonBar>
