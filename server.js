@@ -2,14 +2,15 @@ require('dotenv').config();
 const express = require('express');
 const path = require('path');
 const { dbInit } = require('./lib/db');
-const { addQuestion, addHighscore, getRandomQuestion, getHighscores } = require('./lib/questions');
+const { addQuestion, getRandomQuestion } = require('./lib/questions');
+const { addHighscore, getHighscores } = require('./lib/highscores');
 
 const app = express();
 const PORT = process.env.PORT || 8080;
 const DB_Name = process.env.DB_NAME;
 const DB_URL = process.env.DB_URL;
 
-app.get('/api/questions', async (request, response) => {
+app.get('/api/highscores', async (request, response) => {
   try {
     const highscores = await getHighscores();
     return response.json(highscores);
@@ -28,7 +29,7 @@ app.get('/api/questions/random', async (request, response) => {
   }
 });
 
-app.post('/api/questions', async (req, res) => {
+app.post('/api/highscores', async (req, res) => {
   const highscoreData = req.body;
   await addHighscore(highscoreData);
   res.end();

@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 import { tada } from '../animations/General';
 import PropTypes from 'prop-types';
 import { flexColumnCenter } from '../styles/General';
-import { addHighscore } from '../api/addHighscore';
+import { addHighscore } from '../api/highscores';
 import TextWrapperOutsideCard from '../components/TextWrapperOutsideCard';
 
 const Main = styled.main`
