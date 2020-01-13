@@ -16,10 +16,14 @@ const AnswerContainer = styled.button`
   color: ${props => props.theme.colors.card2};
 `;
 
+const TextContainer = styled.div`
+  margin: auto;
+`;
+
 export default function AnswerCard(props) {
   return (
     <AnswerContainer onClick={props.onClick} {...props}>
-      {props.value}
+      <TextContainer>{props.value}</TextContainer>
     </AnswerContainer>
   );
 }
