@@ -26,10 +26,10 @@ export default function PlayOrAddSetPage() {
     <Main>
       <WideBoxWithLinearGradientBorder text={`Welcome friend! `} />
       <SelectionContainer>
-        <HighCard text={`Play a single- or multiplayer game`}>
+        <HighCard text={`Play a single- or multiplayer game`} path="choose">
           <Dice />
         </HighCard>
-        <HighCard text={`Add public or private questions`}>
+        <HighCard text={`Add public or private questions`} path="privacy">
           <AddQuestion />
         </HighCard>
       </SelectionContainer>
