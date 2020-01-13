@@ -8,7 +8,6 @@ import GameOverPage from './GameOverPage';
 import { flexColumnCenter } from '../styles/General';
 import { getRandomQuestion } from '../api/questions';
 import TextWrapperOutsideCard from '../components/TextWrapperOutsideCard';
-// import passQuestion from '../components/gameplay/passQuestion';
 import GameOverButton from '../components/GameOverButton';
 import PassButton from '../components/PassButton';
 
@@ -30,11 +29,7 @@ const ButtonBar = styled.div`
   justify-content: space-around;
 `;
 
-const StyledTextWrapperOutsideCardOne = styled(TextWrapperOutsideCard)`
-  width: 360px;
-`;
-const StyledTextWrapperOutsideCardTwo = styled(TextWrapperOutsideCard)`
-  color: ${props => props.theme.colors.card2};
+const StyledTextWrapperOutsideCard = styled(TextWrapperOutsideCard)`
   width: 360px;
 `;
 
@@ -84,13 +79,6 @@ export default function PlayPage({
     3: 0,
     4: 0
   });
-
-  console.log(nowPlaying);
-  console.log(playerPoints);
-  console.log(playerPoints[1]);
-  // console.log(nameOfPlayers);
-
-  // const [playerPoints, setPlayerPoints] = React.useState([0, 0, 0, 0]);
 
   const allAnswers = [correct_answer, incorrect_answer1, incorrect_answer2, incorrect_answer3];
 
@@ -214,13 +202,13 @@ export default function PlayPage({
             </CorrectAnswerContainer>
           )}
           {numberOfPlayers === 1 ? (
-            <StyledTextWrapperOutsideCardOne>
+            <StyledTextWrapperOutsideCard>
               Good luck {namesOfPlayers[nowPlaying]}! Your score is {playerPoints[nowPlaying]}
-            </StyledTextWrapperOutsideCardOne>
+            </StyledTextWrapperOutsideCard>
           ) : (
-            <StyledTextWrapperOutsideCardOne>
+            <StyledTextWrapperOutsideCard>
               {namesOfPlayers[nowPlaying]} - your turn! Your score is {playerPoints[nowPlaying]}
-            </StyledTextWrapperOutsideCardOne>
+            </StyledTextWrapperOutsideCard>
           )}
           <QuestionCard question={question} />
           <AnswerContainer>
@@ -239,10 +227,8 @@ export default function PlayPage({
       {gameOver && (
         <GameOverPage
           numberOfPlayers={numberOfPlayers}
-          // nameOfPlayer1={nameOfPlayer1}
-          // nameOfPlayer2={nameOfPlayer2}
-          // pointsPlayer1={pointsPlayer1}
-          // pointsPlayer2={pointsPlayer2}
+          namesOfPlayers={namesOfPlayers}
+          playerPoints={playerPoints}
           questionsPlayed={questionsPlayed}
         />
       )}
