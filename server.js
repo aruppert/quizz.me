@@ -5,10 +5,9 @@ const { dbInit } = require('./lib/db');
 const { addQuestion, addHighscore, getRandomQuestion, getHighscores } = require('./lib/questions');
 
 const app = express();
+const PORT = process.env.PORT || 8080;
 const DB_Name = process.env.DB_NAME;
 const DB_URL = process.env.DB_URL;
-
-app.use(express.json({ extended: false }, path.join(__dirname, 'client/build')));
 
 app.get('/api/questions', async (request, response) => {
   try {
@@ -41,6 +40,9 @@ app.post('/api/questions', async (req, res) => {
   res.end();
 });
 
+app.use(express.json({ extended: false }));
+
+app.use(express.static(path.join(__dirname, 'client/build')));
 app.get('*', function(req, res) {
   res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
 });
@@ -48,7 +50,7 @@ app.get('*', function(req, res) {
 dbInit(DB_URL, DB_Name).then(async () => {
   console.log(`Database ${DB_Name} is ready`);
 
-  app.listen(process.env.PORT, () => {
+  app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${process.env.PORT}`);
   });
 });
