@@ -23,19 +23,26 @@ function GlobalStyles() {
             url('./fonts/gilroy-extrabold.woff2') format('woff2');
         }
         body {
+          height: 100vh;
+          width: 100vw;
           display: flex;
+          flex-flow: column;
           font-family: 'Gilroy';
           font-size: 16px;
           margin: 0;
           background: ${theme.colors.background};
-          height: 100vh;
-          width: 100vw;
 
           > link {
             text-decoration: none;
           }
           button {
             font-family: 'Gilroy';
+          }
+          #root {
+            display: flex;
+            flex-flow: column;
+            height: 100vh;
+            width: 100vw;
           }
         }
       `}

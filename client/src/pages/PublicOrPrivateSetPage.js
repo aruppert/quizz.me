@@ -13,7 +13,7 @@ import TextWrapper from '../components/TextWrapper';
 
 const Main = styled.main`
   ${flexColumnCenter};
-  height: 100vh;
+  height: 100%;
   width: 100vw;
 `;
 
@@ -86,7 +86,8 @@ export default function PublicOrPrivateSetPage({ onChangePrivateCode, privateCod
           </Button>
         )}
         <StyledTextWrapper>
-          Note: Your code should look something like this "Carls_wedding_2019_CW"
+          Note: Your code is like a password, it is case sensitive but please use only letters and
+          numbers.
         </StyledTextWrapper>
       </StyledBigContainer>
       {showError && <ErrorContainer> Code is missing!</ErrorContainer>}

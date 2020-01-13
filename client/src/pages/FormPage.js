@@ -177,12 +177,15 @@ export default function FormPage({ privateCode }) {
               </Status>
               <Input
                 type="text"
+                maxLength="145"
                 value={question.question}
                 name="question"
                 onChange={onChange}
                 placeholder="Question"
               />
               <Input
+                type="text"
+                maxLength="40"
                 value={question.correct_answer}
                 name="correct_answer"
                 onChange={onChange}
@@ -190,6 +193,7 @@ export default function FormPage({ privateCode }) {
               />
               <Input
                 type="text"
+                maxLength="40"
                 value={question.incorrect_answer1}
                 name="incorrect_answer1"
                 onChange={onChange}
@@ -197,6 +201,7 @@ export default function FormPage({ privateCode }) {
               />
               <Input
                 type="text"
+                maxLength="40"
                 value={question.incorrect_answer2}
                 name="incorrect_answer2"
                 onChange={onChange}
@@ -204,6 +209,7 @@ export default function FormPage({ privateCode }) {
               />
               <Input
                 type="text"
+                maxLength="40"
                 value={question.incorrect_answer3}
                 name="incorrect_answer3"
                 onChange={onChange}

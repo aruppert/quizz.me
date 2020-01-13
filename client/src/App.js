@@ -17,8 +17,7 @@ import LandingPage from './pages/LandingPage';
 import FormPage from './pages/FormPage';
 import ChooseGameModePage from './pages/ChooseGameModePage';
 import PlayOrAddSetPage from './pages/PlayOrAddSetPage';
-import SinglePlayerPage from './pages/SinglePlayerPage';
-import MultiPlayerPage from './pages/MultiPlayerPage';
+import PlayPage from './pages/PlayPage';
 import PublicOrPrivateSetPage from './pages/PublicOrPrivateSetPage';
 import Header from './components/Header';
 import Footer from './components/Footer';
@@ -76,9 +75,7 @@ function App() {
                 </Route>
                 <Route path="/choose">
                   <ChooseGameModePage
-                    onAmountOfQuestionsChange={amountOfQuestions =>
-                      setAmountOfQuestions(amountOfQuestions)
-                    }
+                    onAmountOfQuestionsChange={amount => setAmountOfQuestions(amount)}
                     amountOfQuestions={amountOfQuestions}
                     privateCode={privateCode}
                     setNumberOfPlayers={number => setNumberOfPlayers(number)}
@@ -95,21 +92,13 @@ function App() {
                   />
                 </Route>
                 <Route path="/play">
-                  {numberOfPlayers === 1 && (
-                    <SinglePlayerPage
-                      amountOfQuestions={amountOfQuestions}
-                      privateCode={privateCode}
-                      nameOfPlayer1={nameOfPlayer1}
-                    />
-                  )}
-                  {numberOfPlayers === 2 && (
-                    <MultiPlayerPage
-                      amountOfQuestions={amountOfQuestions}
-                      privateCode={privateCode}
-                      nameOfPlayer1={nameOfPlayer1}
-                      nameOfPlayer2={nameOfPlayer2}
-                    />
-                  )}
+                  <PlayPage
+                    numberOfPlayers={numberOfPlayers}
+                    amountOfQuestions={amountOfQuestions}
+                    privateCode={privateCode}
+                    nameOfPlayer1={nameOfPlayer1}
+                    nameOfPlayer2={nameOfPlayer2}
+                  />
                 </Route>
                 <Route path="/playoradd">
                   <PlayOrAddSetPage />

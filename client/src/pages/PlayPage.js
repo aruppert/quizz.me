@@ -7,10 +7,14 @@ import { pulse } from '../animations/General';
 import GameOverPage from './GameOverPage';
 import { flexColumnCenter } from '../styles/General';
 import getRandomQuestion from '../api/getRandomQuestion';
+import TextWrapperOutsideCard from '../components/TextWrapperOutsideCard';
+import passQuestion from '../components/gameplay/passQuestion';
+import GameOverButton from '../components/GameOverButton';
+import PassButton from '../components/PassButton';
 
 const Main = styled.main`
   ${flexColumnCenter};
-  height: 100vh;
+  flex-grow: 1;
   width: 100vw;
 `;
 
@@ -22,46 +26,18 @@ const AnswerContainer = styled.div`
 `;
 const ButtonBar = styled.div`
   display: flex;
-  width: 100%;
+  width: 360px;
   justify-content: space-around;
 `;
 
-const PassButton = styled(AnswerCard)`
-  height: 30px;
-  width: 120px;
-  border: none;
-  margin: 0;
-  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.15) 0%, rgba(0, 0, 0, 0.15) 100%),
-    radial-gradient(at top center, rgba(255, 255, 255, 0.4) 0%, rgba(0, 0, 0, 0.4) 120%) #989898;
-  background-blend-mode: multiply, multiply;
-  font-family: 'Leckerli One', cursive;
-  color: ${props => props.theme.colors.text1};
+const StyledTextWrapperOutsideCardOne = styled(TextWrapperOutsideCard)`
+  width: 360px;
 `;
-
-const GameOverButton = styled(AnswerCard)`
-  height: 30px;
-  width: 120px;
-  border: none;
-  background-image: linear-gradient(to right, #f78ca0 0%, #f9748f 19%, #fd868c 60%, #fe9a8b 100%);
-  margin: 0;
-  font-family: 'Leckerli One', cursive;
-  color: ${props => props.theme.colors.text1};
-`;
-
-const TextWrapperOutsideCard1 = styled.div`
-  text-align: center;
-  height: 30px;
-  width: 200px;
-  margin: 0 0 10px;
-  color: ${props => props.theme.colors.card1};
-`;
-const TextWrapperOutsideCard2 = styled.div`
-  text-align: center;
-  height: 30px;
-  width: 200px;
-  margin: 0 0 10px;
+const StyledTextWrapperOutsideCardTwo = styled(TextWrapperOutsideCard)`
   color: ${props => props.theme.colors.card2};
+  width: 360px;
 `;
+
 const CorrectAnswerText = styled.p`
   color: ${props => props.theme.colors.correct};
   font-family: 'Leckerli One', cursive;
@@ -71,7 +47,7 @@ const CorrectAnswerText = styled.p`
 const CorrectAnswerCard = styled(AnswerCard)`
   border: 4px solid ${props => props.theme.colors.correct};
   align-self: center;
-  animation: ${pulse} 0.8s 2;
+  animation: ${pulse} 0.8s 3;
 `;
 
 const CorrectAnswerContainer = styled.div`
@@ -84,7 +60,8 @@ const CorrectAnswerContainer = styled.div`
   background: ${props => props.theme.colors.background};
 `;
 
-export default function MultiPlayerPage({
+export default function PlayPage({
+  numberOfPlayers,
   amountOfQuestions,
   privateCode,
   nameOfPlayer1,
@@ -128,59 +105,67 @@ export default function MultiPlayerPage({
   shuffle(allAnswers);
 
   async function verifyAnswer(value) {
-    if (nowPlaying === 1) {
+    if (numberOfPlayers === 1) {
+      isQuestionLimitReached(questionsPlayed + 1);
       if (value === correct_answer) {
+        setShowCorrectAnswer(true);
         setTimeout(() => {
           navigator.vibrate([100, 100, 100]);
         }, 500);
         setPointsPlayer1(pointsPlayer1 + 1);
-        setNowPlaying(2);
+        setQuestionsPlayed(questionsPlayed + 1);
+        setTimeout(() => {
+          getNextQuestion();
+        }, 2400);
       } else {
+        setShowCorrectAnswer(true);
         setTimeout(() => {
           navigator.vibrate([500]);
         }, 500);
         setPointsPlayer1(pointsPlayer1 - 1);
-        setNowPlaying(2);
-      }
-    }
-    if (nowPlaying === 2) {
-      isQuestionLimitReached(questionsPlayed + 1);
-      if (value === correct_answer) {
-        setShowCorrectAnswer(true);
-        setPointsPlayer2(pointsPlayer2 + 1);
         setQuestionsPlayed(questionsPlayed + 1);
         setTimeout(() => {
-          navigator.vibrate([100, 100, 100]);
-          setNowPlaying(1);
           getNextQuestion();
-        }, 1800);
-      } else {
-        setShowCorrectAnswer(true);
-        setPointsPlayer2(pointsPlayer2 - 1);
-        setQuestionsPlayed(questionsPlayed + 1);
-        setTimeout(() => {
-          navigator.vibrate([500]);
-          setNowPlaying(1);
-          getNextQuestion();
-        }, 1800);
+        }, 2400);
       }
-    }
-  }
-
-  function passQuestion() {
-    if (nowPlaying === 1) {
-      setPointsPlayer1(pointsPlayer1 - 0.25);
-      setNowPlaying(2);
     } else {
-      setShowCorrectAnswer(true);
-      setPointsPlayer2(pointsPlayer2 - 0.25);
-      setQuestionsPlayed(questionsPlayed + 1);
-
-      setTimeout(() => {
+      if (nowPlaying === 1) {
+        if (value === correct_answer) {
+          setTimeout(() => {
+            navigator.vibrate([100, 100, 100]);
+          }, 500);
+          setPointsPlayer1(pointsPlayer1 + 1);
+          setNowPlaying(2);
+        } else {
+          setTimeout(() => {
+            navigator.vibrate([500]);
+          }, 500);
+          setPointsPlayer1(pointsPlayer1 - 1);
+          setNowPlaying(2);
+        }
+      }
+      if (nowPlaying === 2) {
         isQuestionLimitReached(questionsPlayed + 1);
-        setNowPlaying(1);
-        getNextQuestion();
-      }, 1800);
+        if (value === correct_answer) {
+          setShowCorrectAnswer(true);
+          setPointsPlayer2(pointsPlayer2 + 1);
+          setQuestionsPlayed(questionsPlayed + 1);
+          setTimeout(() => {
+            navigator.vibrate([100, 100, 100]);
+            setNowPlaying(1);
+            getNextQuestion();
+          }, 2400);
+        } else {
+          setShowCorrectAnswer(true);
+          setPointsPlayer2(pointsPlayer2 - 1);
+          setQuestionsPlayed(questionsPlayed + 1);
+          setTimeout(() => {
+            navigator.vibrate([500]);
+            setNowPlaying(1);
+            getNextQuestion();
+          }, 2400);
+        }
+      }
     }
   }
 
@@ -192,6 +177,7 @@ export default function MultiPlayerPage({
 
   React.useEffect(() => {
     getNextQuestion();
+    setTimeout(() => getNextQuestion(), 5000);
   }, []);
 
   return (
@@ -204,16 +190,20 @@ export default function MultiPlayerPage({
               <CorrectAnswerCard value={correct_answer} />
             </CorrectAnswerContainer>
           )}
-          {nowPlaying === 1 ? (
-            <TextWrapperOutsideCard1>{nameOfPlayer1} - it is your turn!</TextWrapperOutsideCard1>
+          {numberOfPlayers === 1 ? (
+            <StyledTextWrapperOutsideCardOne>
+              Good luck {nameOfPlayer1}! Your score is {pointsPlayer1}/{questionsPlayed}
+            </StyledTextWrapperOutsideCardOne>
+          ) : nowPlaying === 1 ? (
+            <StyledTextWrapperOutsideCardOne>
+              {nameOfPlayer1} - your turn! Your score is {pointsPlayer1}/{questionsPlayed}
+            </StyledTextWrapperOutsideCardOne>
           ) : (
-            <TextWrapperOutsideCard2>{nameOfPlayer2} - it is your turn!</TextWrapperOutsideCard2>
+            <StyledTextWrapperOutsideCardTwo>
+              {nameOfPlayer2} - your turn! Your score is {pointsPlayer2}/{questionsPlayed}
+            </StyledTextWrapperOutsideCardTwo>
           )}
-          <QuestionCard
-            score={nowPlaying === 1 ? pointsPlayer1 : pointsPlayer2}
-            total={questionsPlayed}
-            question={question}
-          />
+          <QuestionCard question={question} />
           <AnswerContainer>
             <AnswerCard value={allAnswers[0]} onClick={() => verifyAnswer(allAnswers[0])} />
             <AnswerCard value={allAnswers[1]} onClick={() => verifyAnswer(allAnswers[1])} />
@@ -223,12 +213,31 @@ export default function MultiPlayerPage({
 
           <ButtonBar>
             <GameOverButton value="End game" onClick={() => setGameOver(true)} />
-            <PassButton value="Pass question" onClick={() => passQuestion()} />
+            <PassButton
+              value="Pass question"
+              onClick={() =>
+                passQuestion(
+                  numberOfPlayers,
+                  pointsPlayer1,
+                  setPointsPlayer1,
+                  pointsPlayer2,
+                  setPointsPlayer2,
+                  nowPlaying,
+                  setNowPlaying,
+                  questionsPlayed,
+                  setQuestionsPlayed,
+                  isQuestionLimitReached,
+                  setShowCorrectAnswer,
+                  getNextQuestion
+                )
+              }
+            />
           </ButtonBar>
         </>
       )}
       {gameOver && (
         <GameOverPage
+          numberOfPlayers={numberOfPlayers}
           nameOfPlayer1={nameOfPlayer1}
           nameOfPlayer2={nameOfPlayer2}
           pointsPlayer1={pointsPlayer1}
@@ -240,7 +249,7 @@ export default function MultiPlayerPage({
   );
 }
 
-MultiPlayerPage.propTypes = {
+PlayPage.propTypes = {
   amountOfQuestions: PropTypes.number,
   nameOfPlayer1: PropTypes.string,
   nameOfPlayer2: PropTypes.string

@@ -2,6 +2,7 @@ import React from 'react';
 import styled from '@emotion/styled';
 import { flexColumnCenter, linearGradientBoxShadow } from '../styles/General';
 import TextWrapper from './TextWrapper';
+import PropTypes from 'prop-types';
 
 const QuestionContainer = styled.div`
   ${flexColumnCenter};
@@ -18,13 +19,14 @@ const StyledTextWrapper = styled(TextWrapper)`
   color: ${props => props.theme.colors.card2};
 `;
 
-export default function QuestionCard(props) {
+export default function QuestionCard({ question }) {
   return (
     <QuestionContainer>
-      <StyledTextWrapper>
-        Score: {props.score} of possible {props.total}
-      </StyledTextWrapper>
-      <StyledTextWrapper>{props.question}</StyledTextWrapper>
+      <StyledTextWrapper>{question}</StyledTextWrapper>
     </QuestionContainer>
   );
 }
+
+QuestionCard.propTypes = {
+  question: PropTypes.string
+};

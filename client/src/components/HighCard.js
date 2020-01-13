@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import Dice from '../icons/Dice';
 import { Link } from 'react-router-dom';
 import {
   linearGradientBoxShadow,
@@ -8,7 +7,7 @@ import {
   TextCenterColorOneMargin20
 } from '../styles/General';
 
-const PlayContainer = styled(Link)`
+const HighContainer = styled(Link)`
   ${linearGradientBoxShadow};
   ${flexColumnCenter};
   justify-content: space-evenly;
@@ -22,11 +21,11 @@ const TextWrapper = styled.div`
   ${TextCenterColorOneMargin20};
 `;
 
-export default function PlayCard() {
+export default function HighCard({ text, path, children }) {
   return (
-    <PlayContainer to="/choose">
-      <TextWrapper>Play a single- or multiplayer game</TextWrapper>
-      <Dice />
-    </PlayContainer>
+    <HighContainer to={`/${path}`}>
+      <TextWrapper>{text}</TextWrapper>
+      {children}
+    </HighContainer>
   );
 }
