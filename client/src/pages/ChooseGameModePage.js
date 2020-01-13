@@ -58,12 +58,14 @@ const FlexColumn = styled.div`
 
 const CodeInput = styled(Input)`
   width: 75%;
+  padding: 3px;
+  margin: 3px;
   align-self: center;
 `;
 
 const InputContainer = styled.div`
   display: flex;
-  justify-content: space-around;
+  flex-flow: row wrap;
   width: 100%;
 `;
 
@@ -85,25 +87,48 @@ const ErrorContainer = styled.div`
 
 const RadioButton = styled(SettingsButton)``;
 
-export default function ChooseGameModePage(props) {
+export default function ChooseGameModePage({
+  onAmountOfQuestionsChange,
+  amountOfQuestions,
+  privateCode,
+  setNumberOfPlayers,
+  numberOfPlayers,
+  onChangePrivateCode,
+  namesOfPlayers,
+  onChangeNameOfPlayer1,
+  onChangeNameOfPlayer2,
+  onChangeNameOfPlayer3,
+  onChangeNameOfPlayer4
+}) {
   const [showFirstSettings, setShowFirstSettings] = React.useState(true);
   const [showError, setShowError] = React.useState(false);
 
   function handleChangePlayer1(event) {
     const value = event.target.value;
-    props.chooseNamePlayer1(value);
+    onChangeNameOfPlayer1(value);
   }
+
   function handleChangePlayer2(event) {
     const value = event.target.value;
-    props.chooseNamePlayer2(value);
+    onChangeNameOfPlayer2(value);
+  }
+
+  function handleChangePlayer3(event) {
+    const value = event.target.value;
+    onChangeNameOfPlayer3(value);
+  }
+
+  function handleChangePlayer4(event) {
+    const value = event.target.value;
+    onChangeNameOfPlayer4(value);
   }
 
   function handleQuestionAmountClick(number) {
-    props.onAmountOfQuestionsChange(number);
+    onAmountOfQuestionsChange(number);
   }
 
   function handlePrivateClick() {
-    if (props.privateCode === '') {
+    if (privateCode === '') {
       setShowError(true);
       return null;
     } else {
@@ -120,7 +145,7 @@ export default function ChooseGameModePage(props) {
 
   function handleCodeChange(event) {
     const value = event.target.value;
-    props.onChangePrivateCode(value);
+    onChangePrivateCode(value);
   }
 
   return (
@@ -130,18 +155,32 @@ export default function ChooseGameModePage(props) {
           <StyledTextWrapper>How many want to play?</StyledTextWrapper>
           <PlayerContainer>
             <RadioButton
-              active={props.numberOfPlayers === 1}
-              onClick={() => props.setNumberOfPlayers(1)}
+              active={numberOfPlayers === 1}
+              onClick={() => setNumberOfPlayers(1)}
               type="radio"
             >
               1 Player
             </RadioButton>
             <RadioButton
-              active={props.numberOfPlayers === 2}
-              onClick={() => props.setNumberOfPlayers(2)}
+              active={numberOfPlayers === 2}
+              onClick={() => setNumberOfPlayers(2)}
               type="radio"
             >
               2 Players
+            </RadioButton>
+            <RadioButton
+              active={numberOfPlayers === 3}
+              onClick={() => setNumberOfPlayers(3)}
+              type="radio"
+            >
+              3 Players
+            </RadioButton>
+            <RadioButton
+              active={numberOfPlayers === 4}
+              onClick={() => setNumberOfPlayers(4)}
+              type="radio"
+            >
+              4 Players
             </RadioButton>
           </PlayerContainer>
           <StyledTextWrapper>Please choose public or enter your code:</StyledTextWrapper>
@@ -162,17 +201,19 @@ export default function ChooseGameModePage(props) {
 
       {!showFirstSettings && (
         <Container>
-          {props.numberOfPlayers === 1 ? (
+          {numberOfPlayers === 1 ? (
             <>
               <StyledTextWrapper>Enter your name:</StyledTextWrapper>
-              <Input placeholder="Player 1" onChange={handleChangePlayer1}></Input>{' '}
+              <Input placeholder="Player 1" number="1" onChange={handleChangePlayer1}></Input>{' '}
             </>
           ) : (
             <>
               <StyledTextWrapper>Enter your names:</StyledTextWrapper>
               <InputContainer>
                 <Input placeholder="Player 1" onChange={handleChangePlayer1}></Input>
-                <Input placeholder="Player 2" onChange={handleChangePlayer2}></Input>{' '}
+                <Input placeholder="Player 2" onChange={handleChangePlayer2}></Input>
+                <Input placeholder="Player 3" onChange={handleChangePlayer3}></Input>
+                <Input placeholder="Player 4" onChange={handleChangePlayer4}></Input>
               </InputContainer>
             </>
           )}
@@ -180,25 +221,39 @@ export default function ChooseGameModePage(props) {
 
           <QuestionsContainer>
             <RadioButton
-              active={props.amountOfQuestions === 4}
-              onClick={() => handleQuestionAmountClick(4)}
+              active={amountOfQuestions === 3}
+              onClick={() => handleQuestionAmountClick(3)}
               type="radio"
             >
-              4
+              3
             </RadioButton>
             <RadioButton
-              active={props.amountOfQuestions === 8}
-              onClick={() => handleQuestionAmountClick(8)}
+              active={amountOfQuestions === 5}
+              onClick={() => handleQuestionAmountClick(5)}
               type="radio"
             >
-              8
+              5
             </RadioButton>
             <RadioButton
-              active={props.amountOfQuestions === 12}
-              onClick={() => handleQuestionAmountClick(12)}
+              active={amountOfQuestions === 7}
+              onClick={() => handleQuestionAmountClick(7)}
               type="radio"
             >
-              12
+              7
+            </RadioButton>
+            <RadioButton
+              active={amountOfQuestions === 9}
+              onClick={() => handleQuestionAmountClick(9)}
+              type="radio"
+            >
+              9
+            </RadioButton>
+            <RadioButton
+              active={amountOfQuestions === 11}
+              onClick={() => handleQuestionAmountClick(11)}
+              type="radio"
+            >
+              11
             </RadioButton>
           </QuestionsContainer>
           <StyledButton to="/play">

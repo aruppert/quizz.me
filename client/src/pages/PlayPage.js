@@ -8,7 +8,7 @@ import GameOverPage from './GameOverPage';
 import { flexColumnCenter } from '../styles/General';
 import { getRandomQuestion } from '../api/questions';
 import TextWrapperOutsideCard from '../components/TextWrapperOutsideCard';
-import passQuestion from '../components/gameplay/passQuestion';
+// import passQuestion from '../components/gameplay/passQuestion';
 import GameOverButton from '../components/GameOverButton';
 import PassButton from '../components/PassButton';
 
@@ -64,8 +64,7 @@ export default function PlayPage({
   numberOfPlayers,
   amountOfQuestions,
   privateCode,
-  nameOfPlayer1,
-  nameOfPlayer2
+  namesOfPlayers
 }) {
   const [_ids, set_Ids] = React.useState([]);
   const [question, setQuestion] = React.useState('');
@@ -73,12 +72,25 @@ export default function PlayPage({
   const [incorrect_answer1, setIncorrect_answer1] = React.useState('');
   const [incorrect_answer2, setIncorrect_answer2] = React.useState('');
   const [incorrect_answer3, setIncorrect_answer3] = React.useState('');
-  const [pointsPlayer1, setPointsPlayer1] = React.useState(0);
-  const [pointsPlayer2, setPointsPlayer2] = React.useState(0);
+
   const [questionsPlayed, setQuestionsPlayed] = React.useState(0);
   const [gameOver, setGameOver] = React.useState(false);
   const [nowPlaying, setNowPlaying] = React.useState(1);
   const [showCorrectAnswer, setShowCorrectAnswer] = React.useState(false);
+
+  const [playerPoints, setPlayerPoints] = React.useState({
+    1: 0,
+    2: 0,
+    3: 0,
+    4: 0
+  });
+
+  console.log(nowPlaying);
+  console.log(playerPoints);
+  console.log(playerPoints[1]);
+  // console.log(nameOfPlayers);
+
+  // const [playerPoints, setPlayerPoints] = React.useState([0, 0, 0, 0]);
 
   const allAnswers = [correct_answer, incorrect_answer1, incorrect_answer2, incorrect_answer3];
 
@@ -104,68 +116,80 @@ export default function PlayPage({
 
   shuffle(allAnswers);
 
+  function increasePointsOfCurrentPlayerByOne(nowPlaying) {
+    setPlayerPoints({
+      ...playerPoints,
+      [nowPlaying]: playerPoints[nowPlaying] + 1
+    });
+  }
+
+  function decreasePointsOfCurrentPlayerByAmount(nowPlaying, amount) {
+    setPlayerPoints({
+      ...playerPoints,
+      [nowPlaying]: playerPoints[nowPlaying] - [amount]
+    });
+  }
+
   async function verifyAnswer(value) {
-    if (numberOfPlayers === 1) {
-      isQuestionLimitReached(questionsPlayed + 1);
+    isQuestionLimitReached(questionsPlayed + 1);
+    if (nowPlaying < numberOfPlayers) {
       if (value === correct_answer) {
         setShowCorrectAnswer(true);
+        increasePointsOfCurrentPlayerByOne(nowPlaying, 1);
+        navigator.vibrate([100, 100, 100]);
         setTimeout(() => {
-          navigator.vibrate([100, 100, 100]);
-        }, 500);
-        setPointsPlayer1(pointsPlayer1 + 1);
+          setNowPlaying(nowPlaying + 1);
+          setShowCorrectAnswer(false);
+        }, 2400);
+      } else {
+        setShowCorrectAnswer(true);
+        decreasePointsOfCurrentPlayerByAmount(nowPlaying, 1);
+        navigator.vibrate([500]);
+        setTimeout(() => {
+          setNowPlaying(nowPlaying + 1);
+          setShowCorrectAnswer(false);
+        }, 2400);
+      }
+    } else {
+      if (value === correct_answer) {
+        setShowCorrectAnswer(true);
+        increasePointsOfCurrentPlayerByOne(nowPlaying, 1);
         setQuestionsPlayed(questionsPlayed + 1);
+        navigator.vibrate([100, 100, 100]);
         setTimeout(() => {
+          setNowPlaying(1);
           getNextQuestion();
         }, 2400);
       } else {
         setShowCorrectAnswer(true);
-        setTimeout(() => {
-          navigator.vibrate([500]);
-        }, 500);
-        setPointsPlayer1(pointsPlayer1 - 1);
+        decreasePointsOfCurrentPlayerByAmount(nowPlaying, 1);
         setQuestionsPlayed(questionsPlayed + 1);
+        navigator.vibrate([500]);
         setTimeout(() => {
+          setNowPlaying(1);
           getNextQuestion();
         }, 2400);
       }
+    }
+  }
+
+  function passQuestion() {
+    if (nowPlaying < numberOfPlayers) {
+      setShowCorrectAnswer(true);
+      decreasePointsOfCurrentPlayerByAmount(nowPlaying, 0.25);
+      setTimeout(() => {
+        setNowPlaying(nowPlaying + 1);
+        setShowCorrectAnswer(false);
+      }, 2400);
     } else {
-      if (nowPlaying === 1) {
-        if (value === correct_answer) {
-          setTimeout(() => {
-            navigator.vibrate([100, 100, 100]);
-          }, 500);
-          setPointsPlayer1(pointsPlayer1 + 1);
-          setNowPlaying(2);
-        } else {
-          setTimeout(() => {
-            navigator.vibrate([500]);
-          }, 500);
-          setPointsPlayer1(pointsPlayer1 - 1);
-          setNowPlaying(2);
-        }
-      }
-      if (nowPlaying === 2) {
+      setShowCorrectAnswer(true);
+      decreasePointsOfCurrentPlayerByAmount(nowPlaying, 0.25);
+      setQuestionsPlayed(questionsPlayed + 1);
+      setTimeout(() => {
         isQuestionLimitReached(questionsPlayed + 1);
-        if (value === correct_answer) {
-          setShowCorrectAnswer(true);
-          setPointsPlayer2(pointsPlayer2 + 1);
-          setQuestionsPlayed(questionsPlayed + 1);
-          setTimeout(() => {
-            navigator.vibrate([100, 100, 100]);
-            setNowPlaying(1);
-            getNextQuestion();
-          }, 2400);
-        } else {
-          setShowCorrectAnswer(true);
-          setPointsPlayer2(pointsPlayer2 - 1);
-          setQuestionsPlayed(questionsPlayed + 1);
-          setTimeout(() => {
-            navigator.vibrate([500]);
-            setNowPlaying(1);
-            getNextQuestion();
-          }, 2400);
-        }
-      }
+        getNextQuestion();
+        setNowPlaying(1);
+      }, 2400);
     }
   }
 
@@ -191,16 +215,12 @@ export default function PlayPage({
           )}
           {numberOfPlayers === 1 ? (
             <StyledTextWrapperOutsideCardOne>
-              Good luck {nameOfPlayer1}! Your score is {pointsPlayer1}/{questionsPlayed}
-            </StyledTextWrapperOutsideCardOne>
-          ) : nowPlaying === 1 ? (
-            <StyledTextWrapperOutsideCardOne>
-              {nameOfPlayer1} - your turn! Your score is {pointsPlayer1}/{questionsPlayed}
+              Good luck {namesOfPlayers[nowPlaying]}! Your score is {playerPoints[nowPlaying]}
             </StyledTextWrapperOutsideCardOne>
           ) : (
-            <StyledTextWrapperOutsideCardTwo>
-              {nameOfPlayer2} - your turn! Your score is {pointsPlayer2}/{questionsPlayed}
-            </StyledTextWrapperOutsideCardTwo>
+            <StyledTextWrapperOutsideCardOne>
+              {namesOfPlayers[nowPlaying]} - your turn! Your score is {playerPoints[nowPlaying]}
+            </StyledTextWrapperOutsideCardOne>
           )}
           <QuestionCard question={question} />
           <AnswerContainer>
@@ -212,35 +232,17 @@ export default function PlayPage({
 
           <ButtonBar>
             <GameOverButton value="End game" onClick={() => setGameOver(true)} />
-            <PassButton
-              value="Pass question"
-              onClick={() =>
-                passQuestion(
-                  numberOfPlayers,
-                  pointsPlayer1,
-                  setPointsPlayer1,
-                  pointsPlayer2,
-                  setPointsPlayer2,
-                  nowPlaying,
-                  setNowPlaying,
-                  questionsPlayed,
-                  setQuestionsPlayed,
-                  isQuestionLimitReached,
-                  setShowCorrectAnswer,
-                  getNextQuestion
-                )
-              }
-            />
+            <PassButton value="Pass question" onClick={() => passQuestion()} />
           </ButtonBar>
         </>
       )}
       {gameOver && (
         <GameOverPage
           numberOfPlayers={numberOfPlayers}
-          nameOfPlayer1={nameOfPlayer1}
-          nameOfPlayer2={nameOfPlayer2}
-          pointsPlayer1={pointsPlayer1}
-          pointsPlayer2={pointsPlayer2}
+          // nameOfPlayer1={nameOfPlayer1}
+          // nameOfPlayer2={nameOfPlayer2}
+          // pointsPlayer1={pointsPlayer1}
+          // pointsPlayer2={pointsPlayer2}
           questionsPlayed={questionsPlayed}
         />
       )}

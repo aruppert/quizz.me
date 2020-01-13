@@ -25,19 +25,30 @@ import HighscorePage from './pages/HighscorePage';
 
 function App() {
   const [amountOfQuestions, setAmountOfQuestions] = React.useState(4);
-  const [numberOfPlayers, setNumberOfPlayers] = React.useState(2);
+  const [numberOfPlayers, setNumberOfPlayers] = React.useState(4);
   const [privateCode, setPrivateCode] = React.useState('');
-  const [nameOfPlayer1, setNameOfPlayer1] = React.useState('Player 1');
-  const [nameOfPlayer2, setNameOfPlayer2] = React.useState('Player 2');
+  // const [nameOfPlayer1, setNameOfPlayer1] = React.useState('Player 1');
+  // const [nameOfPlayer2, setNameOfPlayer2] = React.useState('Player 2');
+  // const [nameOfPlayer3, setNameOfPlayer3] = React.useState('Player 3');
+  // const [nameOfPlayer4, setNameOfPlayer4] = React.useState('Player 4');
   const [theme, setTheme] = React.useState(1);
 
-  function chooseNamePlayer1(name) {
-    setNameOfPlayer1(name);
-  }
+  const [namesOfPlayers, setNamesOfPlayers] = React.useState({
+    1: 'Player 1',
+    2: 'Player 2',
+    3: 'Player 3',
+    4: 'Player 4'
+  });
 
-  function chooseNamePlayer2(name) {
-    setNameOfPlayer2(name);
-  }
+  console.log(namesOfPlayers);
+
+  // function chooseNamePlayer1(name) {
+  //   setNameOfPlayer1(name);
+  // }
+
+  // function chooseNamePlayer2(name) {
+  //   setNameOfPlayer2(name);
+  // }
 
   const themeColors = {
     1: primary,
@@ -81,8 +92,19 @@ function App() {
                     setNumberOfPlayers={number => setNumberOfPlayers(number)}
                     numberOfPlayers={numberOfPlayers}
                     onChangePrivateCode={value => setPrivateCode(value)}
-                    chooseNamePlayer1={chooseNamePlayer1}
-                    chooseNamePlayer2={chooseNamePlayer2}
+                    namesOfPlayers={namesOfPlayers}
+                    onChangeNameOfPlayer1={name =>
+                      setNamesOfPlayers({ ...namesOfPlayers, 1: name })
+                    }
+                    onChangeNameOfPlayer2={name =>
+                      setNamesOfPlayers({ ...namesOfPlayers, 2: name })
+                    }
+                    onChangeNameOfPlayer3={name =>
+                      setNamesOfPlayers({ ...namesOfPlayers, 3: name })
+                    }
+                    onChangeNameOfPlayer4={name =>
+                      setNamesOfPlayers({ ...namesOfPlayers, 4: name })
+                    }
                   />
                 </Route>
                 <Route path="/privacy">
@@ -96,8 +118,11 @@ function App() {
                     numberOfPlayers={numberOfPlayers}
                     amountOfQuestions={amountOfQuestions}
                     privateCode={privateCode}
-                    nameOfPlayer1={nameOfPlayer1}
-                    nameOfPlayer2={nameOfPlayer2}
+                    // nameOfPlayer1={nameOfPlayer1}
+                    // nameOfPlayer2={nameOfPlayer2}
+                    // nameOfPlayer3={nameOfPlayer3}
+                    // nameOfPlayer4={nameOfPlayer4}
+                    namesOfPlayers={namesOfPlayers}
                   />
                 </Route>
                 <Route path="/playoradd">
