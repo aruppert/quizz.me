@@ -29,7 +29,7 @@ function App() {
   const [privateCode, setPrivateCode] = React.useState('');
   const [nameOfPlayer1, setNameOfPlayer1] = React.useState('Player 1');
   const [nameOfPlayer2, setNameOfPlayer2] = React.useState('Player 2');
-  const [theme, setTheme] = React.useState(4);
+  const [theme, setTheme] = React.useState(1);
 
   function chooseNamePlayer1(name) {
     setNameOfPlayer1(name);
