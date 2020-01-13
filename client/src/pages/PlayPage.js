@@ -6,7 +6,7 @@ import AnswerCard from '../components/AnswerCard';
 import { pulse } from '../animations/General';
 import GameOverPage from './GameOverPage';
 import { flexColumnCenter } from '../styles/General';
-import getRandomQuestion from '../api/getRandomQuestion';
+import { getRandomQuestion } from '../api/questions';
 import TextWrapperOutsideCard from '../components/TextWrapperOutsideCard';
 import passQuestion from '../components/gameplay/passQuestion';
 import GameOverButton from '../components/GameOverButton';
