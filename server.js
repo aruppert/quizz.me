@@ -33,14 +33,12 @@ app.get('/api/questions/random', async (request, response) => {
 
 app.post('/api/highscores', async (req, res) => {
   const highscoreData = req.body;
-  console.log(highscoreData);
   await addHighscore(highscoreData);
   res.end();
 });
 
 app.post('/api/questions', async (req, res) => {
   const questionData = req.body;
-  console.log(questionData);
   await addQuestion(questionData);
   res.end();
 });

@@ -20,7 +20,7 @@ const TextWrapperOutsideCard = styled.h2`
 `;
 
 export default function HighscorePage() {
-  const highscoreEntries = useFetch('/api/questions');
+  const highscoreEntries = useFetch('/api/highscores');
 
   if (!highscoreEntries) {
     return null;
