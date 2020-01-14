@@ -94,7 +94,6 @@ export default function ChooseGameModePage({
   setNumberOfPlayers,
   numberOfPlayers,
   onChangePrivateCode,
-  namesOfPlayers,
   onChangeNameOfPlayer1,
   onChangeNameOfPlayer2,
   onChangeNameOfPlayer3,
@@ -270,7 +269,11 @@ ChooseGameModePage.propTypes = {
   amountOfQuestions: PropTypes.number,
   onAmountOfQuestionsChange: PropTypes.func,
   setNumberOfPlayers: PropTypes.func,
-  chooseNamePlayer1: PropTypes.func,
-  chooseNamePlayer2: PropTypes.func,
-  onChangePrivateCode: PropTypes.func
+  onChangePrivateCode: PropTypes.func,
+  privateCode: PropTypes.string,
+  numberOfPlayers: PropTypes.number,
+  onChangeNameOfPlayer1: PropTypes.func,
+  onChangeNameOfPlayer2: PropTypes.func,
+  onChangeNameOfPlayer3: PropTypes.func,
+  onChangeNameOfPlayer4: PropTypes.func
 };

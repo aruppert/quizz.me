@@ -63,16 +63,14 @@ export default function PlayPage({
 }) {
   const [_ids, set_Ids] = React.useState([]);
   const [question, setQuestion] = React.useState('');
-  const [correct_answer, setCorrect_answer] = React.useState('');
-  const [incorrect_answer1, setIncorrect_answer1] = React.useState('');
-  const [incorrect_answer2, setIncorrect_answer2] = React.useState('');
-  const [incorrect_answer3, setIncorrect_answer3] = React.useState('');
-
+  const [correctAnswer, setCorrectAnswer] = React.useState('');
+  const [incorrectAnswer1, setIncorrectAnswer1] = React.useState('');
+  const [incorrectAnswer2, setIncorrectAnswer2] = React.useState('');
+  const [incorrectAnswer3, setIncorrectAnswer3] = React.useState('');
   const [questionsPlayed, setQuestionsPlayed] = React.useState(0);
   const [gameOver, setGameOver] = React.useState(false);
   const [nowPlaying, setNowPlaying] = React.useState(1);
   const [showCorrectAnswer, setShowCorrectAnswer] = React.useState(false);
-
   const [playerPoints, setPlayerPoints] = React.useState({
     1: 0,
     2: 0,
@@ -80,7 +78,7 @@ export default function PlayPage({
     4: 0
   });
 
-  const allAnswers = [correct_answer, incorrect_answer1, incorrect_answer2, incorrect_answer3];
+  const allAnswers = [correctAnswer, incorrectAnswer1, incorrectAnswer2, incorrectAnswer3];
 
   async function getNextQuestion() {
     const data = await getRandomQuestion(privateCode);
@@ -89,10 +87,10 @@ export default function PlayPage({
     } else {
       set_Ids(_ids => [..._ids, data._id]);
       setQuestion(data.question);
-      setCorrect_answer(data.correct_answer);
-      setIncorrect_answer1(data.incorrect_answer1);
-      setIncorrect_answer2(data.incorrect_answer2);
-      setIncorrect_answer3(data.incorrect_answer3);
+      setCorrectAnswer(data.correctAnswer);
+      setIncorrectAnswer1(data.incorrectAnswer1);
+      setIncorrectAnswer2(data.incorrectAnswer2);
+      setIncorrectAnswer3(data.incorrectAnswer3);
       setShowCorrectAnswer(false);
     }
   }
@@ -121,7 +119,7 @@ export default function PlayPage({
   async function verifyAnswer(value) {
     isQuestionLimitReached(questionsPlayed + 1);
     if (nowPlaying < numberOfPlayers) {
-      if (value === correct_answer) {
+      if (value === correctAnswer) {
         setShowCorrectAnswer(true);
         increasePointsOfCurrentPlayerByOne(nowPlaying, 1);
         navigator.vibrate([100, 100, 100]);
@@ -139,7 +137,7 @@ export default function PlayPage({
         }, 2400);
       }
     } else {
-      if (value === correct_answer) {
+      if (value === correctAnswer) {
         setShowCorrectAnswer(true);
         increasePointsOfCurrentPlayerByOne(nowPlaying, 1);
         setQuestionsPlayed(questionsPlayed + 1);
@@ -187,6 +185,11 @@ export default function PlayPage({
     }
   }
 
+  function endGame() {
+    setQuestionsPlayed(questionsPlayed + 1);
+    setGameOver(true);
+  }
+
   React.useEffect(() => {
     getNextQuestion();
   }, []);
@@ -198,7 +201,7 @@ export default function PlayPage({
           {showCorrectAnswer && (
             <CorrectAnswerContainer>
               <CorrectAnswerText>correct answer is:</CorrectAnswerText>
-              <CorrectAnswerCard value={correct_answer} />
+              <CorrectAnswerCard value={correctAnswer} />
             </CorrectAnswerContainer>
           )}
           {numberOfPlayers === 1 ? (
@@ -219,7 +222,7 @@ export default function PlayPage({
           </AnswerContainer>
 
           <ButtonBar>
-            <GameOverButton value="End game" onClick={() => setGameOver(true)} />
+            <GameOverButton value="End game" onClick={() => endGame()} />
             <PassButton value="Pass question" onClick={() => passQuestion()} />
           </ButtonBar>
         </>
@@ -237,7 +240,8 @@ export default function PlayPage({
 }
 
 PlayPage.propTypes = {
+  numberOfPlayers: PropTypes.number,
   amountOfQuestions: PropTypes.number,
-  nameOfPlayer1: PropTypes.string,
-  nameOfPlayer2: PropTypes.string
+  privateCode: PropTypes.string,
+  namesOfPlayers: PropTypes.object
 };

@@ -3,7 +3,7 @@ export default async function verifyAnswer(
   numberOfPlayers,
   isQuestionLimitReached,
   questionsPlayed,
-  correct_answer,
+  correctAnswer,
   setShowCorrectAnswer,
   setPointsPlayer1,
   pointsPlayer1,
@@ -16,7 +16,7 @@ export default async function verifyAnswer(
 ) {
   if (numberOfPlayers === 1) {
     isQuestionLimitReached(questionsPlayed + 1);
-    if (value === correct_answer) {
+    if (value === correctAnswer) {
       setShowCorrectAnswer(true);
       setTimeout(() => {
         navigator.vibrate([100, 100, 100]);
@@ -39,7 +39,7 @@ export default async function verifyAnswer(
     }
   } else {
     if (nowPlaying === 1) {
-      if (value === correct_answer) {
+      if (value === correctAnswer) {
         setTimeout(() => {
           navigator.vibrate([100, 100, 100]);
         }, 500);
@@ -55,7 +55,7 @@ export default async function verifyAnswer(
     }
     if (nowPlaying === 2) {
       isQuestionLimitReached(questionsPlayed + 1);
-      if (value === correct_answer) {
+      if (value === correctAnswer) {
         setShowCorrectAnswer(true);
         setPointsPlayer2(pointsPlayer2 + 1);
         setQuestionsPlayed(questionsPlayed + 1);

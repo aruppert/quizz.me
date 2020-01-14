@@ -85,10 +85,10 @@ const Main = styled.main`
 export default function FormPage({ privateCode }) {
   const [question, setQuestion] = React.useState({
     question: '',
-    correct_answer: '',
-    incorrect_answer1: '',
-    incorrect_answer2: '',
-    incorrect_answer3: '',
+    correctAnswer: '',
+    incorrectAnswer1: '',
+    incorrectAnswer2: '',
+    incorrectAnswer3: '',
     privateCode: privateCode
   });
   const [questionStatus, setQuestionStatus] = React.useState('active');
@@ -114,10 +114,10 @@ export default function FormPage({ privateCode }) {
       });
       setQuestion({
         question: '',
-        correct_answer: '',
-        incorrect_answer1: '',
-        incorrect_answer2: '',
-        incorrect_answer3: ''
+        correctAnswer: '',
+        incorrectAnswer1: '',
+        incorrectAnswer2: '',
+        incorrectAnswer3: ''
       });
       setShowError(false);
       setQuestionsCounter(questionsCounter + 1);
@@ -135,10 +135,10 @@ export default function FormPage({ privateCode }) {
   function checkIfFormIsCompletelyFilled() {
     if (
       question.question &&
-      question.correct_answer &&
-      question.incorrect_answer1 &&
-      question.incorrect_answer2 &&
-      question.incorrect_answer3
+      question.correctAnswer &&
+      question.incorrectAnswer1 &&
+      question.incorrectAnswer2 &&
+      question.incorrectAnswer3
     ) {
       return true;
     } else {
@@ -186,32 +186,32 @@ export default function FormPage({ privateCode }) {
               <Input
                 type="text"
                 maxLength="40"
-                value={question.correct_answer}
-                name="correct_answer"
+                value={question.correctAnswer}
+                name="correctAnswer"
                 onChange={onChange}
                 placeholder="Correct Answer"
               />
               <Input
                 type="text"
                 maxLength="40"
-                value={question.incorrect_answer1}
-                name="incorrect_answer1"
+                value={question.incorrectAnswer1}
+                name="incorrectAnswer1"
                 onChange={onChange}
                 placeholder="Wrong Answer 1"
               />
               <Input
                 type="text"
                 maxLength="40"
-                value={question.incorrect_answer2}
-                name="incorrect_answer2"
+                value={question.incorrectAnswer2}
+                name="incorrectAnswer2"
                 onChange={onChange}
                 placeholder="Wrong Answer 2"
               />
               <Input
                 type="text"
                 maxLength="40"
-                value={question.incorrect_answer3}
-                name="incorrect_answer3"
+                value={question.incorrectAnswer3}
+                name="incorrectAnswer3"
                 onChange={onChange}
                 placeholder="Wrong Answer 3"
               />

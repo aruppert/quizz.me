@@ -17,13 +17,13 @@ const TextWrapper = styled.div`
   position: absolute;
   z-index: 1000;
   ${flexColumnCenter};
-  top: 47vh;
+  top: 50vh;
   left: 0px;
   width: 100%;
   font-family: 'Leckerli One', cursive;
   font-size: 1.2rem;
-  color: ${props => props.theme.colors.text1};
-  animation: ${tada} 1.2s infinite;
+  color: ${props => props.theme.colors.text2};
+  animation: ${tada} 1.5s infinite;
 `;
 
 const GameOverContainer = styled.div``;
@@ -42,30 +42,16 @@ const TextWrapperOutsideCard2 = styled(TextWrapperOutsideCard)`
   font-size: 1.2rem;
 `;
 
+const Star = styled.img`
+  animation: ${tada} 1.5s infinite;
+`;
+
 export default function GameOverPage({
   numberOfPlayers,
   namesOfPlayers,
   playerPoints,
   questionsPlayed
 }) {
-  // function determineResult(playerPoints) {
-  //   // if (
-  //   //   points1 === points2 ||
-  //   //   points2 === points3 ||
-  //   //   points3 === points4 ||
-  //   //   points1 === points3 ||
-  //   //   points1 === points4 ||
-  //   //   points2 === points4
-  //   // ) {
-  //   //   return 'Draw!';
-  //   // } else {
-  //   let obj = { playerPoints };
-  //   Object.keys(obj).reduce((a, b) => (obj[a] > obj[b] ? a : b));
-  //   return obj;
-  //   // }
-  // }
-
-  console.log(playerPoints);
   React.useEffect(() => {
     async function submitHighscore() {
       addHighscore({
@@ -97,33 +83,31 @@ export default function GameOverPage({
         <TextWrapperOutsideCard1>
           {namesOfPlayers[1]} scored {playerPoints[1]} points
         </TextWrapperOutsideCard1>
-        <TextWrapperOutsideCard2>
-          {namesOfPlayers[2]} scored {playerPoints[2]} points
-        </TextWrapperOutsideCard2>
-
-        <img src="./images/star-3d-360px.webp" alt="Star in 3D" />
-        {/* {numberOfPlayers === 1 ? (
-          <TextWrapper>Good job!</TextWrapper>
-        ) : (
-          <TextWrapper>
-            {determineResult(playerPoints[1], playerPoints[2], playerPoints[3], playerPoints[4])}
-          </TextWrapper>
-        )} */}
-
-        <TextWrapperOutsideCard1>
-          {namesOfPlayers[3]} scored {playerPoints[3]} points
-        </TextWrapperOutsideCard1>
-        <TextWrapperOutsideCard2>
-          {namesOfPlayers[4]} scored {playerPoints[4]} points
-        </TextWrapperOutsideCard2>
+        {numberOfPlayers > 1 && (
+          <TextWrapperOutsideCard2>
+            {namesOfPlayers[2]} scored {playerPoints[2]} points
+          </TextWrapperOutsideCard2>
+        )}
+        <Star src="./images/star-3d-360px.webp" alt="Star in 3D" />
+        <TextWrapper>Good job!</TextWrapper>
+        {numberOfPlayers > 2 && (
+          <TextWrapperOutsideCard1>
+            {namesOfPlayers[3]} scored {playerPoints[3]} points
+          </TextWrapperOutsideCard1>
+        )}
+        {numberOfPlayers > 3 && (
+          <TextWrapperOutsideCard2>
+            {namesOfPlayers[4]} scored {playerPoints[4]} points
+          </TextWrapperOutsideCard2>
+        )}
       </GameOverContainer>
     </Main>
   );
 }
 
 GameOverPage.propTypes = {
-  pointsPlayer1: PropTypes.number,
-  pointsPlayer2: PropTypes.number,
-  nameOfPlayer1: PropTypes.string,
-  nameOfPlayer2: PropTypes.string
+  numberOfPlayers: PropTypes.number,
+  namesOfPlayers: PropTypes.object,
+  playerPoints: PropTypes.object,
+  questionsPlayed: PropTypes.number
 };
