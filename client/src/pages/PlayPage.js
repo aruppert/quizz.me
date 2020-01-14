@@ -121,7 +121,7 @@ export default function PlayPage({
     if (nowPlaying < numberOfPlayers) {
       if (value === correctAnswer) {
         setShowCorrectAnswer(true);
-        increasePointsOfCurrentPlayerByOne(nowPlaying, 1);
+        increasePointsOfCurrentPlayerByOne(nowPlaying);
         navigator.vibrate([100, 100, 100]);
         setTimeout(() => {
           setNowPlaying(nowPlaying + 1);
@@ -139,7 +139,7 @@ export default function PlayPage({
     } else {
       if (value === correctAnswer) {
         setShowCorrectAnswer(true);
-        increasePointsOfCurrentPlayerByOne(nowPlaying, 1);
+        increasePointsOfCurrentPlayerByOne(nowPlaying);
         setQuestionsPlayed(questionsPlayed + 1);
         navigator.vibrate([100, 100, 100]);
         setTimeout(() => {
