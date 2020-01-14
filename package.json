@@ -33,6 +33,7 @@
   "dependencies": {
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "fireworks": "^2.2.5",
     "mongodb": "^3.4.0"
   },
   "engines": {

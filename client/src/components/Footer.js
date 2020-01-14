@@ -50,9 +50,7 @@ const DiceButtonBackground = styled.div`
   height: 80px;
   background: ${props => props.theme.colors.icon1};
   border-radius: 50%;
-  /* margin-bottom: 20px; */
-  position: absolute;
-  bottom: 5px;
+  margin-bottom: 20px;
 `;
 
 export default function Footer() {

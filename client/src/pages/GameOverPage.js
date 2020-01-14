@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import { flexColumnCenter } from '../styles/General';
 import { addHighscore } from '../api/highscores';
 import TextWrapperOutsideCard from '../components/TextWrapperOutsideCard';
+import { Fireworks } from 'fireworks/lib/react';
 
 const Main = styled.main`
   ${flexColumnCenter};
@@ -21,9 +22,9 @@ const TextWrapper = styled.div`
   left: 0px;
   width: 100%;
   font-family: 'Leckerli One', cursive;
-  font-size: 1.2rem;
+  font-size: 1.5rem;
   color: ${props => props.theme.colors.text2};
-  animation: ${tada} 1.5s infinite;
+  animation: ${tada} 1.8s 2;
 `;
 
 const GameOverContainer = styled.div``;
@@ -43,7 +44,7 @@ const TextWrapperOutsideCard2 = styled(TextWrapperOutsideCard)`
 `;
 
 const Star = styled.img`
-  animation: ${tada} 1.5s infinite;
+  animation: ${tada} 1.8s 2;
 `;
 
 export default function GameOverPage({
@@ -52,6 +53,17 @@ export default function GameOverPage({
   playerPoints,
   questionsPlayed
 }) {
+  let fxProps = {
+    count: 3,
+    interval: 1500,
+    colors: ['#F3E85C', '#D98E05', '#F2F2F2'],
+    calc: (props, i) => ({
+      ...props,
+      x: (i + 1) * (window.innerWidth / 2) - (i + 1) * 100,
+      y: 200 + Math.random() * 100 - 50 + (i === 2 ? -80 : 0)
+    })
+  };
+
   React.useEffect(() => {
     async function submitHighscore() {
       addHighscore({
@@ -79,6 +91,7 @@ export default function GameOverPage({
   }, []);
   return (
     <Main>
+      <Fireworks {...fxProps} />
       <GameOverContainer>
         <TextWrapperOutsideCard1>
           {namesOfPlayers[1]} scored {playerPoints[1]} points
