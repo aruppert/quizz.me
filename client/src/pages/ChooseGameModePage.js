@@ -24,8 +24,8 @@ const Container = styled.div`
   align-self: center;
   text-align: center;
   color: ${props => props.theme.colors.text1};
-  width: 340px;
-  height: 325px;
+  width: 320px;
+  height: 370px;
   border-radius: 25px 0px;
 `;
 const FlexContainer = styled.div`
@@ -36,7 +36,9 @@ const FlexContainer = styled.div`
 `;
 
 const StyledTextWrapper = styled(TextWrapper)`
-  margin: 30px 0 20px;
+  font-size: 1.1rem;
+  margin: 30px 0 10px;
+  width: 220px;
 `;
 
 const StyledButton = styled(ButtonLink)`
@@ -54,23 +56,30 @@ const FlexColumn = styled.div`
   justify-content: space-evenly;
   height: 100%;
   width: 50%;
+  padding: 10px;
 `;
 
 const CodeInput = styled(Input)`
   width: 75%;
-  padding: 3px;
-  margin: 3px;
+
+  /* margin: 3px; */
   align-self: center;
+`;
+
+const NameInput = styled(Input)`
+  margin: 5px 10px;
+  width: 35%;
 `;
 
 const InputContainer = styled.div`
   display: flex;
   flex-flow: row wrap;
+  justify-content: center;
   width: 100%;
 `;
 
 const PlayerContainer = styled.div`
-  margin: 0 0 30px;
+  margin: 0 0 10px;
 `;
 
 const QuestionsContainer = styled.div`
@@ -79,13 +88,28 @@ const QuestionsContainer = styled.div`
 
 const ErrorContainer = styled.div`
   position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.2rem;
+  width: 80%;
+  height: 10%;
+  border-radius: 10px;
+  border: 3px solid ${props => props.theme.colors.warn};
+  background: ${props => props.theme.colors.background};
   z-index: 1000;
   align-self: center;
   margin: 30px 0 0;
   color: ${props => props.theme.colors.warn};
 `;
 
-const RadioButton = styled(SettingsButton)``;
+const AmountOfPlayersButton = styled(SettingsButton)`
+  margin: 10px 30px;
+`;
+
+const AmountOfQuestionsButton = styled(SettingsButton)`
+  margin: 10px 12px 0;
+`;
 
 export default function ChooseGameModePage({
   onAmountOfQuestionsChange,
@@ -153,36 +177,36 @@ export default function ChooseGameModePage({
         <Container>
           <StyledTextWrapper>How many want to play?</StyledTextWrapper>
           <PlayerContainer>
-            <RadioButton
+            <AmountOfPlayersButton
               active={numberOfPlayers === 1}
               onClick={() => setNumberOfPlayers(1)}
               type="radio"
             >
               1 Player
-            </RadioButton>
-            <RadioButton
+            </AmountOfPlayersButton>
+            <AmountOfPlayersButton
               active={numberOfPlayers === 2}
               onClick={() => setNumberOfPlayers(2)}
               type="radio"
             >
               2 Players
-            </RadioButton>
-            <RadioButton
+            </AmountOfPlayersButton>
+            <AmountOfPlayersButton
               active={numberOfPlayers === 3}
               onClick={() => setNumberOfPlayers(3)}
               type="radio"
             >
               3 Players
-            </RadioButton>
-            <RadioButton
+            </AmountOfPlayersButton>
+            <AmountOfPlayersButton
               active={numberOfPlayers === 4}
               onClick={() => setNumberOfPlayers(4)}
               type="radio"
             >
               4 Players
-            </RadioButton>
+            </AmountOfPlayersButton>
           </PlayerContainer>
-          <StyledTextWrapper>Please choose public or enter your code:</StyledTextWrapper>
+          <StyledTextWrapper>Choose public questions or enter your private code:</StyledTextWrapper>
           <FlexContainer>
             <FlexColumn>
               <StyledButton onClick={handlePublicClick}>
@@ -191,7 +215,7 @@ export default function ChooseGameModePage({
               </StyledButton>
             </FlexColumn>
             <FlexColumn>
-              <CodeInput placeholder="Code goes here" onChange={handleCodeChange} />
+              <CodeInput placeholder="Enter code here" onChange={handleCodeChange} />
               <Lock onClick={handlePrivateClick} />
             </FlexColumn>
           </FlexContainer>
@@ -201,66 +225,67 @@ export default function ChooseGameModePage({
       {!showFirstSettings && (
         <Container>
           {numberOfPlayers === 1 ? (
-            <>
-              <StyledTextWrapper>Enter your name:</StyledTextWrapper>
-              <Input placeholder="Player 1" number="1" onChange={handleChangePlayer1}></Input>{' '}
-            </>
+            <StyledTextWrapper>Enter your name:</StyledTextWrapper>
           ) : (
-            <>
-              <StyledTextWrapper>Enter your names:</StyledTextWrapper>
-              <InputContainer>
-                <Input placeholder="Player 1" onChange={handleChangePlayer1}></Input>
-                <Input placeholder="Player 2" onChange={handleChangePlayer2}></Input>
-                <Input placeholder="Player 3" onChange={handleChangePlayer3}></Input>
-                <Input placeholder="Player 4" onChange={handleChangePlayer4}></Input>
-              </InputContainer>
-            </>
+            <StyledTextWrapper>Enter your names:</StyledTextWrapper>
           )}
+          <InputContainer>
+            <NameInput placeholder="Player 1" onChange={handleChangePlayer1}></NameInput>
+            {numberOfPlayers > 1 && (
+              <NameInput placeholder="Player 2" onChange={handleChangePlayer2}></NameInput>
+            )}
+            {numberOfPlayers > 2 && (
+              <NameInput placeholder="Player 3" onChange={handleChangePlayer3}></NameInput>
+            )}
+            {numberOfPlayers > 3 && (
+              <NameInput placeholder="Player 4" onChange={handleChangePlayer4}></NameInput>
+            )}
+          </InputContainer>
           <StyledTextWrapper> How many questions do you want to play?</StyledTextWrapper>
 
           <QuestionsContainer>
-            <RadioButton
+            <AmountOfQuestionsButton
               active={amountOfQuestions === 3}
               onClick={() => handleQuestionAmountClick(3)}
               type="radio"
             >
               3
-            </RadioButton>
-            <RadioButton
+            </AmountOfQuestionsButton>
+            <AmountOfQuestionsButton
               active={amountOfQuestions === 5}
               onClick={() => handleQuestionAmountClick(5)}
               type="radio"
             >
               5
-            </RadioButton>
-            <RadioButton
+            </AmountOfQuestionsButton>
+            <AmountOfQuestionsButton
               active={amountOfQuestions === 7}
               onClick={() => handleQuestionAmountClick(7)}
               type="radio"
             >
               7
-            </RadioButton>
-            <RadioButton
+            </AmountOfQuestionsButton>
+            <AmountOfQuestionsButton
               active={amountOfQuestions === 9}
               onClick={() => handleQuestionAmountClick(9)}
               type="radio"
             >
               9
-            </RadioButton>
-            <RadioButton
+            </AmountOfQuestionsButton>
+            <AmountOfQuestionsButton
               active={amountOfQuestions === 11}
               onClick={() => handleQuestionAmountClick(11)}
               type="radio"
             >
               11
-            </RadioButton>
+            </AmountOfQuestionsButton>
           </QuestionsContainer>
           <StyledButton to="/play">
             START HERE <Rocket />
           </StyledButton>
         </Container>
       )}
-      {showError && <ErrorContainer>Code is missing!</ErrorContainer>}
+      {showError && <ErrorContainer>Enter your code and try again!</ErrorContainer>}
     </Main>
   );
 }

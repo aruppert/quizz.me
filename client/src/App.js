@@ -24,10 +24,10 @@ import Footer from './components/Footer';
 import HighscorePage from './pages/HighscorePage';
 
 function App() {
-  const [amountOfQuestions, setAmountOfQuestions] = React.useState(4);
+  const [amountOfQuestions, setAmountOfQuestions] = React.useState(3);
   const [numberOfPlayers, setNumberOfPlayers] = React.useState(4);
   const [privateCode, setPrivateCode] = React.useState('');
-  const [theme, setTheme] = React.useState(1);
+  const [theme, setTheme] = React.useState(2);
 
   const [namesOfPlayers, setNamesOfPlayers] = React.useState({
     1: 'Player 1',
