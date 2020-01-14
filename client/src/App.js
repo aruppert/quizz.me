@@ -25,9 +25,9 @@ import HighscorePage from './pages/HighscorePage';
 
 function App() {
   const [amountOfQuestions, setAmountOfQuestions] = React.useState(3);
-  const [numberOfPlayers, setNumberOfPlayers] = React.useState(4);
+  const [numberOfPlayers, setNumberOfPlayers] = React.useState(2);
   const [privateCode, setPrivateCode] = React.useState('');
-  const [theme, setTheme] = React.useState(2);
+  const [theme, setTheme] = React.useState(1);
 
   const [namesOfPlayers, setNamesOfPlayers] = React.useState({
     1: 'Player 1',

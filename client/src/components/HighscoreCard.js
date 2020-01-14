@@ -7,7 +7,7 @@ const HighscoreCardContainerBorder = styled.div`
   ${flexColumnCenter};
   margin: 3px 0;
   justify-content: space-evenly;
-  width: 325px;
+  width: 320px;
   height: 40px;
   border-radius: 25px 0px;
 `;
@@ -18,7 +18,7 @@ const HighscoreCardContainer = styled.div`
   ${flexRowWrapCenter};
   justify-content: space-between;
   background: ${props => props.theme.colors.background};
-  width: 319px;
+  width: 314px;
   height: 34px;
   border-radius: 25px 0px;
 `;

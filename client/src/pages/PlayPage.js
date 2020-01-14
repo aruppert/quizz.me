@@ -21,7 +21,7 @@ const AnswerContainer = styled.div`
   display: flex;
   flex-flow: wrap;
   width: 360px;
-  margin: 20px;
+  margin: 10px 0 8px;
 `;
 const ButtonBar = styled.div`
   display: flex;
@@ -37,6 +37,7 @@ const CorrectAnswerText = styled.p`
   color: ${props => props.theme.colors.correct};
   font-family: 'Leckerli One', cursive;
   font-size: 1.5rem;
+  margin: 18px 0 20px;
 `;
 
 const CorrectAnswerCard = styled(AnswerCard)`
@@ -48,10 +49,10 @@ const CorrectAnswerCard = styled(AnswerCard)`
 const CorrectAnswerContainer = styled.div`
   ${flexColumnCenter};
   position: absolute;
-  top: 310px;
+  top: 320px;
   z-index: 1000;
   width: 360px;
-  height: 250px;
+  height: 220px;
   background: ${props => props.theme.colors.background};
 `;
 
@@ -117,7 +118,6 @@ export default function PlayPage({
   }
 
   async function verifyAnswer(value) {
-    isQuestionLimitReached(questionsPlayed + 1);
     if (nowPlaying < numberOfPlayers) {
       if (value === correctAnswer) {
         setShowCorrectAnswer(true);
@@ -143,6 +143,7 @@ export default function PlayPage({
         setQuestionsPlayed(questionsPlayed + 1);
         navigator.vibrate([100, 100, 100]);
         setTimeout(() => {
+          isQuestionLimitReached(questionsPlayed + 1);
           setNowPlaying(1);
           getNextQuestion();
         }, 2400);
@@ -152,30 +153,36 @@ export default function PlayPage({
         setQuestionsPlayed(questionsPlayed + 1);
         navigator.vibrate([500]);
         setTimeout(() => {
+          isQuestionLimitReached(questionsPlayed + 1);
           setNowPlaying(1);
           getNextQuestion();
         }, 2400);
       }
     }
   }
+  console.log(questionsPlayed);
 
   function passQuestion() {
-    if (nowPlaying < numberOfPlayers) {
-      setShowCorrectAnswer(true);
-      decreasePointsOfCurrentPlayerByAmount(nowPlaying, 0.25);
-      setTimeout(() => {
-        setNowPlaying(nowPlaying + 1);
-        setShowCorrectAnswer(false);
-      }, 2400);
+    if (showCorrectAnswer === true) {
+      return null;
     } else {
-      setShowCorrectAnswer(true);
-      decreasePointsOfCurrentPlayerByAmount(nowPlaying, 0.25);
-      setQuestionsPlayed(questionsPlayed + 1);
-      setTimeout(() => {
-        isQuestionLimitReached(questionsPlayed + 1);
-        getNextQuestion();
-        setNowPlaying(1);
-      }, 2400);
+      if (nowPlaying < numberOfPlayers) {
+        setShowCorrectAnswer(true);
+        decreasePointsOfCurrentPlayerByAmount(nowPlaying, 0.25);
+        setTimeout(() => {
+          setNowPlaying(nowPlaying + 1);
+          setShowCorrectAnswer(false);
+        }, 2400);
+      } else {
+        setShowCorrectAnswer(true);
+        decreasePointsOfCurrentPlayerByAmount(nowPlaying, 0.25);
+        setQuestionsPlayed(questionsPlayed + 1);
+        setTimeout(() => {
+          isQuestionLimitReached(questionsPlayed + 1);
+          getNextQuestion();
+          setNowPlaying(1);
+        }, 2400);
+      }
     }
   }
 
@@ -204,6 +211,7 @@ export default function PlayPage({
               <CorrectAnswerCard value={correctAnswer} />
             </CorrectAnswerContainer>
           )}
+
           {numberOfPlayers === 1 ? (
             <StyledTextWrapperOutsideCard>
               Good luck {namesOfPlayers[nowPlaying]}! Your score is {playerPoints[nowPlaying]}

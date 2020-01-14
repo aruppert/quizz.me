@@ -60,9 +60,9 @@ const FlexColumn = styled.div`
 `;
 
 const CodeInput = styled(Input)`
-  width: 75%;
+  width: 80%;
 
-  /* margin: 3px; */
+  margin: 0 20px 0;
   align-self: center;
 `;
 
@@ -215,7 +215,7 @@ export default function ChooseGameModePage({
               </StyledButton>
             </FlexColumn>
             <FlexColumn>
-              <CodeInput placeholder="Enter code here" onChange={handleCodeChange} />
+              <CodeInput placeholder="enter code here" onChange={handleCodeChange} />
               <Lock onClick={handlePrivateClick} />
             </FlexColumn>
           </FlexContainer>
