@@ -2,7 +2,7 @@ import React from 'react';
 import styled from '@emotion/styled';
 import Dice from '../icons/Dice';
 import AddQuestion from '../icons/AddQuestion';
-import ButtonLink from './ButtonLink';
+import ButtonLink from '../components/buttons/ButtonLink';
 import Highscore from '../icons/HighScore';
 import {
   linearGradientBoxShadow,
