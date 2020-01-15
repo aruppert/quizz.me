@@ -3,6 +3,7 @@ import styled from '@emotion/styled';
 import AnswerCard from '../cards/AnswerCard';
 import { pulse, fadeOut } from '../../animations/General';
 import { flexColumnCenter } from '../../styles/General';
+import { Fireworks } from 'fireworks/lib/react';
 
 export const CorrectAnswerText = styled.p`
   color: ${props => props.theme.colors.correct};
@@ -39,9 +40,25 @@ export const CorrectAnswerContainer = styled.div`
 `;
 
 export default function ResultCard({ correctAnswer, answerGivenIsCorrect }) {
+  let fxProps = {
+    count: 3,
+    interval: 1500,
+    colors: ['#279E09', '#44EB1C', '#EB1CBF'],
+    calc: (props, i) => ({
+      ...props,
+      x: (i + 1) * (window.innerWidth / 2) - (i + 1) * 100,
+      y: 200 + Math.random() * 100 - 50 + (i === 2 ? -80 : 0)
+    })
+  };
+
   return (
     <CorrectAnswerContainer>
-      {answerGivenIsCorrect && <CorrectAnswerText>Perfect, your are right!</CorrectAnswerText>}
+      {answerGivenIsCorrect && (
+        <>
+          <Fireworks {...fxProps} />
+          <CorrectAnswerText>Perfect, your are right!</CorrectAnswerText>
+        </>
+      )}
       {!answerGivenIsCorrect && (
         <>
           <WrongAnswerText>Sorry, but that's wrong....</WrongAnswerText>
