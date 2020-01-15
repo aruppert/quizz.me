@@ -13,7 +13,7 @@ import {
 const FooterBar = styled.div`
   ${linearGradientBoxShadow};
   display: flex;
-  width: 100vw;
+  width: 100%;
   height: 70px;
   border-radius: 25px 0px 0px;
   border-top: 3px solid ${props => props.theme.colors.icon1};

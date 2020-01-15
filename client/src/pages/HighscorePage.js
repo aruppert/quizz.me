@@ -12,7 +12,7 @@ const Main = styled.main`
 `;
 
 const TextWrapperOutsideCard = styled.h2`
-  margin: 0;
+  margin: 0 0 10px;
   color: ${props => props.theme.colors.card2};
   font-family: 'Leckerli One', cursive;
   font-size: 35px;

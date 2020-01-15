@@ -19,16 +19,29 @@ const Main = styled.main`
 
 const StyledBigContainer = styled(BigContainer)`
   justify-content: center;
+  width: 320px;
+  height: 420px;
 `;
 
 const StyledInput = styled(Input)`
   align-self: center;
   width: 250px;
-  margin: 15px;
+  margin: 5px;
 `;
 
+const PublicTextWrapper = styled(TextWrapper)`
+  margin: 30px 0 10px;
+  width: 200px;
+  font-size: 1.1rem;
+`;
 const StyledTextWrapper = styled(TextWrapper)`
+  margin: 30px 0 10px;
+  font-size: 1.1rem;
+`;
+
+const NoteTextWrapper = styled(TextWrapper)`
   margin: 15px;
+  font-size: 0.95rem;
 `;
 
 const ErrorContainer = styled.div`
@@ -65,16 +78,19 @@ export default function PublicOrPrivateSetPage({ onChangePrivateCode, privateCod
   return (
     <Main>
       <StyledBigContainer>
-        <StyledTextWrapper>
-          Click the planet to create questions for the public domain:
-        </StyledTextWrapper>
+        <PublicTextWrapper>Add questions for the public with a tap here:</PublicTextWrapper>
         <ButtonLink to="/add" onClick={handleClickOnPublic}>
           <Planet />
         </ButtonLink>
         <StyledTextWrapper>
-          Enter a unique private code and click the lock to create a private game:
+          Or create your own game with a unique private code here:
         </StyledTextWrapper>
-        <StyledInput name="unique" placeholder="please enter unique code" onChange={handleChange} />
+        <StyledInput
+          name="unique"
+          placeholder="enter unique code here"
+          onChange={handleChange}
+          autocomplete="off"
+        />
         {privateCode ? (
           <ButtonLink onClick={handlePrivateClick} to="/add">
             <Lock />
@@ -85,10 +101,7 @@ export default function PublicOrPrivateSetPage({ onChangePrivateCode, privateCod
             <Lock />
           </Button>
         )}
-        <StyledTextWrapper>
-          Note: Your code is like a password, it is case sensitive but please use only letters and
-          numbers.
-        </StyledTextWrapper>
+        <NoteTextWrapper>Example: TimLewisBDParty2020TL</NoteTextWrapper>
       </StyledBigContainer>
       {showError && <ErrorContainer> Code is missing!</ErrorContainer>}
     </Main>

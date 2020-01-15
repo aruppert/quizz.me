@@ -8,8 +8,7 @@ import AddQuestion from '../icons/AddQuestion';
 
 const Main = styled.main`
   ${flexColumnCenter};
-  flex-grow: 1;
-  height: calc(100vh - 140px);
+  height: 100%;
   margin: auto;
   width: 375px;
 `;

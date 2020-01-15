@@ -15,7 +15,7 @@ const HeaderBar = styled.div`
   ${linearGradientBoxShadow};
   /* position: absolute;
   top: 0px; */
-  width: 100vw;
+  width: 100%;
   height: 70px;
   border-radius: 0px 0px 25px;
   border-bottom: 3px solid ${props => props.theme.colors.icon1};
