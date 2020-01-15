@@ -10,6 +10,7 @@ import TextWrapperOutsideCard from '../components/TextWrapperOutsideCard';
 import GameOverButton from '../components/buttons/GameOverButton';
 import PassButton from '../components/buttons/PassButton';
 import ResultCard from '../components/cards/ResultCard';
+import AnswerContainer from '../components/gameplay/AnswerContainer';
 
 const Main = styled.main`
   ${flexColumnCenter};
@@ -20,13 +21,6 @@ const Main = styled.main`
 const GameContainer = styled.div`
   height: 450px;
   width: 350px;
-`;
-
-const AnswerContainer = styled.div`
-  display: flex;
-  flex-flow: wrap;
-  width: 360px;
-  margin: 10px 0 8px;
 `;
 
 // const ResultContainer = styled.div`
@@ -57,6 +51,8 @@ export default function PlayPage({
   const [incorrectAnswer1, setIncorrectAnswer1] = React.useState('');
   const [incorrectAnswer2, setIncorrectAnswer2] = React.useState('');
   const [incorrectAnswer3, setIncorrectAnswer3] = React.useState('');
+  const [animationQuestionCard, setAnimationQuestionCard] = React.useState('none');
+  const [animationAnswerContainer, setAnimationAnswerContainer] = React.useState('none');
   const [questionsPlayed, setQuestionsPlayed] = React.useState(0);
   const [gameOver, setGameOver] = React.useState(false);
   const [nowPlaying, setNowPlaying] = React.useState(1);
@@ -85,14 +81,9 @@ export default function PlayPage({
       setIncorrectAnswer3(data.incorrectAnswer3);
       setShowResult(false);
     }
-  }
-
-  function shuffle(array) {
-    const shuffledArray = array.sort(() => Math.random() - 0.5);
+    const shuffledArray = allAnswers.sort(() => Math.random() - 0.5);
     return shuffledArray;
   }
-
-  shuffle(allAnswers);
 
   function increasePointsOfCurrentPlayerByOne(nowPlaying) {
     setPlayerPoints({
@@ -150,13 +141,23 @@ export default function PlayPage({
     }
   }
 
+  function animatedNextQuestion() {
+    setAnimationQuestionCard('slideOutRightAndInLeft');
+    setAnimationAnswerContainer('fadeIn');
+
+    setTimeout(() => {
+      setAnimationQuestionCard('none');
+      setAnimationAnswerContainer('none');
+    }, 1500);
+    getNextQuestion();
+  }
   function loadNextQuestionOrEndGame() {
     setQuestionsPlayed(questionsPlayed + 1);
     setTimeout(() => {
       if (isQuestionLimitReached(questionsPlayed + 1)) {
         setGameOver(true);
       }
-      getNextQuestion();
+      animatedNextQuestion();
       setNowPlaying(1);
     }, 2400);
   }
@@ -172,6 +173,8 @@ export default function PlayPage({
 
   React.useEffect(() => {
     getNextQuestion();
+    setAnimationQuestionCard('slideInLeft');
+    setAnimationAnswerContainer('fadeIn');
   }, []);
 
   return (
@@ -188,10 +191,10 @@ export default function PlayPage({
                 {namesOfPlayers[nowPlaying]} - your turn! Your score is {playerPoints[nowPlaying]}
               </StyledTextWrapperOutsideCard>
             )}
-            <QuestionCard question={question} />
+            <QuestionCard question={question} animation={animationQuestionCard} />
             {!showResult && (
               <>
-                <AnswerContainer>
+                <AnswerContainer animation={animationAnswerContainer}>
                   <AnswerCard value={allAnswers[0]} onClick={() => verifyAnswer(allAnswers[0])} />
                   <AnswerCard value={allAnswers[1]} onClick={() => verifyAnswer(allAnswers[1])} />
                   <AnswerCard value={allAnswers[2]} onClick={() => verifyAnswer(allAnswers[2])} />
