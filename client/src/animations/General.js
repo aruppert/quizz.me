@@ -14,6 +14,36 @@ export const fadeOut = keyframes`
   animation-name: fadeOut;
 }`;
 
+export const fadeInLeft = keyframes`
+  from {
+    opacity: 0;
+    transform: translate3d(-100%, 0, 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.fadeInLeft {
+  animation-name: fadeInLeft;}`;
+
+export const fadeOutRight = keyframes`
+    from {
+      opacity: 1;
+    }
+  
+    to {
+      opacity: 0;
+      transform: translate3d(100%, 0, 0);
+    }
+  }
+  
+  .fadeOutRight {
+    animation-name: fadeOutRight;
+  }`;
+
 export const bounce = keyframes` 
     from,
     20%,
