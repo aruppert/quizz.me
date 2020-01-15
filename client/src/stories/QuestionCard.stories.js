@@ -1,5 +1,5 @@
 import React from 'react';
-import QuestionCard from '../components/cardsQuestionCard';
+import QuestionCard from '../components/cards/QuestionCard';
 
 export default {
   title: 'QuestionCard'
