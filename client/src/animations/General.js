@@ -1,5 +1,19 @@
 import { keyframes } from '@emotion/core';
 
+export const fadeOut = keyframes`
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+
+.fadeOut {
+  animation-name: fadeOut;
+}`;
+
 export const bounce = keyframes` 
     from,
     20%,

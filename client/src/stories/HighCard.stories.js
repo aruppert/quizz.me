@@ -1,5 +1,5 @@
 import React from 'react';
-import HighCard from '../components/HighCard';
+import HighCard from '../components/cards/HighCard';
 
 export default {
   title: 'HighCard'

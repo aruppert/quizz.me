@@ -5,7 +5,7 @@ import Input from '../components/Input';
 import Planet from '../icons/Planet';
 import Lock from '../icons/Lock';
 import ButtonLink from '../components/ButtonLink';
-import SettingsButton from '../components/SettingsButton';
+import SettingsButton from '../components/buttons/SettingsButton';
 import Rocket from '../icons/Rocket';
 import { flexColumnCenter, linearGradientBoxShadow } from '../styles/General';
 import TextWrapper from '../components/TextWrapper';

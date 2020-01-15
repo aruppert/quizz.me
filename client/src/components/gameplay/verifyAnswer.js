@@ -5,74 +5,53 @@ export default async function verifyAnswer(
   questionsPlayed,
   correctAnswer,
   setShowCorrectAnswer,
-  setPointsPlayer1,
-  pointsPlayer1,
-  setPointsPlayer2,
-  pointsPlayer2,
   setQuestionsPlayed,
   getNextQuestion,
   nowPlaying,
-  setNowPlaying
+  setNowPlaying,
+  increasePointsOfCurrentPlayerByOne,
+  decreasePointsOfCurrentPlayerByAmount
 ) {
-  if (numberOfPlayers === 1) {
-    isQuestionLimitReached(questionsPlayed + 1);
-    if (value === correctAnswer) {
-      setShowCorrectAnswer(true);
-      setTimeout(() => {
+  async function verifyAnswer(value) {
+    if (nowPlaying < numberOfPlayers) {
+      if (value === correctAnswer) {
+        setShowCorrectAnswer(true);
+        increasePointsOfCurrentPlayerByOne(nowPlaying);
         navigator.vibrate([100, 100, 100]);
-      }, 500);
-      setPointsPlayer1(pointsPlayer1 + 1);
-      setQuestionsPlayed(questionsPlayed + 1);
-      setTimeout(() => {
-        getNextQuestion();
-      }, 1800);
-    } else {
-      setShowCorrectAnswer(true);
-      setTimeout(() => {
+        setTimeout(() => {
+          setNowPlaying(nowPlaying + 1);
+          setShowCorrectAnswer(false);
+        }, 2400);
+      } else {
+        setShowCorrectAnswer(true);
+        decreasePointsOfCurrentPlayerByAmount(nowPlaying, 1);
         navigator.vibrate([500]);
-      }, 500);
-      setPointsPlayer1(pointsPlayer1 - 1);
-      setQuestionsPlayed(questionsPlayed + 1);
-      setTimeout(() => {
-        getNextQuestion();
-      }, 1800);
-    }
-  } else {
-    if (nowPlaying === 1) {
-      if (value === correctAnswer) {
         setTimeout(() => {
-          navigator.vibrate([100, 100, 100]);
-        }, 500);
-        setPointsPlayer1(pointsPlayer1 + 1);
-        setNowPlaying(2);
-      } else {
-        setTimeout(() => {
-          navigator.vibrate([500]);
-        }, 500);
-        setPointsPlayer1(pointsPlayer1 - 1);
-        setNowPlaying(2);
+          setNowPlaying(nowPlaying + 1);
+          setShowCorrectAnswer(false);
+        }, 2400);
       }
-    }
-    if (nowPlaying === 2) {
-      isQuestionLimitReached(questionsPlayed + 1);
+    } else {
       if (value === correctAnswer) {
         setShowCorrectAnswer(true);
-        setPointsPlayer2(pointsPlayer2 + 1);
+        increasePointsOfCurrentPlayerByOne(nowPlaying);
         setQuestionsPlayed(questionsPlayed + 1);
+        navigator.vibrate([100, 100, 100]);
         setTimeout(() => {
-          navigator.vibrate([100, 100, 100]);
+          isQuestionLimitReached(questionsPlayed + 1);
           setNowPlaying(1);
           getNextQuestion();
-        }, 1800);
+        }, 2400);
       } else {
         setShowCorrectAnswer(true);
-        setPointsPlayer2(pointsPlayer2 - 1);
+        decreasePointsOfCurrentPlayerByAmount(nowPlaying, 1);
         setQuestionsPlayed(questionsPlayed + 1);
+        navigator.vibrate([500]);
         setTimeout(() => {
-          navigator.vibrate([500]);
+          isQuestionLimitReached(questionsPlayed + 1);
           setNowPlaying(1);
           getNextQuestion();
-        }, 1800);
+        }, 2400);
       }
     }
   }

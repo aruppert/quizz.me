@@ -1,13 +1,13 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import ButtonLink from './ButtonLink';
-import Dice from '../icons/Dice';
+import ButtonLink from '../ButtonLink';
+import Dice from '../../icons/Dice';
 import {
   flexColumnCenter,
   noBorderOutlineBGTextDeco,
   TextCenterColorOneMargin20
-} from '../styles/General';
-import BigContainer from './BigContainer';
+} from '../../styles/General';
+import BigContainer from '../BigContainer';
 
 const StyledBigContainer = styled(BigContainer)`
   ${flexColumnCenter};

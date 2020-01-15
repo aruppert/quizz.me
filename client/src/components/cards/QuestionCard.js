@@ -1,13 +1,14 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import { flexColumnCenter, linearGradientBoxShadow } from '../styles/General';
-import TextWrapper from './TextWrapper';
+import { flexColumnCenter, linearGradientBoxShadow } from '../../styles/General';
+import TextWrapper from './../TextWrapper';
 import PropTypes from 'prop-types';
 
 const QuestionContainer = styled.div`
   ${flexColumnCenter};
   ${linearGradientBoxShadow};
   background: ${props => props.theme.colors.background};
+  margin: 30px 0 0;
   width: 340px;
   height: 180px;
   font-size: 18px;

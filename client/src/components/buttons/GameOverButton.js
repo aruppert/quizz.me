@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import AnswerCard from './AnswerCard';
+import AnswerCard from '../cards/AnswerCard';
 
 const GameOverButton = styled(AnswerCard)`
   height: 30px;

@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import ButtonLink from './ButtonLink';
-import Dice from '../icons/Dice';
-import BigContainer from './BigContainer';
-import TextWrapper from './TextWrapper';
+import ButtonLink from '../ButtonLink';
+import Dice from '../../icons/Dice';
+import BigContainer from '../BigContainer';
+import TextWrapper from '../TextWrapper';
 
 const Nav = styled.div`
   display: flex;
