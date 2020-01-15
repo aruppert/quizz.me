@@ -71,21 +71,27 @@ export default function GameOverPage({
         score: playerPoints[1],
         questionsPlayed: questionsPlayed
       });
-      addHighscore({
-        name: namesOfPlayers[2],
-        score: playerPoints[2],
-        questionsPlayed: questionsPlayed
-      });
-      addHighscore({
-        name: namesOfPlayers[3],
-        score: playerPoints[3],
-        questionsPlayed: questionsPlayed
-      });
-      addHighscore({
-        name: namesOfPlayers[4],
-        score: playerPoints[4],
-        questionsPlayed: questionsPlayed
-      });
+      if (numberOfPlayers > 1) {
+        addHighscore({
+          name: namesOfPlayers[2],
+          score: playerPoints[2],
+          questionsPlayed: questionsPlayed
+        });
+      }
+      if (numberOfPlayers > 2) {
+        addHighscore({
+          name: namesOfPlayers[3],
+          score: playerPoints[3],
+          questionsPlayed: questionsPlayed
+        });
+      }
+      if (numberOfPlayers > 3) {
+        addHighscore({
+          name: namesOfPlayers[4],
+          score: playerPoints[4],
+          questionsPlayed: questionsPlayed
+        });
+      }
     }
     submitHighscore();
   }, []);
