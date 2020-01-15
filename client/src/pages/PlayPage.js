@@ -9,11 +9,6 @@ import { getRandomQuestion } from '../api/questions';
 import TextWrapperOutsideCard from '../components/TextWrapperOutsideCard';
 import GameOverButton from '../components/buttons/GameOverButton';
 import PassButton from '../components/buttons/PassButton';
-import {
-  CorrectAnswerText,
-  CorrectAnswerCard,
-  CorrectAnswerContainer
-} from '../components/gameplay/CorrectAnswer';
 import ResultCard from '../components/cards/ResultCard';
 
 const Main = styled.main`
