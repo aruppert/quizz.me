@@ -41,10 +41,8 @@ const ButtonBar = styled.div`
 `;
 
 const StyledTextWrapperOutsideCard = styled(TextWrapperOutsideCard)`
-  position: absolute;
-  top: 90px;
-
   width: 360px;
+  margin: 0;
 `;
 
 export default function PlayPage({
@@ -180,16 +178,16 @@ export default function PlayPage({
     <Main>
       {!gameOver && (
         <>
-          {numberOfPlayers === 1 ? (
-            <StyledTextWrapperOutsideCard>
-              Good luck {namesOfPlayers[1]}! Your score is {playerPoints[1]}
-            </StyledTextWrapperOutsideCard>
-          ) : (
-            <StyledTextWrapperOutsideCard>
-              {namesOfPlayers[nowPlaying]} - your turn! Your score is {playerPoints[nowPlaying]}
-            </StyledTextWrapperOutsideCard>
-          )}
           <GameContainer>
+            {numberOfPlayers === 1 ? (
+              <StyledTextWrapperOutsideCard>
+                Good luck {namesOfPlayers[1]}! Your score is {playerPoints[1]}
+              </StyledTextWrapperOutsideCard>
+            ) : (
+              <StyledTextWrapperOutsideCard>
+                {namesOfPlayers[nowPlaying]} - your turn! Your score is {playerPoints[nowPlaying]}
+              </StyledTextWrapperOutsideCard>
+            )}
             <QuestionCard question={question} />
             {!showResult && (
               <>

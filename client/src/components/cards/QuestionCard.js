@@ -8,7 +8,7 @@ const QuestionContainer = styled.div`
   ${flexColumnCenter};
   ${linearGradientBoxShadow};
   background: ${props => props.theme.colors.background};
-  margin: 30px 0 0;
+  margin: 5px 0 0;
   width: 340px;
   height: 180px;
   font-size: 18px;

@@ -64,6 +64,8 @@ export default function GameOverPage({
     })
   };
 
+  // Object.values(playerPoints);
+
   React.useEffect(() => {
     async function submitHighscore() {
       addHighscore({
