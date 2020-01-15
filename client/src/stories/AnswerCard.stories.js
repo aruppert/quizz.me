@@ -1,5 +1,5 @@
 import React from 'react';
-import AnswerCard from '../components/AnswerCard';
+import AnswerCard from '../components/cards/AnswerCard';
 
 export default {
   title: 'AnswerCard'
