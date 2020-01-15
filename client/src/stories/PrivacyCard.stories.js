@@ -1,5 +1,5 @@
 import React from 'react';
-import PrivacyCard from '../components/PrivacyCard';
+import PrivacyCard from '../components/cards/PrivacyCard';
 
 export default {
   title: 'PrivacyCard'

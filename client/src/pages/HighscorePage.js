@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import HighscoreCard from '../components/HighscoreCard';
+import HighscoreCard from '../components/cards/HighscoreCard';
 import useFetch from '../hooks/useFetch';
 import { flexColumnCenter } from '../styles/General';
 

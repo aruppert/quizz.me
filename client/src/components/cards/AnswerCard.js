@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled';
+import PropTypes from 'prop-types';
 
 const AnswerContainer = styled.button`
   display: flex;
@@ -22,8 +23,12 @@ const TextContainer = styled.div`
 
 export default function AnswerCard(props) {
   return (
-    <AnswerContainer onClick={props.onClick} {...props}>
+    <AnswerContainer {...props}>
       <TextContainer>{props.value}</TextContainer>
     </AnswerContainer>
   );
 }
+
+AnswerCard.propTypes = {
+  value: PropTypes.string
+};

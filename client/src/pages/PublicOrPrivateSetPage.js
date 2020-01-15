@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import Planet from '../icons/Planet';
 import Lock from '../icons/Lock';
 import Input from '../components/Input';
-import ButtonLink from '../components/ButtonLink';
+import ButtonLink from '../components/buttons/ButtonLink';
 import Button from '../components/Button';
 import BigContainer from '../components/BigContainer';
 import { flexColumnCenter } from '../styles/General';

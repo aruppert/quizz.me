@@ -1,9 +1,19 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import ButtonLink from './ButtonLink';
-import Dice from '../icons/Dice';
-import BigContainer from './BigContainer';
-import TextWrapper from './TextWrapper';
+import ButtonLink from '../buttons/ButtonLink';
+import Dice from '../../icons/Dice';
+import {
+  flexColumnCenter,
+  noBorderOutlineBGTextDeco,
+  TextCenterColorOneMargin20
+} from '../../styles/General';
+import BigContainer from '../BigContainer';
+
+const StyledBigContainer = styled(BigContainer)`
+  ${flexColumnCenter};
+  flex-flow: column;
+  justify-content: center;
+`;
 
 const Nav = styled.div`
   display: flex;
@@ -11,9 +21,7 @@ const Nav = styled.div`
 `;
 
 const NavButton = styled.button`
-  border: none;
-  outline: none;
-  background: none;
+  ${noBorderOutlineBGTextDeco};
   border: 2px solid white;
   border-radius: 10px;
   font-size: 1em;
@@ -23,16 +31,21 @@ const NavButton = styled.button`
   width: fit-content;
 `;
 
+const TextWrapper = styled.div`
+  ${TextCenterColorOneMargin20};
+`;
 const TextWrapperWarning = styled(TextWrapper)`
   color: ${props => props.theme.colors.warn};
 `;
 
-export default function PublicConfirmationCard(props) {
+export default function PrivateConfirmationCard(props) {
   function handleClickOnMore() {
     props.addMore();
   }
+
+  console.log(props.privateCode);
   return (
-    <BigContainer>
+    <StyledBigContainer>
       {props.questions === 0 ? (
         <>
           <TextWrapperWarning>Oops, you didn't add any questions.</TextWrapperWarning>
@@ -46,19 +59,20 @@ export default function PublicConfirmationCard(props) {
       ) : (
         <>
           <TextWrapper>
-            Thank you for contributing <p>{props.questions}</p> question(s) to the public domain.
-            Your question(s) will be reviewed by an admin and set active very soon. To play click
-            the dice:
+            Congrats! You’ve created a private set with<p> {props.questions} </p>question(s). Just
+            share this unique code
+            <p>{props.privateCode}</p>
+            with your friends. No one, without the private code can play your set! Wanna test your
+            set? Hit the dice and enter your code!
           </TextWrapper>
           <ButtonLink to="/play">
             <Dice />
           </ButtonLink>
-          <TextWrapper>or add more with the button below:</TextWrapper>
           <Nav>
             <NavButton onClick={handleClickOnMore}> Wait, I love this - let me add more!</NavButton>
-          </Nav>
+          </Nav>{' '}
         </>
       )}
-    </BigContainer>
+    </StyledBigContainer>
   );
 }

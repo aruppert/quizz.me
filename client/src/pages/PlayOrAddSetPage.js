@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import HighCard from '../components/HighCard';
-import WideBoxWithLinearGradientBorder from '../components/WideBoxWithLinearGradientBorder';
+import HighCard from '../components/cards/HighCard';
+import WideCardWithLinearGradientBorder from '../components/cards/WideCardWithLinearGradientBorder';
 import Dice from '../icons/Dice';
 import { flexColumnCenter } from '../styles/General';
 import AddQuestion from '../icons/AddQuestion';
@@ -23,7 +23,7 @@ const SelectionContainer = styled.div`
 export default function PlayOrAddSetPage() {
   return (
     <Main>
-      <WideBoxWithLinearGradientBorder text={`Welcome friend! `} />
+      <WideCardWithLinearGradientBorder text={`Welcome friend! `} />
       <SelectionContainer>
         <HighCard text={`Play a single- or multiplayer game`} path="choose">
           <Dice />
@@ -32,7 +32,7 @@ export default function PlayOrAddSetPage() {
           <AddQuestion />
         </HighCard>
       </SelectionContainer>
-      <WideBoxWithLinearGradientBorder text={` Enjoy the game!`} />
+      <WideCardWithLinearGradientBorder text={` Enjoy the game!`} />
     </Main>
   );
 }

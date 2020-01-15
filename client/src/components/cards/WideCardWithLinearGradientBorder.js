@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import TextWrapper from './TextWrapper';
-import { linearGradientBoxShadow, flexColumnCenter, flexRowWrapCenter } from '../styles/General';
+import TextWrapper from '../TextWrapper';
+import { linearGradientBoxShadow, flexColumnCenter, flexRowWrapCenter } from '../../styles/General';
 
-const WideBoxWithLGBorderContainer = styled.div`
+const WideCardWithLGBorderContainer = styled.div`
   ${linearGradientBoxShadow};
   ${flexColumnCenter};
   margin: 3px 0;
@@ -13,7 +13,7 @@ const WideBoxWithLGBorderContainer = styled.div`
   border-radius: 25px 0px;
 `;
 
-const WideBoxWithLGBorder = styled.div`
+const WideCardWithLGBorder = styled.div`
   display: flex;
   position: absolute;
   z-index: 1000;
@@ -36,12 +36,12 @@ const StyledTextWrapper = styled(TextWrapper)`
   -webkit-text-fill-color: transparent;
 `;
 
-export default function WideBoxWithLinearGradientBorder({ text }) {
+export default function WideCardWithLinearGradientBorder({ text }) {
   return (
-    <WideBoxWithLGBorderContainer>
-      <WideBoxWithLGBorder>
+    <WideCardWithLGBorderContainer>
+      <WideCardWithLGBorder>
         <StyledTextWrapper>{text}</StyledTextWrapper>
-      </WideBoxWithLGBorder>
-    </WideBoxWithLGBorderContainer>
+      </WideCardWithLGBorder>
+    </WideCardWithLGBorderContainer>
   );
 }

@@ -4,8 +4,8 @@ import PropTypes from 'prop-types';
 import Input from '../components/Input';
 import Planet from '../icons/Planet';
 import Lock from '../icons/Lock';
-import PrivateConfirmationCard from '../components/PrivateConfirmationCard';
-import PublicConfirmationCard from '../components/PublicConfirmationCard';
+import PrivateConfirmationCard from '../components/cards/PrivateConfirmationCard';
+import PublicConfirmationCard from '../components/cards/PublicConfirmationCard';
 import QuestionCardsAdded from '../icons/QuestionCardsAdded';
 import { addQuestion } from '../api/questions';
 import {

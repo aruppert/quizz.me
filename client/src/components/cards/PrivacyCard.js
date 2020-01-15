@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import ButtonLink from './ButtonLink';
-import Planet from '../icons/Planet';
-import Lock from '../icons/Lock';
-import { linearGradientBoxShadow, flexColumnCenter } from '../styles/General';
+import ButtonLink from '../buttons/ButtonLink';
+import Planet from '../../icons/Planet';
+import Lock from '../../icons/Lock';
+import { linearGradientBoxShadow, flexColumnCenter } from '../../styles/General';
 
 const PrivacyContainer = styled.div`
   ${linearGradientBoxShadow};

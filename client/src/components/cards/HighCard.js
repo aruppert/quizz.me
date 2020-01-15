@@ -5,7 +5,7 @@ import {
   linearGradientBoxShadow,
   flexColumnCenter,
   TextCenterColorOneMargin20
-} from '../styles/General';
+} from '../../styles/General';
 
 const HighContainer = styled(Link)`
   ${linearGradientBoxShadow};

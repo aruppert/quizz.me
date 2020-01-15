@@ -5,11 +5,11 @@ export const primary = {
     background: '#F2F2F2',
     card1: '#04DBC6',
     card2: '#007E71',
-    active: 'yellow',
+    active: '#FFE740',
     icon1: '#fff',
     icon2: '#373737',
     warn: '#ff2607',
-    correct: '#fda34b'
+    correct: '#44EB1C'
   }
 };
 
@@ -24,7 +24,7 @@ export const secondary = {
     icon1: '#fff',
     icon2: '#373737',
     warn: '#ff2607',
-    correct: 'green'
+    correct: '#44EB1C'
   }
 };
 
@@ -39,7 +39,7 @@ export const tertiary = {
     icon1: '#fff',
     icon2: '#373737',
     warn: '#ff2607',
-    correct: 'green'
+    correct: '#44EB1C'
   }
 };
 
@@ -54,7 +54,7 @@ export const quaternary = {
     icon1: '#fff',
     icon2: '#373737',
     warn: '#ff2607',
-    correct: 'green'
+    correct: '#44EB1C'
   }
 };
 
@@ -69,7 +69,7 @@ export const quinary = {
     icon1: '#fff',
     icon2: '#373737',
     warn: '#ff2607',
-    correct: '#38ef7d'
+    correct: '##44EB1C'
   }
 };
 
@@ -84,7 +84,7 @@ export const senary = {
     icon1: '#fff',
     icon2: '#373737',
     warn: '#ff2607',
-    correct: 'green'
+    correct: '#44EB1C'
   }
 };
 
@@ -99,7 +99,7 @@ export const septenary = {
     icon1: '#fff',
     icon2: '#373737',
     warn: '#ff2607',
-    correct: 'green'
+    correct: '#44EB1C'
   }
 };
 
@@ -114,7 +114,7 @@ export const octonary = {
     icon1: '#fff',
     icon2: '#373737',
     warn: '#ff2607',
-    correct: 'green'
+    correct: '#44EB1C'
   }
 };
 
@@ -129,6 +129,6 @@ export const nonary = {
     icon1: '#373737',
     icon2: '#fff',
     warn: '#ff2607',
-    correct: 'green'
+    correct: '#44EB1C'
   }
 };
