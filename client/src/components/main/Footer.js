@@ -1,14 +1,14 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import Dice from '../icons/Dice';
-import AddQuestion from '../icons/AddQuestion';
-import ButtonLink from '../components/buttons/ButtonLink';
-import Highscore from '../icons/HighScore';
+import Dice from '../../icons/Dice';
+import AddQuestion from '../../icons/AddQuestion';
+import ButtonLink from '../buttons/ButtonLink';
+import Highscore from '../../icons/HighScore';
 import {
   linearGradientBoxShadow,
   flexRowWrapCenter,
   noBorderOutlineBGTextDeco
-} from '../styles/General';
+} from '../../styles/General';
 
 const FooterBar = styled.div`
   ${linearGradientBoxShadow};

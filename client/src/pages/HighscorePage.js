@@ -20,12 +20,12 @@ const TextWrapperOutsideCard = styled.h2`
 `;
 
 export default function HighscorePage() {
+  // eslint-disable-next-line
   const highscoreEntries = useFetch('/api/highscores');
 
   if (!highscoreEntries) {
     return null;
-  }
-  {
+  } else {
     return (
       <Main>
         <TextWrapperOutsideCard>highscores</TextWrapperOutsideCard>

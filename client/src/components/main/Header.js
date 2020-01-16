@@ -1,14 +1,14 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import ColorPalette from '../icons/ColorPalette';
-import Logo from '../icons/Logo';
+import ColorPalette from '../../icons/ColorPalette';
+import Logo from '../../icons/Logo';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import {
   linearGradientBoxShadow,
   noBorderOutlineBGTextDeco,
   flexRowWrapCenter
-} from '../styles/General';
+} from '../../styles/General';
 
 const HeaderBar = styled.div`
   display: flex;

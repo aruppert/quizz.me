@@ -6,7 +6,7 @@ import AnswerCard from '../components/cards/AnswerCard';
 import GameOverPage from './GameOverPage';
 import { flexColumnCenter } from '../styles/General';
 import { getRandomQuestion } from '../api/questions';
-import TextWrapperOutsideCard from '../components/TextWrapperOutsideCard';
+import TextWrapperOutsideCard from '../components/textAndInput/TextWrapperOutsideCard';
 import GameOverButton from '../components/buttons/GameOverButton';
 import PassButton from '../components/buttons/PassButton';
 import ResultCard from '../components/cards/ResultCard';
@@ -23,11 +23,6 @@ const GameContainer = styled.div`
   width: 350px;
 `;
 
-// const ResultContainer = styled.div`
-//  display: flex;
-//   width: 360px;
-//   margin: 10px 0 8px;
-// `
 const ButtonBar = styled.div`
   display: flex;
   width: 360px;
@@ -63,7 +58,6 @@ export default function PlayPage({
     3: 0,
     4: 0
   });
-  const [showQuestion, setShowQuestion] = React.useState(true);
   const [answerGivenIsCorrect, setAnswerGivenIsCorrect] = React.useState(null);
 
   const allAnswers = [correctAnswer, incorrectAnswer1, incorrectAnswer2, incorrectAnswer3];
@@ -151,6 +145,7 @@ export default function PlayPage({
     }, 1500);
     getNextQuestion();
   }
+
   function loadNextQuestionOrEndGame() {
     setQuestionsPlayed(questionsPlayed + 1);
     setTimeout(() => {
@@ -175,6 +170,7 @@ export default function PlayPage({
     getNextQuestion();
     setAnimationQuestionCard('slideInLeft');
     setAnimationAnswerContainer('fadeIn');
+    // eslint-disable-next-line
   }, []);
 
   return (

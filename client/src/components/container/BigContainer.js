@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { linearGradientBoxShadow } from '../styles/General';
+import { linearGradientBoxShadow } from '../../styles/General';
 
 const BigContainer = styled.div`
   ${linearGradientBoxShadow};

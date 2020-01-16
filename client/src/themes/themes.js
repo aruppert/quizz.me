@@ -5,7 +5,7 @@ export const primary = {
     background: '#F2F2F2',
     card1: '#04DBC6',
     card2: '#007E71',
-    active: '#FFE740',
+    active: '#fda34b',
     icon1: '#fff',
     icon2: '#373737',
     warn: '#ff2607',

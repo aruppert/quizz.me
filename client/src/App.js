@@ -19,8 +19,8 @@ import ChooseGameModePage from './pages/ChooseGameModePage';
 import PlayOrAddSetPage from './pages/PlayOrAddSetPage';
 import PlayPage from './pages/PlayPage';
 import PublicOrPrivateSetPage from './pages/PublicOrPrivateSetPage';
-import Header from './components/Header';
-import Footer from './components/Footer';
+import Header from './components/main/Header';
+import Footer from './components/main/Footer';
 import HighscorePage from './pages/HighscorePage';
 
 function App() {

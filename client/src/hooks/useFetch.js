@@ -12,6 +12,7 @@ function useFetch(url) {
       setData(newData);
     }
     doFetch();
+    // eslint-disable-next-line
   }, []);
 
   return data;
