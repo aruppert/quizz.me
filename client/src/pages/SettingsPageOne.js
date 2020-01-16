@@ -130,7 +130,7 @@ SettingsPageOne.propTypes = {
   numberOfPlayers: PropTypes.number,
   setNumberOfPlayers: PropTypes.func,
   privateCode: PropTypes.string,
-  setShowError: PropTypes.bool,
+  setShowError: PropTypes.func,
   setShowFirstSettings: PropTypes.func,
   onChangePrivateCode: PropTypes.func
 };

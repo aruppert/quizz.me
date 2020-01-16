@@ -66,6 +66,5 @@ export default function PublicConfirmationCard(props) {
 
 PublicConfirmationCard.propTypes = {
   addMore: PropTypes.func,
-  questions: PropTypes.number,
-  privateCode: PropTypes.string
+  questions: PropTypes.number
 };
