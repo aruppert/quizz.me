@@ -1,13 +1,11 @@
 export const primary = {
   colors: {
-    text1: '#fff',
-    text2: '#373737',
+    text: '#fff',
     background: '#F2F2F2',
     card1: '#04DBC6',
     card2: '#007E71',
     active: '#fda34b',
-    icon1: '#fff',
-    icon2: '#373737',
+    icon: '#fff',
     warn: '#ff2607',
     correct: '#44EB1C'
   }
@@ -15,14 +13,12 @@ export const primary = {
 
 export const secondary = {
   colors: {
-    text1: '#fff',
-    text2: '#373737',
+    text: '#fff',
     background: '#F2F2F2',
     card1: '#764BA2',
     card2: '#333F75',
     active: '#fda34b',
-    icon1: '#fff',
-    icon2: '#373737',
+    icon: '#fff',
     warn: '#ff2607',
     correct: '#44EB1C'
   }
@@ -30,14 +26,12 @@ export const secondary = {
 
 export const tertiary = {
   colors: {
-    text1: '#fff',
-    text2: '#373737',
+    text: '#fff',
     background: '#F2F2F2',
     card1: '#c94b4b',
     card2: '#4b134f',
     active: '#fda34b',
-    icon1: '#fff',
-    icon2: '#373737',
+    icon: '#fff',
     warn: '#ff2607',
     correct: '#44EB1C'
   }
@@ -45,14 +39,12 @@ export const tertiary = {
 
 export const quaternary = {
   colors: {
-    text1: '#fff',
-    text2: '#373737',
+    text: '#fff',
     background: '#F2F2F2',
     card1: '#30cfd0',
     card2: '#330867',
     active: '#fda34b',
-    icon1: '#fff',
-    icon2: '#373737',
+    icon: '#fff',
     warn: '#ff2607',
     correct: '#44EB1C'
   }
@@ -60,14 +52,12 @@ export const quaternary = {
 
 export const quinary = {
   colors: {
-    text1: '#fff',
-    text2: '#373737',
+    text: '#fff',
     background: '#F2F2F2',
     card1: '#FDC830',
     card2: '#F37335',
     active: '#30cfd0',
-    icon1: '#fff',
-    icon2: '#373737',
+    icon: '#fff',
     warn: '#ff2607',
     correct: '##44EB1C'
   }
@@ -75,14 +65,12 @@ export const quinary = {
 
 export const senary = {
   colors: {
-    text1: '#fff',
-    text2: '#373737',
+    text: '#fff',
     background: '#F2F2F2',
     card1: '#0ba360',
     card2: '#3cba92',
     active: '#fda34b',
-    icon1: '#fff',
-    icon2: '#373737',
+    icon: '#fff',
     warn: '#ff2607',
     correct: '#44EB1C'
   }
@@ -90,14 +78,12 @@ export const senary = {
 
 export const septenary = {
   colors: {
-    text1: '#fff',
-    text2: '#373737',
+    text: '#fff',
     background: '#F2F2F2',
     card1: '#667eea',
     card2: '#764ba2',
     active: '#fda34b',
-    icon1: '#fff',
-    icon2: '#373737',
+    icon: '#fff',
     warn: '#ff2607',
     correct: '#44EB1C'
   }
@@ -105,14 +91,12 @@ export const septenary = {
 
 export const octonary = {
   colors: {
-    text1: '#fff',
-    text2: '#373737',
+    text: '#fff',
     background: '#F2F2F2',
     card1: '#007adf',
     card2: '#00ecbc',
     active: '#fda34b',
-    icon1: '#fff',
-    icon2: '#373737',
+    icon: '#fff',
     warn: '#ff2607',
     correct: '#44EB1C'
   }
@@ -120,14 +104,12 @@ export const octonary = {
 
 export const nonary = {
   colors: {
-    text1: '#373737',
-    text2: '#fff',
+    text: '#fff',
     background: '#F2F2F2',
-    card1: '#b721ff',
-    card2: '#21d4fd',
+    card1: '#262626',
+    card2: '#0D0D0D',
     active: '#fda34b',
-    icon1: '#373737',
-    icon2: '#fff',
+    icon: '#fff',
     warn: '#ff2607',
     correct: '#44EB1C'
   }

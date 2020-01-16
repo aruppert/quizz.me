@@ -20,7 +20,7 @@ const LandingLogo = styled(Logo)`
 `;
 
 const StyledTextWrapper = styled(TextWrapper)`
-  color: ${props => props.theme.colors.text1};
+  color: ${props => props.theme.colors.text};
   font-family: 'Leckerli One', cursive;
   font-size: 35px;
   font-weight: bold;

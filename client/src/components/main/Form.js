@@ -13,7 +13,7 @@ export const Form = styled.form`
   flex-flow: column wrap;
   justify-content: space-evenly;
   height: 100%;
-  color: ${props => props.theme.colors.text1};
+  color: ${props => props.theme.colors.text};
   padding: 0px 20px;
 `;
 

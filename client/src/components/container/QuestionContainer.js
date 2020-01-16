@@ -9,7 +9,7 @@ const QuestionContainer = styled.div`
   width: 340px;
   height: 180px;
   font-size: 18px;
-  border: 5px solid ${props => props.theme.colors.icon1};
+  border: 5px solid ${props => props.theme.colors.icon};
   border-radius: 25px 0px;
   animation-name: ${({ animation }) => animation};
   animation-duration: 1.5s;

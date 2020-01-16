@@ -10,7 +10,7 @@ const AnswerContainer = styled.button`
   width: 160px;
   height: 90px;
   font-size: 16px;
-  border: 4px solid ${props => props.theme.colors.text1};
+  border: 4px solid ${props => props.theme.colors.text};
   background: ${props => props.theme.colors.background};
   border-radius: 25px;
   box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);

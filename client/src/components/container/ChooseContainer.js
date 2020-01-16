@@ -7,7 +7,7 @@ const ChooseContainer = styled.div`
   justify-content: space-around;
   align-self: center;
   text-align: center;
-  color: ${props => props.theme.colors.text1};
+  color: ${props => props.theme.colors.text};
   width: 320px;
   height: 370px;
   border-radius: 25px 0px;

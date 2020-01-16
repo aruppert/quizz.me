@@ -9,7 +9,7 @@ const StyledButton = styled(Button)`
   flex-flow: column;
   justify-content: space-evenly;
   text-decoration: none;
-  color: ${props => props.theme.colors.text1};
+  color: ${props => props.theme.colors.text};
 `;
 
 export default StyledButton;

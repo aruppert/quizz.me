@@ -8,7 +8,7 @@ const GameOverButton = styled(AnswerCard)`
   background-image: linear-gradient(to right, #f78ca0 0%, #f9748f 19%, #fd868c 60%, #fe9a8b 100%);
   margin: 0;
   font-family: 'Leckerli One', cursive;
-  color: ${props => props.theme.colors.text1};
+  color: ${props => props.theme.colors.text};
 `;
 
 export default GameOverButton;

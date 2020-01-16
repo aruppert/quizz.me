@@ -18,8 +18,8 @@ const HeaderBar = styled.div`
   width: 100%;
   height: 70px;
   border-radius: 0px 0px 25px;
-  border-bottom: 3px solid ${props => props.theme.colors.icon1};
-  border-right: 3px solid ${props => props.theme.colors.icon1};
+  border-bottom: 3px solid ${props => props.theme.colors.icon};
+  border-right: 3px solid ${props => props.theme.colors.icon};
   text-decoration: none;
 `;
 
@@ -32,7 +32,7 @@ const HeaderContainer = styled.div`
 
 const HeadText = styled.h1`
   all: unset;
-  color: ${props => props.theme.colors.text1};
+  color: ${props => props.theme.colors.text};
   font-family: 'Leckerli One', cursive;
   font-size: 35px;
   font-weight: bold;

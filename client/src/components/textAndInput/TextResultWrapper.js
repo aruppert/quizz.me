@@ -11,7 +11,7 @@ const TextResultWrapper = styled.div`
   width: 100%;
   font-family: 'Leckerli One', cursive;
   font-size: 1.5rem;
-  color: ${props => props.theme.colors.text2};
+  color: #373737;
   animation: ${tada} 1.8s 2;
 `;
 

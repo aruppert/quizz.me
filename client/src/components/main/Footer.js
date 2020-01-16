@@ -16,8 +16,8 @@ const FooterBar = styled.div`
   width: 100%;
   height: 70px;
   border-radius: 25px 0px 0px;
-  border-top: 3px solid ${props => props.theme.colors.icon1};
-  border-left: 3px solid ${props => props.theme.colors.icon1};
+  border-top: 3px solid ${props => props.theme.colors.icon};
+  border-left: 3px solid ${props => props.theme.colors.icon};
 `;
 
 const FooterContainer = styled.div`
@@ -48,7 +48,7 @@ const DiceButtonBackground = styled.div`
   ${flexRowWrapCenter};
   width: 80px;
   height: 80px;
-  background: ${props => props.theme.colors.icon1};
+  background: ${props => props.theme.colors.icon};
   border-radius: 50%;
   margin-bottom: 20px;
 `;

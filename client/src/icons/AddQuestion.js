@@ -2,10 +2,10 @@ import React from 'react';
 import styled from '@emotion/styled';
 
 const Svg = styled.svg`
-  fill: ${props => props.theme.colors.icon1};
+  fill: ${props => props.theme.colors.icon};
   height: 45px;
   width: 45px;
-  stroke: ${props => props.theme.colors.icon1};
+  stroke: ${props => props.theme.colors.icon};
   stroke-width: 0.25;
   stroke-linecap: round;
 `;

@@ -7,7 +7,7 @@ const SettingsButton = styled.button`
   font-size: 1rem;
   text-align: center;
   align-self: center;
-  color: ${props => props.theme.colors.text1};
+  color: ${props => props.theme.colors.text};
 `;
 
 export default SettingsButton;
