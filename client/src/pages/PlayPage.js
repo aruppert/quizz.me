@@ -75,9 +75,12 @@ export default function PlayPage({
       setIncorrectAnswer3(data.incorrectAnswer3);
       setShowResult(false);
     }
-    const shuffledArray = allAnswers.sort(() => Math.random() - 0.5);
+  }
+  function shuffle(array) {
+    const shuffledArray = array.sort(() => Math.random() - 0.5);
     return shuffledArray;
   }
+  shuffle(allAnswers);
 
   function increasePointsOfCurrentPlayerByOne(nowPlaying) {
     setPlayerPoints({
@@ -89,16 +92,17 @@ export default function PlayPage({
   function decreasePointsOfCurrentPlayerByAmount(nowPlaying, amount) {
     setPlayerPoints({
       ...playerPoints,
-      [nowPlaying]: playerPoints[nowPlaying] - [amount]
+      [nowPlaying]: playerPoints[nowPlaying] - amount
     });
   }
 
   async function verifyAnswer(value) {
     setShowResult(true);
-    setAnswerGivenIsCorrect(value === correctAnswer);
+    const newAnswerIsCorrect = value === correctAnswer;
+    setAnswerGivenIsCorrect(newAnswerIsCorrect);
     const isNotLastPlayer = nowPlaying < numberOfPlayers;
 
-    if (answerGivenIsCorrect) {
+    if (newAnswerIsCorrect) {
       increasePointsOfCurrentPlayerByOne(nowPlaying);
       navigator.vibrate([100, 100, 100]);
     } else {
@@ -152,6 +156,7 @@ export default function PlayPage({
       if (isQuestionLimitReached(questionsPlayed + 1)) {
         setGameOver(true);
       }
+
       animatedNextQuestion();
       setNowPlaying(1);
     }, 2400);
