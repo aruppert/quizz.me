@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { noBorderOutlineBGTextDeco } from '../styles/General';
+import { noBorderOutlineBGTextDeco } from '../../styles/General';
 
 const Button = styled.button`
   ${noBorderOutlineBGTextDeco};

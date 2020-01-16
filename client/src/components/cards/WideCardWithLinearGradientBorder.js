@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import TextWrapper from '../TextWrapper';
+import TextWrapper from '../textAndInput/TextWrapper';
 import { linearGradientBoxShadow, flexColumnCenter, flexRowWrapCenter } from '../../styles/General';
 
 const WideCardWithLGBorderContainer = styled.div`

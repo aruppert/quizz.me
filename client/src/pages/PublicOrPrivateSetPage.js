@@ -4,12 +4,12 @@ import styled from '@emotion/styled';
 import PropTypes from 'prop-types';
 import Planet from '../icons/Planet';
 import Lock from '../icons/Lock';
-import Input from '../components/Input';
+import Input from '../components/textAndInput/Input';
 import ButtonLink from '../components/buttons/ButtonLink';
-import Button from '../components/Button';
-import BigContainer from '../components/BigContainer';
+import Button from '../components/buttons/Button';
+import BigContainer from '../components/container/BigContainer';
 import { flexColumnCenter } from '../styles/General';
-import TextWrapper from '../components/TextWrapper';
+import TextWrapper from '../components/textAndInput/TextWrapper';
 
 const Main = styled.main`
   ${flexColumnCenter};

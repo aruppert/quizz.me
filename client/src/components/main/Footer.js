@@ -1,14 +1,14 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import Dice from '../icons/Dice';
-import AddQuestion from '../icons/AddQuestion';
-import ButtonLink from '../components/buttons/ButtonLink';
-import Highscore from '../icons/HighScore';
+import Dice from '../../icons/Dice';
+import AddQuestion from '../../icons/AddQuestion';
+import ButtonLink from '../buttons/ButtonLink';
+import Highscore from '../../icons/HighScore';
 import {
   linearGradientBoxShadow,
   flexRowWrapCenter,
   noBorderOutlineBGTextDeco
-} from '../styles/General';
+} from '../../styles/General';
 
 const FooterBar = styled.div`
   ${linearGradientBoxShadow};
@@ -16,8 +16,8 @@ const FooterBar = styled.div`
   width: 100%;
   height: 70px;
   border-radius: 25px 0px 0px;
-  border-top: 3px solid ${props => props.theme.colors.icon1};
-  border-left: 3px solid ${props => props.theme.colors.icon1};
+  border-top: 3px solid ${props => props.theme.colors.icon};
+  border-left: 3px solid ${props => props.theme.colors.icon};
 `;
 
 const FooterContainer = styled.div`
@@ -48,7 +48,7 @@ const DiceButtonBackground = styled.div`
   ${flexRowWrapCenter};
   width: 80px;
   height: 80px;
-  background: ${props => props.theme.colors.icon1};
+  background: ${props => props.theme.colors.icon};
   border-radius: 50%;
   margin-bottom: 20px;
 `;

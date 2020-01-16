@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 import Logo from '../icons/Logo';
 import { Link, useHistory } from 'react-router-dom';
 import { linearGradientBoxShadow, flexColumnCenter } from '../styles/General';
-import TextWrapper from '../components/TextWrapper';
+import TextWrapper from '../components/textAndInput/TextWrapper';
 import { fadeInLeftFadeOutRight, fadeIn } from '../animations/General';
 
 const Container = styled(Link)`
@@ -20,7 +20,7 @@ const LandingLogo = styled(Logo)`
 `;
 
 const StyledTextWrapper = styled(TextWrapper)`
-  color: ${props => props.theme.colors.text1};
+  color: ${props => props.theme.colors.text};
   font-family: 'Leckerli One', cursive;
   font-size: 35px;
   font-weight: bold;
@@ -30,7 +30,13 @@ const StyledTextWrapper = styled(TextWrapper)`
 export default function LandingPage() {
   const history = useHistory();
 
-  setTimeout(() => history.push('/playoradd'), 3700);
+  React.useEffect(() => {
+    const timeoutId = setTimeout(() => history.push('/playoradd'), 3700);
+    return () => {
+      clearTimeout(timeoutId);
+    };
+    // eslint-disable-next-line
+  }, []);
 
   return (
     <Container to="/playoradd">

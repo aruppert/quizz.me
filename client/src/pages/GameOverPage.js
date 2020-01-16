@@ -4,7 +4,8 @@ import { tada } from '../animations/General';
 import PropTypes from 'prop-types';
 import { flexColumnCenter } from '../styles/General';
 import { addHighscore } from '../api/highscores';
-import TextWrapperOutsideCard from '../components/TextWrapperOutsideCard';
+import TextWrapperOutsideCard from '../components/textAndInput/TextWrapperOutsideCard';
+import TextResultWrapper from '../components/textAndInput/TextResultWrapper';
 import { Fireworks } from 'fireworks/lib/react';
 
 const Main = styled.main`
@@ -12,19 +13,6 @@ const Main = styled.main`
   height: 100%;
   flex-grow: 1;
   width: 100vw;
-`;
-
-const TextWrapper = styled.div`
-  position: absolute;
-  z-index: 1000;
-  ${flexColumnCenter};
-  top: 50vh;
-  left: 0px;
-  width: 100%;
-  font-family: 'Leckerli One', cursive;
-  font-size: 1.5rem;
-  color: ${props => props.theme.colors.text2};
-  animation: ${tada} 1.8s 2;
 `;
 
 const GameOverContainer = styled.div``;
@@ -35,12 +23,8 @@ const TextWrapperOutsideCard1 = styled(TextWrapperOutsideCard)`
   width: 375px;
   font-size: 1.2rem;
 `;
-const TextWrapperOutsideCard2 = styled(TextWrapperOutsideCard)`
+const TextWrapperOutsideCard2 = styled(TextWrapperOutsideCard1)`
   color: ${props => props.theme.colors.card2};
-  font-family: 'Leckerli One', cursive;
-  margin: auto;
-  width: 375px;
-  font-size: 1.2rem;
 `;
 
 const Star = styled.img`
@@ -63,8 +47,6 @@ export default function GameOverPage({
       y: 200 + Math.random() * 100 - 50 + (i === 2 ? -80 : 0)
     })
   };
-
-  // Object.values(playerPoints);
 
   React.useEffect(() => {
     async function submitHighscore() {
@@ -96,6 +78,7 @@ export default function GameOverPage({
       }
     }
     submitHighscore();
+    // eslint-disable-next-line
   }, []);
   return (
     <Main>
@@ -110,7 +93,7 @@ export default function GameOverPage({
           </TextWrapperOutsideCard2>
         )}
         <Star src="./images/star-3d-360px.webp" alt="Star in 3D" />
-        <TextWrapper>Good job!</TextWrapper>
+        <TextResultWrapper>Good job!</TextResultWrapper>
         {numberOfPlayers > 2 && (
           <TextWrapperOutsideCard1>
             {namesOfPlayers[3]} scored {playerPoints[3]} points

@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled';
+import PropTypes from 'prop-types';
 import ButtonLink from '../buttons/ButtonLink';
 import Dice from '../../icons/Dice';
 import {
@@ -7,7 +8,7 @@ import {
   noBorderOutlineBGTextDeco,
   TextCenterColorOneMargin20
 } from '../../styles/General';
-import BigContainer from '../BigContainer';
+import BigContainer from '../container/BigContainer';
 
 const StyledBigContainer = styled(BigContainer)`
   ${flexColumnCenter};
@@ -27,7 +28,7 @@ const NavButton = styled.button`
   font-size: 1em;
   font-weight: bold;
   margin: 0px 5px;
-  color: ${props => props.theme.colors.text1};
+  color: ${props => props.theme.colors.text};
   width: fit-content;
 `;
 
@@ -76,3 +77,9 @@ export default function PrivateConfirmationCard(props) {
     </StyledBigContainer>
   );
 }
+
+PrivateConfirmationCard.propTypes = {
+  addMore: PropTypes.func,
+  questions: PropTypes.number,
+  privateCode: PropTypes.string
+};

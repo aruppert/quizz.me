@@ -1,9 +1,10 @@
 import React from 'react';
 import styled from '@emotion/styled';
+import PropTypes from 'prop-types';
 import ButtonLink from '../buttons/ButtonLink';
 import Dice from '../../icons/Dice';
-import BigContainer from '../BigContainer';
-import TextWrapper from '../TextWrapper';
+import BigContainer from '../container/BigContainer';
+import TextWrapper from '../textAndInput/TextWrapper';
 
 const Nav = styled.div`
   display: flex;
@@ -19,7 +20,7 @@ const NavButton = styled.button`
   font-size: 1em;
   font-weight: bold;
   margin: 0px 5px;
-  color: ${props => props.theme.colors.text1};
+  color: ${props => props.theme.colors.text};
   width: fit-content;
 `;
 
@@ -62,3 +63,8 @@ export default function PublicConfirmationCard(props) {
     </BigContainer>
   );
 }
+
+PublicConfirmationCard.propTypes = {
+  addMore: PropTypes.func,
+  questions: PropTypes.number
+};

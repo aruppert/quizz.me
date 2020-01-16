@@ -23,7 +23,7 @@ export const TextCenterColorOneMargin20 = props => css`
   margin: 20px;
   text-align: center;
   align-self: center;
-  color: ${props.theme.colors.text1};
+  color: ${props.theme.colors.text};
 `;
 
 export const noBorderOutlineBGTextDeco = css`

@@ -17,7 +17,7 @@ const PrivacyContainer = styled.div`
 const TextWrapper = styled.div`
   font-size: 1.5rem;
   text-align: center;
-  color: ${props => props.theme.colors.text1};
+  color: ${props => props.theme.colors.text};
   margin: 10px;
 `;
 

@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import AnswerCard from '../cards/AnswerCard';
+import PropTypes from 'prop-types';
 import { pulse, fadeOut } from '../../animations/General';
 import { flexColumnCenter } from '../../styles/General';
 import { Fireworks } from 'fireworks/lib/react';
@@ -69,3 +70,8 @@ export default function ResultCard({ correctAnswer, answerGivenIsCorrect }) {
     </CorrectAnswerContainer>
   );
 }
+
+ResultCard.propTypes = {
+  correctAnswer: PropTypes.string,
+  answerGivenIsCorrect: PropTypes.bool
+};
