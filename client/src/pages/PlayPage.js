@@ -147,7 +147,6 @@ export default function PlayPage({
       setAnimationQuestionCard('none');
       setAnimationAnswerContainer('none');
     }, 1500);
-    getNextQuestion();
   }
 
   function loadNextQuestionOrEndGame() {
@@ -156,9 +155,9 @@ export default function PlayPage({
       if (isQuestionLimitReached(questionsPlayed + 1)) {
         setGameOver(true);
       }
-
       animatedNextQuestion();
       setNowPlaying(1);
+      setTimeout(() => getNextQuestion(), 600);
     }, 2400);
   }
 
