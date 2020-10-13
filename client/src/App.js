@@ -27,7 +27,7 @@ function App() {
   const [amountOfQuestions, setAmountOfQuestions] = React.useState(3);
   const [numberOfPlayers, setNumberOfPlayers] = React.useState(1);
   const [privateCode, setPrivateCode] = React.useState('');
-  const [theme, setTheme] = React.useState(1);
+  const [theme, setTheme] = React.useState(5);
 
   const [namesOfPlayers, setNamesOfPlayers] = React.useState({
     1: 'Player 1',

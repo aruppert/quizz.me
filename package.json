@@ -1,7 +1,7 @@
 {
-  "name": "quizzle",
+  "name": "quizz.me",
   "version": "1.0.0",
-  "description": "A quiz to show your skills ## Project title \"Quizzle\" is just a working title. Creative suggestions for a title are very welcome.",
+  "description": "Your personalized trivia game for every occasion.",
   "main": "index.js",
   "scripts": {
     "build": "cd client && npm run build",
@@ -17,12 +17,12 @@
     "url": "git+https://github.com/aruppert/quizzle.git"
   },
   "keywords": [],
-  "author": "",
+  "author": "Alexander Ruppert",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/aruppert/quizzle/issues"
+    "url": "https://github.com/aruppert/quizz.me/issues"
   },
-  "homepage": "https://github.com/aruppert/quizzle#readme",
+  "homepage": "https://github.com/aruppert/quizz.me#readme",
   "devDependencies": {
     "eslint": "^6.7.2",
     "eslint-plugin-react": "^7.17.0",

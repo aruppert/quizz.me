@@ -1,27 +1,61 @@
-# quizzle
+# quizz.Me
 
-A quiz to show your skills
+Your personalized trivia game for every occasion.
 
-## Project title
+## Description
 
-"Quizzle" is just a working title. Creative suggestions for a title are very welcome.
+With quizz.Me you can test your trivia knowledge with multiple choice questions.
+You can add questions for all users or create a totally unique and private set with a passcode, e.g. with funny details about the bride and groom.
+Your creativity and quizz.Me's multiplayer mode will be the highlight at any party!
 
 ## Motivation
 
 This project is my final work for the intensive Web Development Course [@neuefische](http://neuefische.de/) in Cologne. We had one month time to complete it.
 
-## Tech/framework used
+## Tech/framework highlights
 
-<b>Built with</b>
-<to be added>
+<b>Built mainly with the help of</b>
 
-## Features
-
-<to be added>
+- React
+- React-Router
+- Emotion
+- PropTypes
+- Storybook
+- Node.js
+- Express
+- MongoDB (Atlas)
+- npm
+- Git Workflow
+- JSON
+- Adobe XD
 
 ## Code Example
 
-<to be added>
+```
+async function verifyAnswer(value) {
+    setShowResult(true);
+    const newAnswerIsCorrect = value === correctAnswer;
+    setAnswerGivenIsCorrect(newAnswerIsCorrect);
+    const isNotLastPlayer = nowPlaying < numberOfPlayers;
+
+    if (newAnswerIsCorrect) {
+      increasePointsOfCurrentPlayerByOne(nowPlaying);
+      navigator.vibrate([100, 100, 100]);
+    } else {
+      decreasePointsOfCurrentPlayerByAmount(nowPlaying, 1);
+      navigator.vibrate([500]);
+    }
+
+    if (isNotLastPlayer) {
+      setTimeout(() => {
+        setNowPlaying(nowPlaying + 1);
+        setShowResult(false);
+      }, 2400);
+    } else {
+      loadNextQuestionOrEndGame();
+    }
+}
+```
 
 ## Installation
 
@@ -82,18 +116,6 @@ The datastructe of the two collections should look like this:
 "score" : 3,
 "questionsPlayed" : 5
 }
-
-## Built with
-
-- HTML
-- CSS
-- Javascript
-- React
-- emotion
-- storybook
-- Node.js
-- express
-- MongoDB Atlas
 
 ## License
 
