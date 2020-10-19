@@ -31,6 +31,7 @@
     "prettier": "1.19.1"
   },
   "dependencies": {
+    "ckey": "^1.0.2",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "fireworks": "^2.2.5",
