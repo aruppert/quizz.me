@@ -1,4 +1,4 @@
-require('dotenv').config();
+const ck = require('ckey');
 const express = require('express');
 const path = require('path');
 const { dbInit } = require('./lib/db');
@@ -6,9 +6,9 @@ const { addQuestion, getRandomQuestion } = require('./lib/questions');
 const { addHighscore, getHighscores } = require('./lib/highscores');
 
 const app = express();
-const PORT = process.env.PORT || 8080;
-const DB_Name = process.env.DB_NAME;
-const DB_URL = process.env.DB_URL;
+const PORT = ck.PORT;
+const DB_Name = ck.DB_NAME;
+const DB_URL = ck.DB_URL;
 
 app.use(express.json({ extended: false }));
 
