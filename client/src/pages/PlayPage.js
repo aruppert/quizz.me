@@ -20,7 +20,7 @@ const Main = styled.main`
 
 const GameContainer = styled.div`
   height: 450px;
-  width: 350px;
+  width: 360px;
 `;
 
 const ButtonBar = styled.div`
