@@ -59,7 +59,7 @@ export const quinary = {
     active: '#30cfd0',
     icon: '#fff',
     warn: '#ff2607',
-    correct: '##44EB1C'
+    correct: '#44EB1C'
   }
 };
 
