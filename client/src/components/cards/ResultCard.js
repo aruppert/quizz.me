@@ -24,7 +24,7 @@ export const WrongAnswerText = styled.p`
   font-family: 'Leckerli One', cursive;
   font-size: 1.5rem;
   margin: 18px 0 20px;
-  animation: ${fadeOut} 3s 1;
+  animation: ${fadeOut} 3.5s 1;
 `;
 
 export const CorrectAnswerCard = styled(AnswerCard)`
