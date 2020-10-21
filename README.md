@@ -1,6 +1,6 @@
 # quizz.Me
 
-Your personalized trivia game for every occasion.
+Your personalized trivia game for every occasion. Try here: https://quizzMe.alexanderruppert.com
 
 ## Description
 
@@ -10,11 +10,11 @@ Your creativity and quizz.Me's multiplayer mode will be the highlight at any par
 
 ## Motivation
 
-This project is my final work for the intensive Web Development Course [@neuefische](http://neuefische.de/) in Cologne. We had one month time to complete it.
+This project is my final work for the intensive Web Development Course [@neuefische GmbH](http://neuefische.de/) in Cologne. We had one month time to complete it.
 
 ## Tech/framework highlights
 
-<b>Built mainly with the help of</b>
+<b>Built mainly with </b>
 
 - React
 - React-Router
@@ -28,6 +28,32 @@ This project is my final work for the intensive Web Development Course [@neuefis
 - Git Workflow
 - JSON
 - Adobe XD
+
+## Features
+
+General:
+- Play in single player or in multi player mode (2-4 players) on one device
+- Answer questions from the public domain or
+- Play a private set of questions with a passcode
+- Make it into the all-time high score list or just check it out
+
+Settings:
+- Decide the length of the game (3, 5, 7, 9 or 11 questions)
+- Enter player’s names before starting the game
+- Change the color scheme with one click (on the paint palette)
+
+Gameplay:
+- Answer questions by tapping on one of the four choices
+- Get instant feedback about your answer
+- See the correct answer
+- Earn a point for every correct answer and lose one for an incorrect one
+- No Idea? Pass a question and lose only 0.25 points
+- End the game at any time
+- See the result of your game at the end
+
+Creation:
+- Add questions to the public domain or
+- Create a private set of questions & answers with a unique passcode
 
 ## Code Example
 
@@ -59,13 +85,13 @@ async function verifyAnswer(value) {
 
 ## Installation
 
-Just run:
+Clone the repo and just run:
 
 ```
  npm install
 ```
 
-The script should automatically install the client. If something goes wrong:
+The script should automatically install the client side, too. If something goes wrong try:
 
 ```
 cd client
@@ -81,27 +107,30 @@ In one run:
 npm run server
 ```
 
-and in the other:
+And in the other:
 
 ```
 npm run client
 ```
 
-The app should start in your browers (usually on http://localhost:3000)
+The app should start in your browser (usually on http://localhost:3000)
 
 ## How to use?
 
-To try out the full functionality please use the following URL, where this app has been deployed:
+To try out the full functionality of the game please check it out on domain:
 
-https://quizzme2020.herokuapp.com/
+https://quizzMe.alexanderruppert.com
 
-Otherwise you need to deploy your own server (e.g. a JSON Server.)
 
-The datastructe of the two collections should look like this:
+Otherwise you need to deploy your own server (e.g. a JSON Server.) and create a database...
 
+The data structure of the two collections should look like this:
+
+Questions & Answers database:
+```
 {
 "\_id" : ObjectId("5e206675e63bec3db479c2cb"),
-"question" : "What is considered the rarist form of color blindness?",
+"question" : "What is considered the rarest form of color blindness?",
 "correctAnswer" : "Blue",
 "incorrectAnswer1" : "Red",
 "incorrectAnswer2" : "Green",
@@ -109,14 +138,18 @@ The datastructe of the two collections should look like this:
 "privateCode" : "",
 "status" : "active"
 }
+```
 
+High score database:
+```
 {
 "\_id" : ObjectId("5e1e3b2bf5c116fb6c24810c"),
 "name" : "Ernie",
 "score" : 3,
 "questionsPlayed" : 5
 }
+```
 
 ## License
 
-MIT © aruppert
+MIT © Alexander Ruppert
