@@ -1,5 +1,6 @@
 const ck = require('ckey');
 const express = require('express');
+const compression = require('compression');
 const path = require('path');
 const { dbInit } = require('./lib/db');
 const { addQuestion, getRandomQuestion } = require('./lib/questions');
@@ -9,6 +10,8 @@ const app = express();
 const PORT = ck.PORT;
 const DB_Name = ck.DB_NAME;
 const DB_URL = ck.DB_URL;
+
+app.use(compression());
 
 app.use(express.json({ extended: false }));
 
